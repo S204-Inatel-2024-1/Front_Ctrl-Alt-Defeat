@@ -1,39 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css'; // Importe o arquivo CSS
 
 const Login = () => {
   const [aba, setAba] = useState('equipe');
-  const [equipe, setEquipe] = useState([]);
-  const [faculdade, setFaculdade] = useState('');
-  const [email, setEmail] = useState('');
-  const [emailOrientador, setEmailOrientador] = useState('');
-  const [senhaOrientador, setSenhaOrientador] = useState('');
+  const [equipe, setEquipe] = useState(['']);
+
+  useEffect(() => {
+    if (aba === 'equipe' && equipe.length === 0) {
+      setEquipe(['']); // Adiciona um membro por padrão se a aba é "equipe" e não há membros
+    }
+  }, [aba, equipe]);
 
   const mudarAba = (aba) => {
     setAba(aba);
-    if (aba === 'equipe') {
-      setEquipe([]);
-    } else if (aba === 'orientador') {
-      setEmailOrientador('');
-      setSenhaOrientador('');
-    }
   };
 
-  const mudarEquipe = (indice, valor) => {
+  const mudarMembro = (indice, valor) => {
     const novaEquipe = [...equipe];
-    const [email, matricula] = valor.split(',');
-    if (/^\S+@\S+\.\S+$/.test(email) && /^\d+$/.test(matricula)) {
-      novaEquipe[indice] = valor;
-      setEquipe(novaEquipe);
-    }
-  };
-
-  const mudarOrientador = (e) => {
-    if (e.target.name === 'email') {
-      setEmailOrientador(e.target.value);
-    } else if (e.target.name === 'senha') {
-      setSenhaOrientador(e.target.value);
-    }
+    novaEquipe[indice] = valor;
+    setEquipe(novaEquipe);
   };
 
   const adicionarMembro = () => {
@@ -48,45 +33,37 @@ const Login = () => {
     setEquipe(novaEquipe);
   };
 
+  const validarMatricula = (valor) => {
+    return /^\d*$/.test(valor); // Verifica se a matrícula contém apenas números inteiros
+  };
+
   return (
     <div className="login-container"> {/* Adicione a classe CSS ao container */}
       <button className={`tab-btn ${aba === 'equipe' ? 'active' : ''}`} onClick={() => mudarAba('equipe')}>Equipe</button>
       <button className={`tab-btn ${aba === 'orientador' ? 'active' : ''}`} onClick={() => mudarAba('orientador')}>Orientador</button>
       {aba === 'equipe' && (
         <div>
-          <input
-            type="text"
-            placeholder="Faculdade"
-            value={faculdade}
-            onChange={(e) => setFaculdade(e.target.value)}
-          />
-          <input
-            type="email"
-            placeholder="Email de Matrícula"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
           {equipe.map((membro, indice) => (
-            <div key={indice}>
+            <div key={indice} className="membro-equipe">
               <input
                 type="text"
                 placeholder={`Email do Membro da Equipe ${indice + 1}`}
-                value={equipe[indice] ? equipe[indice].split(',')[0] : ''}
+                value={equipe[indice] ? equipe[indice] : ''}
                 onChange={(e) =>
-                  mudarEquipe(indice, `${e.target.value},${equipe[indice] ? equipe[indice].split(',')[1] : ''}`)
+                  mudarMembro(indice, e.target.value)
+                }
+              />
+              <input
+                type="text"
+                placeholder={`Matrícula do Membro da Equipe ${indice + 1}`}
+                value={equipe[indice] ? equipe[indice] : ''}
+                onChange={(e) =>
+                  validarMatricula(e.target.value) && mudarMembro(indice, e.target.value)
                 }
               />
               {indice > 0 && (
                 <button onClick={() => removerMembro(indice)}>Remover</button>
               )}
-              <input
-                type="text"
-                placeholder={`Matrícula do Membro da Equipe ${indice + 1}`}
-                value={equipe[indice] ? equipe[indice].split(',')[1] : ''}
-                onChange={(e) =>
-                  mudarEquipe(indice, `${equipe[indice] ? equipe[indice].split(',')[0] : ''},${e.target.value}`)
-                }
-              />
             </div>
           ))}
           <button className="add-btn" onClick={adicionarMembro} disabled={equipe.length === 4}>Adicionar Membro</button>
@@ -97,16 +74,12 @@ const Login = () => {
           <input
             type="email"
             placeholder="Email"
-            value={emailOrientador}
             name="email"
-            onChange={mudarOrientador}
           />
           <input
             type="password"
             placeholder="Senha"
-            value={senhaOrientador}
             name="senha"
-            onChange={mudarOrientador}
           />
         </div>
       )}
