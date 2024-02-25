@@ -3,11 +3,13 @@ import './App.css'; // Importe o arquivo CSS
 
 const Login = () => {
   const [aba, setAba] = useState('equipe');
-  const [equipe, setEquipe] = useState(['']);
+  const [equipe, setEquipe] = useState([{ email: '', matricula: '' }]);
+  const [emailOrientador, setEmailOrientador] = useState('');
+  const [senhaOrientador, setSenhaOrientador] = useState('');
 
   useEffect(() => {
     if (aba === 'equipe' && equipe.length === 0) {
-      setEquipe(['']); // Adiciona um membro por padrão se a aba é "equipe" e não há membros
+      setEquipe([{ email: '', matricula: '' }]); // Adiciona um membro por padrão se a aba é "equipe" e não há membros
     }
   }, [aba, equipe]);
 
@@ -15,15 +17,19 @@ const Login = () => {
     setAba(aba);
   };
 
-  const mudarMembro = (indice, valor) => {
-    const novaEquipe = [...equipe];
-    novaEquipe[indice] = valor;
+  const mudarMembro = (indice, campo, valor) => {
+    const novaEquipe = equipe.map((membro, i) => {
+      if (i === indice) {
+        return { ...membro, [campo]: valor };
+      }
+      return membro;
+    });
     setEquipe(novaEquipe);
   };
 
   const adicionarMembro = () => {
     if (equipe.length < 4) {
-      setEquipe([...equipe, '']);
+      setEquipe([...equipe, { email: '', matricula: '' }]);
     }
   };
 
@@ -37,6 +43,17 @@ const Login = () => {
     return /^\d*$/.test(valor); // Verifica se a matrícula contém apenas números inteiros
   };
 
+  const cadastrarEquipe = () => {
+    console.log('Dados dos membros da equipe:');
+    console.log(equipe);
+  };
+
+  const cadastrarOrientador = () => {
+    console.log('Dados do orientador:');
+    console.log('Email: ', emailOrientador);
+    console.log('Senha: ', senhaOrientador);
+  };
+
   return (
     <div className="login-container"> {/* Adicione a classe CSS ao container */}
       <button className={`tab-btn ${aba === 'equipe' ? 'active' : ''}`} onClick={() => mudarAba('equipe')}>Equipe</button>
@@ -48,17 +65,17 @@ const Login = () => {
               <input
                 type="text"
                 placeholder={`Email do Membro da Equipe ${indice + 1}`}
-                value={equipe[indice] ? equipe[indice] : ''}
+                value={membro.email}
                 onChange={(e) =>
-                  mudarMembro(indice, e.target.value)
+                  mudarMembro(indice, 'email', e.target.value)
                 }
               />
               <input
                 type="text"
                 placeholder={`Matrícula do Membro da Equipe ${indice + 1}`}
-                value={equipe[indice] ? equipe[indice] : ''}
+                value={membro.matricula}
                 onChange={(e) =>
-                  validarMatricula(e.target.value) && mudarMembro(indice, e.target.value)
+                  validarMatricula(e.target.value) && mudarMembro(indice, 'matricula', e.target.value)
                 }
               />
               {indice > 0 && (
@@ -67,6 +84,7 @@ const Login = () => {
             </div>
           ))}
           <button className="add-btn" onClick={adicionarMembro} disabled={equipe.length === 4}>Adicionar Membro</button>
+          <button className="cadastrar-btn" onClick={cadastrarEquipe}>Cadastrar</button>
         </div>
       )}
       {aba === 'orientador' && (
@@ -74,13 +92,16 @@ const Login = () => {
           <input
             type="email"
             placeholder="Email"
-            name="email"
+            value={emailOrientador}
+            onChange={(e) => setEmailOrientador(e.target.value)}
           />
           <input
             type="password"
             placeholder="Senha"
-            name="senha"
+            value={senhaOrientador}
+            onChange={(e) => setSenhaOrientador(e.target.value)}
           />
+          <button className="cadastrar-btn" onClick={cadastrarOrientador}>Cadastrar</button>
         </div>
       )}
     </div>
