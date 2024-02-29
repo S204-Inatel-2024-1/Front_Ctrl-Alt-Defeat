@@ -1,33 +1,69 @@
 .login-container {
-  max-width: 800px;
-  margin: 0 auto;
-  text-align: center;
+  text-align: left;
+  justify-content: left;
+  padding: 20px;
 }
 
 .tab-btn {
+  display: flex;
+  margin-bottom: 20px;
+  text-align: left;
+  justify-content: left;
+}
+
+.tab-btn button {
   background-color: #ccc;
   border: none;
   padding: 10px 20px;
   margin: 5px;
   cursor: pointer;
   border-radius: 5px;
-  font-size: 16px;
+  font-size: 20px;
 }
 
-.tab-btn.active {
+.tab-btn button.active {
   background-color: #df1414;
   color: white;
 }
 
-.add-btn {
+.membro-equipe {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.membro-equipe input {
+  margin-right: 10px;
+  padding: 10px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: border-color 0.3s;
+  box-sizing: border-box;
+}
+
+.membro-equipe input:focus {
+  border-color: #df1414;
+}
+
+.add-btn,
+.cadastrar-btn {
   background-color: #484fe2;
   color: white;
   border: none;
   padding: 10px 20px;
-  margin-top: 10px;
   cursor: pointer;
   border-radius: 5px;
-  font-size: 16px;
+  font-size: 18px;
+  transition: background-color 0.3s;
+}
+
+.add-btn {
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.add-btn:hover {
+  background-color: darkgreen;
 }
 
 .add-btn:disabled {
@@ -35,11 +71,36 @@
   cursor: not-allowed;
 }
 
-.cadastrar-btn {
-  background-color: green;
-  color: white;
-  padding: 10px 20px;
-  border: none;
+.cadastrar-btn:hover {
+  background-color: darkgreen;
+}
+
+.orientador-section input {
+  padding: 10px;
+  font-size: 15px;
+  border: 1px solid #ccc;
   border-radius: 5px;
+  transition: border-color 0.3s;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  margin-right: 10px;
+}
+
+.orientador-section input:focus {
+  border-color: #df1414;
+}
+
+.remove-btn button {
+  background-color: #484fe2;
+  color: white;
+  border: none;
+  padding: 8px 16px;
   cursor: pointer;
+  border-radius: 5px;
+  font-size: 20px;
+  transition: background-color 0.3s;
+}
+
+.remove-btn button:hover {
+  background-color: #ff0000;
 }
