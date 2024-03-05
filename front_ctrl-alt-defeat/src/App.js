@@ -6,8 +6,9 @@ const url = "http://localhost:3000/TeamMembers"
 function Login() {
   const [aba, setAba] = useState("equipe");
   const [equipe, setEquipe] = useState([
-    { nome: "", email: "", matricula: "" },
+    { name: "", email: "", matricula: "" },
   ]);
+
   const [nomeOrientador, setNomeOrientador] = useState("");
   const [emailOrientador, setEmailOrientador] = useState("");
   const [senhaOrientador, setSenhaOrientador] = useState("");
@@ -26,7 +27,24 @@ function Login() {
     fetchData();
   }, []);
 
-  console.log(equipe);
+  // Adicionando membros na equipe
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(equipe),
+    })
+
+    // Carregamento dinamico - implementando no arquivo json
+    const addedMember = await res.json()
+    setEquipe((prevMembers) => [...prevMembers, addedMember])
+
+    setEquipe({ name: "", matricula: "", email: "" })
+  }
 
   const mudarAba = (novaAba) => {
     setAba(novaAba);
@@ -41,7 +59,7 @@ function Login() {
 
   const adicionarMembro = () => {
     if (equipe.length < 4) {
-      setEquipe([...equipe, { nome: "", email: "", matricula: "" }]);
+      setEquipe([...equipe, { name: "", matricula: "", email: "" }]);
     }
   };
 
@@ -123,8 +141,8 @@ function Login() {
           <button
             className="add-btn"
             onClick={adicionarMembro}
-            disabled={equipe.length === 4}
-          >
+            onSubmit={handleSubmit}
+            disabled={equipe.length === 4}>
             Adicionar Membro
           </button>
           <button className="cadastrar-btn" onClick={cadastrarEquipe}>

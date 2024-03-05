@@ -1,16 +1,6 @@
 {
     "TeamMembers": [
       {
-        "name": "Humberto",
-        "matricula": 1234,
-        "email": "humberto@ges.inatel.br"
-      },
-      {
-        "name": "Gabriel",
-        "matricula": 4321,
-        "email": "gabriel@ges.inatel.br"
-      },
-      {
         "name": "Douglas",
         "matricula": 1730,
         "email": "douglas.brandao@gec.inatel.br"
