@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 
-const Login = () => {
+const url = "http://localhost:3000/TeamMembers"
+
+function Login() {
   const [aba, setAba] = useState("equipe");
   const [equipe, setEquipe] = useState([
     { nome: "", email: "", matricula: "" },
@@ -9,6 +11,22 @@ const Login = () => {
   const [nomeOrientador, setNomeOrientador] = useState("");
   const [emailOrientador, setEmailOrientador] = useState("");
   const [senhaOrientador, setSenhaOrientador] = useState("");
+
+  // Resgatando dados
+  useEffect(() => {
+    async function fetchData() {
+      const res = await fetch(url)
+
+      // Transformando json em objeto
+      const data = await res.json()
+
+      setEquipe(data);
+    }
+
+    fetchData();
+  }, []);
+
+  console.log(equipe);
 
   const mudarAba = (novaAba) => {
     setAba(novaAba);
@@ -77,8 +95,8 @@ const Login = () => {
               <input
                 type="text"
                 placeholder={`Nome do Membro ${indice + 1}`}
-                value={membro.nome}
-                onChange={(e) => mudarMembro(indice, "nome", e.target.value)}
+                value={membro.name}
+                onChange={(e) => mudarMembro(indice, "name", e.target.value)}
               />
               <input
                 type="email"
@@ -87,7 +105,7 @@ const Login = () => {
                 onChange={(e) => mudarMembro(indice, "email", e.target.value)}
               />
               <input
-                type="password"
+                type="number"
                 placeholder={`Matrícula do Membro ${indice + 1}`}
                 value={membro.matricula}
                 onChange={(e) =>
@@ -116,9 +134,8 @@ const Login = () => {
       )}
       {aba === "orientador" && (
         <div
-          className={`orientador-section ${
-            aba === "orientador" ? "active" : ""
-          }`}
+          className={`orientador-section ${aba === "orientador" ? "active" : ""
+            }`}
         >
           <input
             type="text"
