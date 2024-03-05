@@ -5,10 +5,11 @@ const url = "http://localhost:3000/TeamMembers"
 
 function Login() {
   const [aba, setAba] = useState("equipe");
-  const [equipe, setEquipe] = useState([
-    { name: "", email: "", matricula: "" },
-  ]);
-
+  const [equipe, setEquipe] = useState([]);
+  const [name, setName] = useState("");
+  const [matricula, setMatricula] = useState("");
+  const [email, setEmail] = useState("")
+ 
   const [nomeOrientador, setNomeOrientador] = useState("");
   const [emailOrientador, setEmailOrientador] = useState("");
   const [senhaOrientador, setSenhaOrientador] = useState("");
