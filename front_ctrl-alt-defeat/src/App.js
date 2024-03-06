@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 
-const url = "http://localhost:3000/TeamMembers"
+const url = "http://localhost:3000/TeamMembers";
 
 function Login() {
   const [aba, setAba] = useState("equipe");
   const [equipe, setEquipe] = useState([]);
-  const [name, setName] = useState("");
-  const [matricula, setMatricula] = useState("");
-  const [email, setEmail] = useState("")
- 
+
+  // Estado para os campos do novo membro da equipe
+  const [name, setNovoNome] = useState("");
+  const [matricula, setNovaMatricula] = useState("");
+  const [email, setNovoEmail] = useState("");
+
   const [nomeOrientador, setNomeOrientador] = useState("");
   const [emailOrientador, setEmailOrientador] = useState("");
   const [senhaOrientador, setSenhaOrientador] = useState("");
@@ -17,38 +19,38 @@ function Login() {
   // Resgatando dados
   useEffect(() => {
     async function fetchData() {
-      const res = await fetch(url)
-
-      // Transformando json em objeto
-      const data = await res.json()
-
+      const res = await fetch(url);
+      const data = await res.json();
       setEquipe(data);
     }
-
     fetchData();
   }, []);
 
   // Adicionando membros na equipe
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
+
+    const member = {
+      name,
+      matricula,
+      email,
+    };
 
     const res = await fetch(url, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(equipe),
-    })
+      body: JSON.stringify(member),
+    });
 
-    // Carregamento dinamico - implementando no arquivo json
-    const addedMember = await res.json()
-    setEquipe((prevMembers) => [...prevMembers, addedMember])
+    const addedMember = await res.json();
+    setEquipe((prevMembers) => [...prevMembers, addedMember]);
 
-    setEquipe({ name: "", matricula: "", email: "" })
-  }
-
-  const mudarAba = (novaAba) => {
-    setAba(novaAba);
+    // Limpa os campos do novo membro após a submissão
+    // setNovoNome("");
+    // setNovaMatricula("");
+    // setNovoEmail("");
   };
 
   const mudarMembro = (indice, campo, valor) => {
@@ -56,6 +58,17 @@ function Login() {
       i === indice ? { ...membro, [campo]: valor } : membro
     );
     setEquipe(novaEquipe);
+    if (campo === 'name') {
+      setNovoNome(valor);
+    } else if (campo === 'matricula') {
+      setNovaMatricula(valor);
+    } else if (campo === 'email') {
+      setNovoEmail(valor);
+    }
+  };
+
+  const mudarAba = (novaAba) => {
+    setAba(novaAba);
   };
 
   const adicionarMembro = () => {
@@ -75,10 +88,10 @@ function Login() {
 
   const validarSenha = (valor) => valor.length >= 6;
 
-  const cadastrarEquipe = () => {
-    console.log("Dados dos Membros da Equipe: ");
-    console.log(equipe);
-  };
+  // const cadastrarEquipe = () => {
+  //   console.log("Dados dos Membros da Equipe: ");
+  //   console.log(equipe);
+  // };
 
   const cadastrarOrientador = () => {
     if (validarEmail(emailOrientador) && validarSenha(senhaOrientador)) {
@@ -109,53 +122,56 @@ function Login() {
       </div>
       {aba === "equipe" && (
         <div className={`equipe-section ${aba === "equipe" ? "active" : ""}`}>
-          {equipe.map((membro, indice) => (
-            <div key={indice} className="membro-equipe">
-              <input
-                type="text"
-                placeholder={`Nome do Membro ${indice + 1}`}
-                value={membro.name}
-                onChange={(e) => mudarMembro(indice, "name", e.target.value)}
-              />
-              <input
-                type="email"
-                placeholder={`Email do Membro ${indice + 1}`}
-                value={membro.email}
-                onChange={(e) => mudarMembro(indice, "email", e.target.value)}
-              />
-              <input
-                type="number"
-                placeholder={`Matrícula do Membro ${indice + 1}`}
-                value={membro.matricula}
-                onChange={(e) =>
-                  validarMatricula(e.target.value) &&
-                  mudarMembro(indice, "matricula", e.target.value)
-                }
-              />
-              <div className="remove-btn">
-                {indice > 0 && (
-                  <button onClick={() => removerMembro(indice)}>Remover</button>
-                )}
+          <form onSubmit={handleSubmit}>
+            {equipe.map((membro, indice) => (
+              <div key={indice} className="membro-equipe">
+                <label>
+                  <input
+                    type="text"
+                    placeholder={`Nome do Membro ${indice + 1}`}
+                    value={membro.name}
+                    onChange={(e) =>
+                      mudarMembro(indice, "name", e.target.value)
+                    }
+                  />
+                </label>
+                <label>
+                  <input
+                    type="email"
+                    placeholder={`Email do Membro ${indice + 1}`}
+                    value={membro.email}
+                    onChange={(e) => mudarMembro(indice, "email", e.target.value)
+                    }
+                  />
+                </label>
+                <label>
+                  <input
+                    type="number"
+                    placeholder={`Matrícula do Membro ${indice + 1}`}
+                    value={membro.matricula}
+                    onChange={(e) =>
+                      mudarMembro(indice, "matricula", e.target.value)
+                    }
+                  />
+                </label>
+                <div className="remove-btn">
+                  {indice > 0 && (
+                    <button onClick={() => removerMembro(indice)}>Remover</button>
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
-          <button
-            className="add-btn"
-            onClick={adicionarMembro}
-            onSubmit={handleSubmit}
-            disabled={equipe.length === 4}>
+            ))}
+            <button className="cadastrar-btn" disabled={equipe.length === 4}>
+              Cadastrar
+            </button>
+          </form>
+          <button className="add-btn" onClick={adicionarMembro} disabled={equipe.length === 4}>
             Adicionar Membro
-          </button>
-          <button className="cadastrar-btn" onClick={cadastrarEquipe}>
-            Cadastrar
           </button>
         </div>
       )}
       {aba === "orientador" && (
-        <div
-          className={`orientador-section ${aba === "orientador" ? "active" : ""
-            }`}
-        >
+        <div className={`orientador-section ${aba === "orientador" ? "active" : ""}`}>
           <input
             type="text"
             placeholder="Nome"
@@ -174,15 +190,13 @@ function Login() {
             value={senhaOrientador}
             onChange={(e) => setSenhaOrientador(e.target.value)}
           />
+          <button className="cadastrar-btn" onClick={cadastrarOrientador}>
+            Cadastrar
+          </button>
         </div>
-      )}
-      {aba === "orientador" && (
-        <button className="cadastrar-btn" onClick={cadastrarOrientador}>
-          Cadastrar
-        </button>
       )}
     </div>
   );
-};
+}
 
 export default Login;
