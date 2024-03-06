@@ -44,13 +44,14 @@ function Login() {
       body: JSON.stringify(member),
     });
 
+    //carregamento dinamico
     const addedMember = await res.json();
     setEquipe((prevMembers) => [...prevMembers, addedMember]);
 
     // Limpa os campos do novo membro após a submissão
-    // setNovoNome("");
-    // setNovaMatricula("");
-    // setNovoEmail("");
+    setNovoNome("");
+    setNovaMatricula("");
+    setNovoEmail("");
   };
 
   const mudarMembro = (indice, campo, valor) => {
@@ -77,9 +78,18 @@ function Login() {
     }
   };
 
-  const removerMembro = (indice) => {
+  const removerMembro = async (indice) => {
     const novaEquipe = equipe.filter((_, i) => i !== indice);
     setEquipe(novaEquipe);
+    const membroRemovido = equipe[indice];
+    try {
+      await fetch(`${url}/${membroRemovido.id}`, {
+        method: "DELETE",
+      });
+      console.log("Membro removido do servidor JSON");
+    } catch (error) {
+      console.error("Erro ao remover membro do servidor JSON:", error);
+    }
   };
 
   const validarMatricula = (valor) => /^\d*$/.test(valor);
@@ -161,7 +171,7 @@ function Login() {
                 </div>
               </div>
             ))}
-            <button className="cadastrar-btn" disabled={equipe.length === 4}>
+            <button className="cadastrar-btn">
               Cadastrar
             </button>
           </form>

@@ -7,16 +7,16 @@
       "id": "8fca"
     },
     {
-      "name": "Eduardo",
-      "matricula": 200,
-      "email": "eduardo.costa@ges.inatel.br",
-      "id": "5b08"
-    },
-    {
       "id": "5477",
       "name": "Humberto",
       "matricula": "1234",
       "email": "humberto@inatel"
+    },
+    {
+      "id": "6dd8",
+      "name": "Eduardo",
+      "matricula": "200",
+      "email": "eduardo@ges.inatel.br"
     }
   ]
 }
