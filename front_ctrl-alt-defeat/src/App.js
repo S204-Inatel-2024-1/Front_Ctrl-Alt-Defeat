@@ -58,6 +58,7 @@ function Login() {
     const novaEquipe = equipe.map((membro, i) =>
       i === indice ? { ...membro, [campo]: valor } : membro
     );
+
     setEquipe(novaEquipe);
     if (campo === 'name') {
       setNovoNome(valor);
@@ -132,52 +133,73 @@ function Login() {
       </div>
       {aba === "equipe" && (
         <div className={`equipe-section ${aba === "equipe" ? "active" : ""}`}>
-          <form onSubmit={handleSubmit}>
-            {equipe.map((membro, indice) => (
-              <div key={indice} className="membro-equipe">
+          <table>
+            {/* Cabeçalho da tabela */}
+            <thead>
+              <tr className="membro-list th">
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Matrícula</th>
+                <th>Remover</th>
+              </tr>
+            </thead>
+            <tbody>
+              {/* Mapeamento dos membros */}
+              {equipe.map((membro, indice) => (
+                <tr className="membro-list td" key={membro.id}>
+                  <td>{membro.name}</td>
+                  <td>{membro.email}</td>
+                  <td>{membro.matricula}</td>
+                  <td>
+                    {/* Botão de remover */}
+                    {indice >= 0 && (
+                      <button className="remove-btn" onClick={() => removerMembro(indice)}>Remover</button>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          {/* Formulário de adicionar membro */}
+          {equipe.length < 4 && (
+            <form onSubmit={handleSubmit}>
+              <div className="membro-equipe">
                 <label>
                   <input
                     type="text"
-                    placeholder={`Nome do Membro ${indice + 1}`}
-                    value={membro.name}
-                    onChange={(e) =>
-                      mudarMembro(indice, "name", e.target.value)
-                    }
+                    placeholder={`Nome do Membro`}
+                    value={name}
+                    name="name"
+                    onChange={(e) => setNovoNome(e.target.value)}
                   />
                 </label>
                 <label>
                   <input
                     type="email"
-                    placeholder={`Email do Membro ${indice + 1}`}
-                    value={membro.email}
-                    onChange={(e) => mudarMembro(indice, "email", e.target.value)
-                    }
+                    placeholder={`Email do Membro`}
+                    value={email}
+                    name="email"
+                    onChange={(e) => setNovoEmail(e.target.value)}
                   />
                 </label>
                 <label>
                   <input
                     type="number"
-                    placeholder={`Matrícula do Membro ${indice + 1}`}
-                    value={membro.matricula}
-                    onChange={(e) =>
-                      mudarMembro(indice, "matricula", e.target.value)
-                    }
+                    placeholder={`Matrícula do Membro`}
+                    value={matricula}
+                    name="matricula"
+                    onChange={(e) => setNovaMatricula(e.target.value)}
                   />
                 </label>
-                <div className="remove-btn">
-                  {indice > 0 && (
-                    <button onClick={() => removerMembro(indice)}>Remover</button>
-                  )}
-                </div>
               </div>
-            ))}
-            <button className="cadastrar-btn">
-              Cadastrar
-            </button>
-          </form>
-          <button className="add-btn" onClick={adicionarMembro} disabled={equipe.length === 4}>
-            Adicionar Membro
-          </button>
+              {/* Botão de cadastrar */}
+              <button className="cadastrar-btn" disabled={equipe.length === 4}>Cadastrar</button>
+            </form>
+          )}
+          {/* Botão de adicionar membro */}
+          {equipe.length < 4 && (
+            <button className="add-btn" onClick={adicionarMembro} disabled={equipe.length === 4}>Adicionar Membro</button>
+          )}
         </div>
       )}
       {aba === "orientador" && (
