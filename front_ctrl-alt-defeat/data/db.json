@@ -1,18 +1,6 @@
 {
   "TeamMembers": [
     {
-      "id": "cdc0",
-      "name": "Gabriel",
-      "matricula": "4321",
-      "email": "gabriel@inatel.bg"
-    },
-    {
-      "id": "a676",
-      "name": "Douglas",
-      "matricula": "1730",
-      "email": "douglas.brandao@gec.inatel.br"
-    },
-    {
       "id": "0346",
       "name": "Eduardo",
       "matricula": "200",

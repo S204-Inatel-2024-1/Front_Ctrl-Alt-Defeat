@@ -122,3 +122,27 @@
 .orientador-section input:focus {
   border-color: #df1414;
 }
+
+
+.input-wrapper {
+  margin-bottom: 10px;
+}
+
+.input-wrapper label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding: 10px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: border-color 0.3s;
+  box-sizing: border-box;
+}
+
+.input-wrapper input:focus {
+  border-color: #df1414;
+}

@@ -54,21 +54,6 @@ function Login() {
     setNovoEmail("");
   };
 
-  const mudarMembro = (indice, campo, valor) => {
-    const novaEquipe = equipe.map((membro, i) =>
-      i === indice ? { ...membro, [campo]: valor } : membro
-    );
-
-    setEquipe(novaEquipe);
-    if (campo === 'name') {
-      setNovoNome(valor);
-    } else if (campo === 'matricula') {
-      setNovaMatricula(valor);
-    } else if (campo === 'email') {
-      setNovoEmail(valor);
-    }
-  };
-
   const mudarAba = (novaAba) => {
     setAba(novaAba);
   };
@@ -164,44 +149,48 @@ function Login() {
           {equipe.length < 4 && (
             <form onSubmit={handleSubmit}>
               <div className="membro-equipe">
-                <label>
-                  <input
-                    type="text"
-                    placeholder={`Nome do Membro`}
-                    value={name}
-                    name="name"
-                    onChange={(e) => setNovoNome(e.target.value)}
-                  />
-                </label>
-                <label>
-                  <input
-                    type="email"
-                    placeholder={`Email do Membro`}
-                    value={email}
-                    name="email"
-                    onChange={(e) => setNovoEmail(e.target.value)}
-                  />
-                </label>
-                <label>
-                  <input
-                    type="number"
-                    placeholder={`Matrícula do Membro`}
-                    value={matricula}
-                    name="matricula"
-                    onChange={(e) => setNovaMatricula(e.target.value)}
-                  />
-                </label>
+                <div className="input-wrapper">
+                  <label>
+                    Nome:
+                    <input
+                      type="text"
+                      value={name}
+                      name="name"
+                      onChange={(e) => setNovoNome(e.target.value)}
+                    />
+                  </label>
+                </div>
+                <div className="input-wrapper">
+                  <label>
+                    Email:
+                    <input
+                      type="email"
+                      value={email}
+                      name="email"
+                      onChange={(e) => setNovoEmail(e.target.value)}
+                    />
+                  </label>
+                </div>
+                <div className="input-wrapper">
+                  <label>
+                    Matrícula:
+                    <input
+                      type="number"
+                      value={matricula}
+                      name="matricula"
+                      onChange={(e) => setNovaMatricula(e.target.value)}
+                    />
+                  </label>
+                </div>
+
               </div>
               {/* Botão de cadastrar */}
               <button className="cadastrar-btn" disabled={equipe.length === 4}>Cadastrar</button>
             </form>
           )}
-          {/* Botão de adicionar membro */}
-          {equipe.length < 4 && (
-            <button className="add-btn" onClick={adicionarMembro} disabled={equipe.length === 4}>Adicionar Membro</button>
-          )}
         </div>
       )}
+
       {aba === "orientador" && (
         <div className={`orientador-section ${aba === "orientador" ? "active" : ""}`}>
           <input
