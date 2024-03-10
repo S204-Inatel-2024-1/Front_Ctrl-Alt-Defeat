@@ -78,8 +78,8 @@ function Login() {
 
     const res = await fetch(url2, {
       method: "POST",
-      headers:{
-        "Content-Type":"applications/json"
+      headers: {
+        "Content-Type": "applications/json"
       },
       body: JSON.stringify(coord)
     })
@@ -293,9 +293,11 @@ function Login() {
                   value={senhaOrientador}
                   onChange={(e) => setSenhaOrientador(e.target.value)}
                 />
-                <button className="cadastrar-btn" onClick={cadastrarOrientador}>
-                  Cadastrar
-                </button>
+                <div>
+                  <button className="cadastrar-btn" onClick={cadastrarOrientador}>
+                    Cadastrar
+                  </button>
+                </div>
               </form>
             </div>
           )}
