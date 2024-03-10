@@ -29,9 +29,9 @@ jobs:
       - name: Build React app
         run: |
           cd front_ctrl-alt-defeat
-          npm run build
+          npm start
 
       - name: Start JSON Server
         run: | 
           cd front_ctrl-alt-defeat
-          npm run json-server &
+          npm run server
