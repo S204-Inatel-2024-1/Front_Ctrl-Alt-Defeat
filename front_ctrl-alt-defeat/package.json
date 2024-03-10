@@ -13,11 +13,12 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "set PORT=3001 && react-scripts start",
+    "start": "set PORT=3002 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "json-server --watch data/db.json"
+    "server": "set PORT=3001 && json-server --watch data/dbMembros.json",
+    "server2": "set PORT=3000 && json-server --watch data/dbOrientador.json"
   },
   "eslintConfig": {
     "extends": [

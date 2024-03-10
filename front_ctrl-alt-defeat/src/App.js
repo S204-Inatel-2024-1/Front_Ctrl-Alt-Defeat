@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useSyncExternalStore } from "react";
 import "./App.css";
 
-const url = "http://localhost:3000/TeamMembers";
-const url2 = "http://localhost:3002/Coordenator"
+const url = "http://localhost:3001/TeamMembers";
+const url2 = "http://localhost:3000/Coordenator"
 
 function Login() {
   const [aba, setAba] = useState("equipe");
