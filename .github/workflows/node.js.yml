@@ -26,7 +26,7 @@ jobs:
 
       - name: Build React app
         run: |
-          cd Front_ctrl-Alt-Defat
+          cd Front_Ctrl-Alt-Defat
           ls
           npm run build
 
