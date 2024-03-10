@@ -35,4 +35,4 @@ jobs:
       - name: Start JSON Server
         run: | 
           cd front_ctrl-alt-defeat
-          npm run server
+          npm run json-server &
