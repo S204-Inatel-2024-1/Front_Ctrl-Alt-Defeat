@@ -58,11 +58,11 @@ function Login() {
     setAba(novaAba);
   };
 
-  const adicionarMembro = () => {
-    if (equipe.length < 4) {
-      setEquipe([...equipe, { name: "", matricula: "", email: "" }]);
-    }
-  };
+  // const adicionarMembro = () => {
+  //   if (equipe.length < 4) {
+  //     setEquipe([...equipe, { name: "", matricula: "", email: "" }]);
+  //   }
+  // };
 
   const removerMembro = async (indice) => {
     const novaEquipe = equipe.filter((_, i) => i !== indice);
@@ -78,7 +78,7 @@ function Login() {
     }
   };
 
-  const validarMatricula = (valor) => /^\d*$/.test(valor);
+  // const validarMatricula = (valor) => /^\d*$/.test(valor);
 
   const validarEmail = (valor) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valor);
 
