@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useSyncExternalStore } from "react";
 import "./App.css";
 
 const url = "http://localhost:3000/TeamMembers";
+const url2 = "http://localhost:3002/Coordenator"
 
 function Login() {
   const [aba, setAba] = useState("equipe");
   const [equipe, setEquipe] = useState([]);
+  const [orientadores, setCoord] = useState([]);
 
   // Estado para os campos do novo membro da equipe
   const [name, setNovoNome] = useState("");
@@ -16,12 +18,22 @@ function Login() {
   const [emailOrientador, setEmailOrientador] = useState("");
   const [senhaOrientador, setSenhaOrientador] = useState("");
 
-  // Resgatando dados
+  // Resgatando dados da equipe
   useEffect(() => {
     async function fetchData() {
       const res = await fetch(url);
       const data = await res.json();
       setEquipe(data);
+    }
+    fetchData();
+  }, []);
+
+  //Resgatando dados do orientador
+  useEffect(() => {
+    async function fetchData() {
+      const res = await fetch(url2);
+      const data = await res.json();
+      setCoord(data);
     }
     fetchData();
   }, []);
@@ -54,6 +66,33 @@ function Login() {
     setNovoEmail("");
   };
 
+  // Adicionando orientador
+  const handleSubmitOrientador = async (e) => {
+    e.preventDefault();
+
+    const coord = {
+      nomeOrientador,
+      emailOrientador,
+      senhaOrientador
+    }
+
+    const res = await fetch(url2, {
+      method: "POST",
+      headers:{
+        "Content-Type":"applications/json"
+      },
+      body: JSON.stringify(coord)
+    })
+
+    const addedOrientadores = await res.json()
+    setCoord((prevOrientadores) => [...prevOrientadores, addedOrientadores])
+
+    setNomeOrientador("")
+    setEmailOrientador("")
+    setSenhaOrientador("")
+  }
+
+
   const mudarAba = (novaAba) => {
     setAba(novaAba);
   };
@@ -63,6 +102,20 @@ function Login() {
   //     setEquipe([...equipe, { name: "", matricula: "", email: "" }]);
   //   }
   // };
+
+  const removerOrientador = async (indice) => {
+    const novoOrientadores = orientadores.filter((_, i) => i !== indice);
+    setCoord(novoOrientadores);
+    const membroRemovido = orientadores[indice];
+    try {
+      await fetch(`${url2}/${membroRemovido.id}`, {
+        method: "DELETE",
+      });
+      console.log("Membro removido do servidor JSON");
+    } catch (error) {
+      console.error("Erro ao remover membro do servidor JSON:", error);
+    }
+  };
 
   const removerMembro = async (indice) => {
     const novaEquipe = equipe.filter((_, i) => i !== indice);
@@ -151,10 +204,10 @@ function Login() {
               <div className="membro-equipe">
                 <div className="input-wrapper">
                   <label>
-                    Nome:
                     <input
                       type="text"
                       value={name}
+                      placeholder="Nome"
                       name="name"
                       onChange={(e) => setNovoNome(e.target.value)}
                     />
@@ -162,10 +215,10 @@ function Login() {
                 </div>
                 <div className="input-wrapper">
                   <label>
-                    Email:
                     <input
                       type="email"
                       value={email}
+                      placeholder="Email"
                       name="email"
                       onChange={(e) => setNovoEmail(e.target.value)}
                     />
@@ -173,10 +226,10 @@ function Login() {
                 </div>
                 <div className="input-wrapper">
                   <label>
-                    Matrícula:
                     <input
                       type="number"
                       value={matricula}
+                      placeholder="Matricula"
                       name="matricula"
                       onChange={(e) => setNovaMatricula(e.target.value)}
                     />
@@ -193,27 +246,59 @@ function Login() {
 
       {aba === "orientador" && (
         <div className={`orientador-section ${aba === "orientador" ? "active" : ""}`}>
-          <input
-            type="text"
-            placeholder="Nome"
-            value={nomeOrientador}
-            onChange={(e) => setNomeOrientador(e.target.value)}
-          />
-          <input
-            type="email"
-            placeholder="Email"
-            value={emailOrientador}
-            onChange={(e) => setEmailOrientador(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="Senha"
-            value={senhaOrientador}
-            onChange={(e) => setSenhaOrientador(e.target.value)}
-          />
-          <button className="cadastrar-btn" onClick={cadastrarOrientador}>
-            Cadastrar
-          </button>
+          <table>
+            {/* Cabeçalho da tabela */}
+            <thead>
+              <tr className="membro-list th">
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Remover</th>
+              </tr>
+            </thead>
+            <tbody>
+              {/* Mapeamento dos membros */}
+              {orientadores.map((orientador, indice) => (
+                <tr className="membro-list td" key={orientador.id}>
+                  <td>{orientador.nomeOrientador}</td>
+                  <td>{orientador.emailOrientador}</td>
+                  <td>
+                    {/* Botão de remover */}
+                    {indice >= 0 && (
+                      <button className="remove-btn" onClick={() => removerOrientador(indice)}>Remover</button>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          {orientadores.length < 1 && (
+            <div>
+              <form onSubmit={handleSubmitOrientador}>
+                <input
+                  type="text"
+                  placeholder="Nome"
+                  value={nomeOrientador}
+                  onChange={(e) => setNomeOrientador(e.target.value)}
+                />
+                <input
+                  type="email"
+                  placeholder="Email"
+                  value={emailOrientador}
+                  onChange={(e) => setEmailOrientador(e.target.value)}
+                />
+                <input
+                  type="password"
+                  placeholder="Senha"
+                  value={senhaOrientador}
+                  onChange={(e) => setSenhaOrientador(e.target.value)}
+                />
+                <button className="cadastrar-btn" onClick={cadastrarOrientador}>
+                  Cadastrar
+                </button>
+              </form>
+            </div>
+          )}
         </div>
       )}
     </div>
