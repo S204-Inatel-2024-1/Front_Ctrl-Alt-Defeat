@@ -29,6 +29,7 @@ jobs:
       - name: Build React app
         run: |
           cd front_ctrl-alt-defeat
+          npm install --save-dev @babel/plugin-proposal-private-property-in-object
           npm run build
 
       - name: Start JSON Server
