@@ -24,6 +24,7 @@ jobs:
       - name: Install dependencies
         run: |
           cd front_ctrl-alt-defeat
+          npm install --save-dev @babel/plugin-proposal-private-property-in-object
           npm i
 
       - name: Build React app
