@@ -32,7 +32,7 @@ jobs:
           cd front_ctrl-alt-defeat
           npm run build
 
-      - name: Start JSON Server
-        run: | 
-          cd front_ctrl-alt-defeat
-          npm run json-server &
+      # - name: Start JSON Server
+      #   run: | 
+      #     cd front_ctrl-alt-defeat
+      #     npm run json-server &
