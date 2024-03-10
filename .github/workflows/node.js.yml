@@ -22,13 +22,16 @@ jobs:
           node-version: '14'
 
       - name: Install dependencies
-        run: npm install
+        run: |
+          cd front_ctrl-alt-defeat
+          npm install
 
       - name: Build React app
         run: |
-          ls
-          cd Front_Ctrl-Alt-Defeat
+          cd front_ctrl-alt-defeat
           npm run build
 
       - name: Start JSON Server
-        run: npm run json-server &
+        run: | 
+          cd front_ctrl-alt-defeat
+          npm run json-server &
