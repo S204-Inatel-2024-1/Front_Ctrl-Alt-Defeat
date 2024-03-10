@@ -15,8 +15,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        with:
-            path: Front_Ctrl-Alt-Defeat/front_ctrl-alt-defeat/
 
       - name: Install Node.js
         uses: actions/setup-node@v2
@@ -28,7 +26,8 @@ jobs:
 
       - name: Build React app
         run: 
+          cd Front_ctrl-Alt-Defat
           ls
-          
+
       - name: Start JSON Server
         run: npm run json-server &
