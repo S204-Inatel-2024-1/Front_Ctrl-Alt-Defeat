@@ -28,9 +28,7 @@ jobs:
 
       - name: Build React app
         run: 
-          '''
           ls
-          '''
-
+          
       - name: Start JSON Server
         run: npm run json-server &
