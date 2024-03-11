@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useSyncExternalStore } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 
 const url = "http://localhost:3001/TeamMembers";

@@ -17,7 +17,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "set PORT=3001 && json-server --watch data/dbMembros.json",
+    "server1": "set PORT=3001 && json-server --watch data/dbMembros.json",
     "server2": "set PORT=3000 && json-server --watch data/dbOrientador.json"
   },
   "eslintConfig": {

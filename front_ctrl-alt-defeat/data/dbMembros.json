@@ -1,3 +1,10 @@
 {
-  "TeamMembers": []
+  "TeamMembers": [
+    {
+      "id": "6884",
+      "name": "Eduardo Costa Resende",
+      "matricula": "200",
+      "email": "eduardo.costa@ges.inatel.br"
+    }
+  ]
 }
