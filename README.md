@@ -1,2 +1,3 @@
 # Front_Ctrl-Alt-Defeat
-Repositorio destinado ao FrontEnd do projeto da materia de S204
+
+Repositorio destinado ao Frontend do projeto da matéria de S204 - Engenharia de Software
