@@ -13,7 +13,7 @@ const Register = () => {
   }
 
   return (
-    <div>
+    <div id="register">
       <h2>Ctrl+Alt+Defeat</h2>
       <p className="subtitle"> Cadastre-se para participar da maior feira de tecnologia de Minas Gerais</p>
       <form onSubmit={handleSubmit}>
@@ -21,8 +21,11 @@ const Register = () => {
         <input type="email" placeholder="Email da instituicao"/>
         <input type="password" placeholder="Senha"/>
         <input type="password" placeholder="Confirme a senha"/>
-
+        <input type="submit" placeholder="Cadastrar"/>
       </form>
+      <p>
+        Ja esta cadastrado? <Link to="/login">Entre na plataforma</Link>
+      </p>
     </div>
   )
 }

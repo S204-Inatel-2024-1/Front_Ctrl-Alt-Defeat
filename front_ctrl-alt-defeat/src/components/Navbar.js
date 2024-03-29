@@ -10,7 +10,7 @@ const Navbar = () => {
       <Link to="/">
         Ctrl+alt+defeat
       </Link>
-      <form>
+      <form id="search-form">
         <BsSearch />
         <input type='text' placeholder='Pesquisar' />
       </form>
