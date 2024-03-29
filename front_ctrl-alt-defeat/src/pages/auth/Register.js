@@ -1,7 +1,5 @@
 import "./Auth.css"
 
-import React from 'react'
-
 const Register = () => {
   return (
     <div>Register</div>
