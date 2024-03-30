@@ -16,25 +16,31 @@ import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 
 function App() {
-  const {auth, loading} = useAuth()
+  const { auth, loading } = useAuth()
 
-  if(loading){
-    console.log(loading)
-
+  if (loading) {
     return <p>Carregando...</p>
   }
   return (
     <div className="App">
       <BrowserRouter>
-      <Navbar />
-      <div className='container'>
-        <Routes>
-          <Route path='/' element={auth? <Home/> : <Navigate to="/login"/>} />
-          <Route path="/Login" element={!auth? <Login/> : <Navigate to="/"/>} />
-          <Route path="/register" element={auth? <Register/> : <Navigate to="/"/>}/>
-        </Routes>
-      </div>
-        <Footer/>
+        <Navbar />
+        <div className="container">
+          <Routes>
+            <Route
+              path='/'
+              element={auth ? <Home /> : <Navigate to="/Login" />}
+            />
+            <Route
+              path="Login"
+              element={!auth ? <Login /> : <Navigate to="/" />}
+            />
+            <Route path="register"
+              element={!auth ? <Register /> : <Navigate to="/" />}
+            />
+          </Routes>
+        </div>
+        <Footer />
       </BrowserRouter>
     </div>
   );
