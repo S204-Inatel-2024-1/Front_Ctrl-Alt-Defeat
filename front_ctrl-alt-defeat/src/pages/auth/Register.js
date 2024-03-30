@@ -2,6 +2,7 @@ import "./Auth.css"
 
 // Components
 import {Link} from 'react-router-dom'
+import Message from "../../components/Message"
 
 // Hooks
 import { useEffect, useState } from "react"
@@ -21,7 +22,7 @@ const Register = () => {
   const dispatch = useDispatch()
 
   // Pegando estado e o contexto (Redux)
-  const {loading, error} = useSelector((state) => state.auth)
+  const {loading, msg} = useSelector((state) => state.auth)
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -53,7 +54,9 @@ const Register = () => {
         <input type="number" placeholder="Matricula" onChange={(e) => setMatricula(e.target.value)} value={matricula || ""}/>
         <input type="password" placeholder="Senha" onChange={(e) => setpassword(e.target.value)} value={passwordAluno || ""}/>
         <input type="password" placeholder="Confirme a senha" onChange={(e) => setconfirmPassword(e.target.value)} value={confirmPass || ""}/>
-        <input type="submit" placeholder="Cadastrar"/>
+        {!loading && <input type="submit" value="Cadastrar"/>}
+        {loading && <input type="submit" value="Aguarde..." disabled/>}
+        {msg && <Message msg={msg} type="error"/>}
       </form>
       <p>
         Ja esta cadastrado? <Link to="/login">Entre na plataforma</Link>

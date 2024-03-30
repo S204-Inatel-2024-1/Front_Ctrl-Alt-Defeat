@@ -5,9 +5,10 @@ const register = async (data) => {
     try {
         const res = await fetch(api + "/register/aluno", config).then((res) => res.json()).catch((err) => err)
 
-        if(res){
+        if (res) {
             localStorage.setItem("user", JSON.stringify(res))
         }
+        return res
     } catch (err) {
         console.log('Error in Register: ', err);
     }
