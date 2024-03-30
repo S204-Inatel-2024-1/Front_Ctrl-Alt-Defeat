@@ -1,4 +1,4 @@
-export const api = "http://localhost:3000"
+export const api = "http://localhost:3000/auth"
 export const uploads = "http://localhost:3000/uploads"
 
 export const requestConfig = (method, data, token = null, image = null) => {
