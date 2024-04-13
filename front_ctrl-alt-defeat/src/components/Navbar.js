@@ -2,7 +2,7 @@ import './Navbar.css'
 
 // Components
 import { NavLink, Link } from 'react-router-dom'
-import { BsSearch, BsHouseDoorFill, BsFillPersonFill, BsFillCameraFill } from 'react-icons/bs'
+import { BsSearch, BsHouseDoorFill, BsBackpack2, BsAward, BsFillCameraFill } from 'react-icons/bs'
 
 // hooks
 import { useState } from 'react'
@@ -25,20 +25,20 @@ const Navbar = () => {
     dispatch(logout()) // Limpo o usuario do sistema
     dispatch(reset()) // Garantia a mais de que o usuario foi removido
 
-    navigate("/login")
+    navigate("/")
   }
 
   return (
     <nav id="nav">
       <Link to="/">
-        Ctrl+alt+defeat
+        FETIN
       </Link>
       <form id="search-form">
         <BsSearch />
         <input type='text' placeholder='Pesquisar' />
       </form>
       <ul id='nav-links'>
-        {auth ? (
+        {!auth ? (
           <>
             <li>
               <NavLink to="/">
@@ -53,8 +53,13 @@ const Navbar = () => {
               </li>
             )}
             <li>
-              <NavLink to="/profile">
-                <BsFillPersonFill />
+              <NavLink to="/LoginAluno">
+                <BsBackpack2 />
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/LoginOrientador">
+                <BsAward />
               </NavLink>
             </li>
             <li>
@@ -64,12 +69,17 @@ const Navbar = () => {
         ) : (
           <>
             <li>
-              <NavLink to='/login'> Entrar</NavLink>
+              <NavLink to='/LoginAluno'> Logar como aluno</NavLink>
             </li>
             <li>
-              <NavLink to='/Register'> Cadastrar</NavLink>
+              <NavLink to='/RegisterAluno'> Cadastrar aluno </NavLink>
             </li>
-
+            <li>
+              <NavLink to='/LoginOrientador'> Logar como orientador</NavLink>
+            </li>
+            <li>
+              <NavLink to='/RegisterOrientador'> Registrar orientador</NavLink>
+            </li>
           </>
         )}
       </ul>

@@ -11,7 +11,7 @@ import { useSelector, useDispatch } from "react-redux"
 // Redux
 import { login, reset } from "../../slices/authSlice"
 
-const Login = () => {
+const LoginAluno = () => {
   const [emailAluno, setEmail] = useState("")
   const [passwordAluno, setPassword] = useState("")
 
@@ -27,7 +27,7 @@ const Login = () => {
       passwordAluno
     }
 
-    dispatch(login(user))
+    dispatch(login({ userData: user, route: "aluno" }))
   }
 
   // Limpando todos os estados auth
@@ -38,7 +38,7 @@ const Login = () => {
   return (
     <div id="login">
       <h2>
-        Ctrl+Alt+Defeat
+        Entre como Aluno
       </h2>
       <p className="subtitle">Faca login para cadastrar um projeto</p>
       <form onSubmit={handleSubmit}>
@@ -49,10 +49,10 @@ const Login = () => {
         {msg && <Message msg={msg} type="error"/>}
       </form>
       <p>
-        Nao se cadastrou ainda? <Link to="/register">Clique aqui</Link>
+        Nao se cadastrou ainda? <Link to="/RegisterAluno">Clique aqui</Link>
       </p>
     </div>
   )
 }
 
-export default Login
+export default LoginAluno

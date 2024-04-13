@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux"
 // Redux
 import { register, reset } from "../../slices/authSlice"
 
-const Register = () => {
+const RegisterAluno = () => {
 
   const [nameAluno, setName] = useState("")
   const [emailAluno, setEmail] = useState("")
@@ -35,9 +35,8 @@ const Register = () => {
       confirmPass
     }
 
-    console.log(user)
 
-    dispatch(register(user))
+    dispatch(register({ userData: user, route: "aluno" }))
   }
 
   useEffect(() => {
@@ -59,10 +58,10 @@ const Register = () => {
         {msg && <Message msg={msg} type="error"/>}
       </form>
       <p>
-        Ja esta cadastrado? <Link to="/login">Entre na plataforma</Link>
+        Ja esta cadastrado? <Link to="/LoginAluno">Entre na plataforma</Link>
       </p>
     </div>
   )
 }
 
-export default Register
+export default RegisterAluno

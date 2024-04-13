@@ -12,8 +12,10 @@ import Footer from './components/Footer'
 
 // Pages
 import Home from "./pages/home/Home"
-import Login from './pages/auth/Login';
-import Register from './pages/auth/Register';
+import LoginAluno from './pages/auth/LoginAluno';
+import RegisterAluno from './pages/auth/RegisterAluno';
+import RegisterOrientador from './pages/auth/RegisterOrientador';
+import LoginOrientador from './pages/auth/LoginOrientador';
 
 function App() {
   const { auth, loading } = useAuth()
@@ -29,21 +31,30 @@ function App() {
           <Routes>
             <Route
               path='/'
-              element={auth ? <Home /> : <Navigate to="/Login" />}
+              element={auth ? <Home /> : <Navigate to="/" />}
             />
             <Route
-              path="Login"
-              element={!auth ? <Login /> : <Navigate to="/" />}
+              path="/LoginAluno"
+              element={!auth ? <LoginAluno /> : <Navigate to="/" />}
             />
-            <Route path="register"
-              element={!auth ? <Register /> : <Navigate to="/" />}
+            <Route 
+              path="/RegisterAluno"
+              element={!auth ? <RegisterAluno /> : <Navigate to="/" />}
+            />
+            <Route
+              path='/LoginOrientador'
+              element={!auth ? <LoginOrientador/> : <Navigate to="/" />}
+            />
+            <Route
+              path='/RegisterOrientador'
+              element={!auth ? <RegisterOrientador/> : <Navigate to="/" />}
             />
           </Routes>
         </div>
         <Footer />
       </BrowserRouter>
     </div>
-  );
+  )
 }
 
 export default App;
