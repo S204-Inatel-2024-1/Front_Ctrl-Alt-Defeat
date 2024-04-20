@@ -12,8 +12,8 @@ import { useSelector, useDispatch } from "react-redux"
 import { login, reset } from "../../slices/authSlice"
 
 const LoginAluno = () => {
-  const [emailAluno, setEmail] = useState("")
-  const [passwordAluno, setPassword] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
 
   const dispatch = useDispatch()
 
@@ -23,8 +23,8 @@ const LoginAluno = () => {
     e.preventDefault()
 
     const user ={
-      emailAluno,
-      passwordAluno
+      email,
+      password
     }
 
     dispatch(login({ userData: user, route: "aluno" }))
@@ -42,8 +42,8 @@ const LoginAluno = () => {
       </h2>
       <p className="subtitle">Faca login para cadastrar um projeto</p>
       <form onSubmit={handleSubmit}>
-        <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} value={emailAluno || ""} />
-        <input type="password" placeholder="Senha" onChange={(e) => setPassword(e.target.value)} value={passwordAluno || ""}/>
+        <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} value={email || ""} />
+        <input type="password" placeholder="Senha" onChange={(e) => setPassword(e.target.value)} value={password || ""}/>
         {!loading && <input type="submit" value="Entrar"/>}
         {loading && <input type="submit" value="Aguarde..." disabled/>}
         {msg && <Message msg={msg} type="error"/>}
