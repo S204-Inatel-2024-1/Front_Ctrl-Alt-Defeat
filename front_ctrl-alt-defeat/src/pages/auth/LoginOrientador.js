@@ -13,8 +13,8 @@ import { login, reset } from "../../slices/authSlice"
 
 
 const LoginOrientador = () => {
-    const [emailOrientador, setEmail] = useState("")
-    const [passwordOrientador, setPassword] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
 
     const dispatch = useDispatch()
 
@@ -24,8 +24,8 @@ const LoginOrientador = () => {
         e.preventDefault()
 
         const user = {
-            emailOrientador,
-            passwordOrientador
+            email,
+            password
         }
 
         dispatch(login({ userData: user, route: "orientador" }))
@@ -43,8 +43,8 @@ const LoginOrientador = () => {
             </h2>
             <p className="subtitle">Faca login para cadastrar um projeto</p>
             <form onSubmit={handleSubmit}>
-                <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} value={emailOrientador || ""} />
-                <input type="password" placeholder="Senha" onChange={(e) => setPassword(e.target.value)} value={passwordOrientador || ""} />
+                <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} value={email || ""} />
+                <input type="password" placeholder="Senha" onChange={(e) => setPassword(e.target.value)} value={password || ""} />
                 {!loading && <input type="submit" value="Entrar" />}
                 {loading && <input type="submit" value="Aguarde..." disabled />}
                 {msg && <Message msg={msg} type="error" />}
