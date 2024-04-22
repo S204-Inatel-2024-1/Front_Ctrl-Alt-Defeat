@@ -5,9 +5,8 @@ import { NavLink, Link } from 'react-router-dom'
 import { BsSearch, BsHouseDoorFill, BsBackpack2, BsAward, BsFillCameraFill } from 'react-icons/bs'
 
 // hooks
-import { useState } from 'react'
 import { useAuth } from '../hooks/useAuth'
-import { UseDispatch, useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 // Redux
