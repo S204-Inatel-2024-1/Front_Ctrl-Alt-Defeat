@@ -34,7 +34,7 @@ const LoginOrientador = () => {
     // Limpando todos os estados auth
     useEffect(() => {
         dispatch(reset())
-    }, dispatch)
+    }, [dispatch])
 
     return (
         <div id="login">
