@@ -16,6 +16,9 @@ import LoginAluno from './pages/auth/LoginAluno';
 import RegisterAluno from './pages/auth/RegisterAluno';
 import RegisterOrientador from './pages/auth/RegisterOrientador';
 import LoginOrientador from './pages/auth/LoginOrientador';
+import LoginAdm from './pages/auth/LoginAdm';
+import RegisterAdm from './pages/auth/RegisterAdm';
+
 
 function App() {
   const { auth, loading } = useAuth()
@@ -48,6 +51,14 @@ function App() {
             <Route
               path='/RegisterOrientador'
               element={!auth ? <RegisterOrientador/> : <Navigate to="/" />}
+            />
+            <Route
+              path='/LoginAdm'
+              element={!auth ? <LoginAdm/> : <Navigate to="/" />}
+            />
+            <Route
+              path='/RegisterAdm'
+              element={!auth ? <RegisterAdm/> : <Navigate to="/" />}
             />
           </Routes>
         </div>

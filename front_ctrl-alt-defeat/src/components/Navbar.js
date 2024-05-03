@@ -2,7 +2,7 @@ import './Navbar.css'
 
 // Components
 import { NavLink, Link } from 'react-router-dom'
-import { BsSearch, BsHouseDoorFill, BsBackpack2, BsAward, BsFillCameraFill } from 'react-icons/bs'
+import { BsSearch, BsHouseDoorFill, BsBackpack2, BsAward, BsFillCameraFill, BsAwardFill } from 'react-icons/bs'
 
 // hooks
 import { useAuth } from '../hooks/useAuth'
@@ -62,6 +62,11 @@ const Navbar = () => {
               </NavLink>
             </li>
             <li>
+              <NavLink to="/LoginAdm">
+                <BsAwardFill />
+              </NavLink>
+            </li>
+            <li>
               <span onClick={handleLogout}>Sair</span>
             </li>
           </>
@@ -78,6 +83,12 @@ const Navbar = () => {
             </li>
             <li>
               <NavLink to='/RegisterOrientador'> Registrar orientador</NavLink>
+            </li>
+            <li>
+              <NavLink to='/LoginAdm'> Logar como orientador</NavLink>
+            </li>
+            <li>
+              <NavLink to='/RegisterAdm'> Registrar orientador</NavLink>
             </li>
           </>
         )}
