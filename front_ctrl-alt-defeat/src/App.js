@@ -18,6 +18,7 @@ import RegisterOrientador from './pages/auth/RegisterOrientador';
 import LoginOrientador from './pages/auth/LoginOrientador';
 import LoginAdm from './pages/auth/LoginAdm';
 import RegisterAdm from './pages/auth/RegisterAdm';
+import ProfileAluno from './pages/profile/ProfileAluno'
 
 
 function App() {
@@ -33,12 +34,12 @@ function App() {
         <div className="container">
           <Routes>
             <Route
-              path='/'
-              element={auth ? <Home /> : <Navigate to="/" />}
+              path=''
+              element={!auth ? <Home /> : <Navigate to="" />}
             />
             <Route
               path="/LoginAluno"
-              element={!auth ? <LoginAluno /> : <Navigate to="/" />}
+              element={!auth ? <LoginAluno /> : <Navigate to="/ProfileAluno" />}
             />
             <Route 
               path="/RegisterAluno"
@@ -59,6 +60,10 @@ function App() {
             <Route
               path='/RegisterAdm'
               element={!auth ? <RegisterAdm/> : <Navigate to="/" />}
+            />
+            <Route 
+              path='/ProfileAluno' 
+              element={<ProfileAluno />} 
             />
           </Routes>
         </div>

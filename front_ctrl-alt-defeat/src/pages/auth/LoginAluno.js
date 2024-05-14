@@ -5,7 +5,7 @@ import Message from "../../components/Message"
 import { useEffect, useState } from "react"
 
 // Hooks
-import { Link } from "react-router-dom"
+import { Link, Navigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 
 // Redux
@@ -17,7 +17,7 @@ const LoginAluno = () => {
 
   const dispatch = useDispatch()
 
-  const {loading, msg} = useSelector((state) => state.auth)
+  const {loading, msg, auth} = useSelector((state) => state.auth)
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -28,6 +28,11 @@ const LoginAluno = () => {
     }
 
     dispatch(login({ userData: user, route: "aluno" }))
+
+    if (auth) {
+      return <Navigate to="/ProfileAluno" />;
+    }
+
   }
 
   // Limpando todos os estados auth

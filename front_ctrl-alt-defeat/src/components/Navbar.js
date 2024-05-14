@@ -62,33 +62,15 @@ const Navbar = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/LoginAdm">
+              <NavLink to="/ProfileAluno">
                 <BsAwardFill />
               </NavLink>
-            </li>
-            <li>
-              <span onClick={handleLogout}>Sair</span>
             </li>
           </>
         ) : (
           <>
             <li>
-              <NavLink to='/LoginAluno'> Logar como aluno</NavLink>
-            </li>
-            <li>
-              <NavLink to='/RegisterAluno'> Cadastrar aluno </NavLink>
-            </li>
-            <li>
-              <NavLink to='/LoginOrientador'> Logar como orientador</NavLink>
-            </li>
-            <li>
-              <NavLink to='/RegisterOrientador'> Registrar orientador</NavLink>
-            </li>
-            <li>
-              <NavLink to='/LoginAdm'> Logar como orientador</NavLink>
-            </li>
-            <li>
-              <NavLink to='/RegisterAdm'> Registrar orientador</NavLink>
+              <span onClick={handleLogout}>Sair</span>
             </li>
           </>
         )}

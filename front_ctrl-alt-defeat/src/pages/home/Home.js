@@ -3,8 +3,8 @@ import "./Home.css"
 const Home = () => {
     return (
         <div id="home">
-            <h2>Welcome to Our Website</h2>
-            <p className="subtitle">Discover amazing projects</p>
+            <h2>AAAAAAAAAAAAAAAAAAA</h2>
+            <p className="subtitle">socorro</p>
             <div>
                 {/* Add your content here */}
                 {/* Example link to a project page */}
