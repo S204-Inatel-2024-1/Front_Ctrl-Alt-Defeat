@@ -39,7 +39,7 @@ function App() {
             />
             <Route
               path="/LoginAluno"
-              element={!auth ? <LoginAluno /> : <Navigate to="/ProfileAluno" />}
+              element={auth ? <Navigate to="/ProfileAluno" /> : <LoginAluno />}
             />
             <Route 
               path="/RegisterAluno"

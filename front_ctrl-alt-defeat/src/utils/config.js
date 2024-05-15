@@ -1,4 +1,4 @@
-export const api = "https://deploy-backend-xk4l.onrender.com/auth"
+export const api = "https://deploy-backend-xk4l.onrender.com/"
 export const uploads = "http://localhost:3000/uploads"
 
 export const requestConfig = (method, data, token = null, image = null) => {

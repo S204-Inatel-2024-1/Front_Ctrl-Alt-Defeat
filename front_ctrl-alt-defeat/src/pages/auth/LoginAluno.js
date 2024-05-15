@@ -20,7 +20,7 @@ const LoginAluno = () => {
   const {loading, msg, auth} = useSelector((state) => state.auth)
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault() 
 
     const user ={
       email,

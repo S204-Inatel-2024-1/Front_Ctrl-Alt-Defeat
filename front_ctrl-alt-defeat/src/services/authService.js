@@ -1,46 +1,79 @@
-import { api, requestConfig } from "../utils/config"
+import { api, requestConfig } from "../utils/config";
 
 const register = async (data, route) => {
-    const config = requestConfig("POST", data)
-    try {
-        const res = await fetch(api + "/register/" + route, config).then((res) => res.json()).catch((err) => err)
+  const config = requestConfig("POST", data);
+  try {
+    const res = await fetch(api + "auth/register/" + route, config)
+      .then((res) => res.json())
+      .catch((err) => err);
 
-        if (res._id) {
-            localStorage.setItem("user", JSON.stringify(res))
-        }
-        return res
-    } catch (err) {
-        console.log('Error in Register: ', err);
-    }
-}
+    localStorage.setItem("user", JSON.stringify(res));
+
+    return res;
+  } catch (err) {
+    console.log('Error in Register: ', err);
+  }
+};
 
 // Logout do Usuario
 const logout = () => {
-    localStorage.removeItem("user")
-}
+  localStorage.removeItem("user");
+};
 
 // Entrando um usuario
 const login = async (data, route) => {
-    const config = requestConfig("POST", data)
+  const config = requestConfig("POST", data);
 
+  try {
+    const res = await fetch(api + "auth/login/" + route, config)
+      .then((res) => res.json())
+      .catch((err) => err);
+
+    localStorage.setItem("user", JSON.stringify(res));
+
+    return res;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const getEquipeData = async (email) => {
+  const config = requestConfig("GET");
+
+  try {
+    const res = await fetch(api + "get/aluno/data/" + email, config)
+      .then((res) => res.json())
+      .catch((err) => err);
+
+      console.log(res);
+
+    return res;
+  } catch (err) {
+    console.log('Error in getEquipeData: ', err);
+  }
+};
+
+// Get user details
+const getUserDetails = async (id) => {
+    const config = requestConfig("GET");
+  
     try {
-        const res = await fetch(api + "/login/" + route, config).then((res) => res.json()).catch((err) => err)
-
-        if (res._id) {
-            localStorage.setItem("user", JSON.stringify(res))
-        }
-
-        return res
-
-    } catch (err) {
-        console.log(err)
+      const res = await fetch(api + "/users/" + id, config)
+        .then((res) => res.json())
+        .catch((err) => err);
+  
+      return res;
+    } catch (error) {
+      console.log(error);
     }
-}
+  };
 
 const authService = {
-    register,
-    logout,
-    login,
-}
+  register,
+  logout,
+  login,
+  getEquipeData,
+  getUserDetails, // Adicione getEquipeData ao objeto authService
+};
 
-export default authService
+export default authService;
