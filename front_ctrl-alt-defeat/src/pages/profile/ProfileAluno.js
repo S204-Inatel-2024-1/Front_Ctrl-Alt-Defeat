@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import authService from '../../services/authService';
-import { getUserDetails } from "../../services/authService";
-import { useParams } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
 
 const ProfileAluno = () => {
   const { id } = useParams();
@@ -10,20 +9,19 @@ const ProfileAluno = () => {
   const { user, loading } = useSelector((state) => state.auth);
   const [profileData, setProfileData] = useState(null);
 
-  useEffect(() => {
-    dispatch(getUserDetails(id)); // Fetch user data on component mount
-  }, [id]); // Trigger on id change (optional)
+  // useEffect(() => {
+  //   dispatch(getUserDetails(id)); // Fetch user data on component mount
+  // }, [id]); // Trigger on id change (optional)
 
   useEffect(() => {
     const fetchData = async () => {
-      if (user && user.email) { // Check if user and email are available
-        const data = await authService.getEquipeData(user.email);
-        setProfileData(data);
-      }
+        if (user) {
+            const data = await authService.getEquipeData("eduardo.costa@ges.inatel.br"); // Use getEquipeData do authService
+            setProfileData(data);
+        }
     };
-
     fetchData();
-  }, [user]); // Fetch equipe data when user changes
+  }, []);
 
   if (loading) {
     return <div>Loading profile...</div>;

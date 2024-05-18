@@ -29,8 +29,7 @@ export const logout = createAsyncThunk("auth/logout", async () => {
 
 // Entrando com um usuario
 export const login = createAsyncThunk("auth/login", async ({ userData, route }, thunkAPI) => {
-
-    console.log("ccccccccccccccccccc" + userData)
+    
     const data = await authService.login(userData, route);
 
     // checando errors
