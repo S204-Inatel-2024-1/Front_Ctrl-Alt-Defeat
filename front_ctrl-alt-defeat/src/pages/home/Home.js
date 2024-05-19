@@ -1,14 +1,18 @@
 import "./Home.css"
+import { Link } from "react-router-dom";
+
+import { useSelecto, useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+
 
 const Home = () => {
+
+    const dispatch = useDispatch()
+    const {user} = useSelector((state) => state.auth)
+
     return (
         <div id="home">
-            <h2>AAAAAAAAAAAAAAAAAAA</h2>
-            <p className="subtitle">socorro</p>
-            <div>
-                {/* Add your content here */}
-                {/* Example link to a project page */}
-            </div>
+
         </div>
     );
 };

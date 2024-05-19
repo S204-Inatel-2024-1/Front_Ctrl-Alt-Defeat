@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import authService from '../../services/authService';
+import { NavLink } from 'react-router-dom';
 import "./Profile.css";
 import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
 
@@ -67,7 +68,11 @@ const ProfileAluno = () => {
             <span className="value">
               {showTeams
                 ? profileData.equipesAtuais.map((equipe, index) => (
-                    <div key={index}>{equipe}</div>
+                    <div key={index}>
+                      <NavLink to={`/equipe/${equipe}`}>
+                        Equipe {equipe}
+                      </NavLink>
+                    </div>
                   ))
                 : null}
             </span>
