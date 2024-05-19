@@ -1,4 +1,5 @@
-import './App.css';
+import React from 'react';
+import './App.css'; // Importing the global CSS
 
 // Router
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
@@ -41,7 +42,7 @@ function App() {
             <Route path='/RegisterOrientador' element={!auth ? <RegisterOrientador /> : <Navigate to="/" />} />
             <Route path='/LoginAdm' element={!auth ? <LoginAdm /> : <Navigate to="/" />} />
             <Route path='/RegisterAdm' element={!auth ? <RegisterAdm /> : <Navigate to="/" />} />
-            <Route path='/ProfileAluno' element={<ProfileAluno />} />
+            <Route path='/ProfileAluno/:email' element={<ProfileAluno />} /> {/* Dynamic route */}
             <Route path='/equipe/:equipeId' element={<EquipeDetalhes />} /> {/* Dynamic route */}
           </Routes>
         </div>

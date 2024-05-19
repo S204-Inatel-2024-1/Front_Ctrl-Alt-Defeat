@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import authService from '../../services/authService';
 import { NavLink } from 'react-router-dom';
@@ -8,6 +9,7 @@ import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
 const ProfileAluno = () => {
   const dispatch = useDispatch();
   const { user, loading } = useSelector((state) => state.auth);
+  const { email } = useParams();
   const [profileData, setProfileData] = useState(null);
   const [error, setError] = useState(null);
   const [showTeams, setShowTeams] = useState(false);
@@ -19,8 +21,8 @@ const ProfileAluno = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (user) {
-          const data = await authService.getEquipeData("eduardo.costa@ges.inatel.br");
+        if (email) {
+          const data = await authService.getEquipeData(email);
           setProfileData(data);
         }
       } catch (err) {
@@ -32,7 +34,7 @@ const ProfileAluno = () => {
     return () => {
       setProfileData(null);
     };
-  }, [user]);
+  }, [email]);
 
   if (error) {
     return <div className="error-message">Error: {error}</div>;
