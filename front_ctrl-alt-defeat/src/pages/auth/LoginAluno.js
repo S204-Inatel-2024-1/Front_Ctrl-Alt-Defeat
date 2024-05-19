@@ -5,7 +5,7 @@ import Message from "../../components/Message"
 import { useEffect, useState } from "react"
 
 // Hooks
-import { Link } from "react-router-dom"
+import { Link, NavLink, Navigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 
 // Redux
@@ -17,10 +17,10 @@ const LoginAluno = () => {
 
   const dispatch = useDispatch()
 
-  const {loading, msg} = useSelector((state) => state.auth)
+  const {loading, msg, auth} = useSelector((state) => state.auth)
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault() 
 
     const user ={
       email,

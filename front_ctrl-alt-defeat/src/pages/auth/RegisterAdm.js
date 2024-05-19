@@ -36,9 +36,9 @@ const RegisterAdm = () => {
           dispatch(register({ userData: userAdm, route: "adm" }))
     }
 
-    useEffect(() => {
-        dispatch(reset())
-    }, [dispatch])
+    // useEffect(() => {
+    //     dispatch(reset())
+    // }, [dispatch])
 
     return (
         <div id="register">

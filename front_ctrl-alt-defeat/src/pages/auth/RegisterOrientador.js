@@ -36,9 +36,9 @@ const RegisterOrientador = () => {
           dispatch(register({ userData: userOrientador, route: "orientador" }))
     }
 
-    useEffect(() => {
-        dispatch(reset())
-    }, [dispatch])
+    // useEffect(() => {
+    //     dispatch(reset())
+    // }, [dispatch])
 
     return (
         <div id="register">
