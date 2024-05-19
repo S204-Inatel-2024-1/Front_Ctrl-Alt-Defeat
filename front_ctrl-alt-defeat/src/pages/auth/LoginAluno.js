@@ -17,7 +17,7 @@ const LoginAluno = () => {
 
   const dispatch = useDispatch()
 
-  const {loading, msg, auth} = useSelector((state) => state.auth)
+  const {loading, msg, user} = useSelector((state) => state.auth)
 
   const handleSubmit = (e) => {
     e.preventDefault() 

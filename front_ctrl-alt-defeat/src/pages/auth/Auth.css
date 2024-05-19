@@ -1,10 +1,11 @@
 #login,
 #register {
   border: 5px solid #363636;
-  background-color: #000;
+  background-color: #1e1e1e;
   padding: 1.5em 2em;
   max-width: 33%;
   margin: 2em auto;
+  border-radius: 10px;
 }
 
 #login h2,
@@ -12,12 +13,14 @@
   text-align: center;
   font-size: 2.1em;
   margin-top: 0;
+  color: #0094f6;
 }
 
 .subtitle {
   font-weight: bold;
   color: #999;
   margin-bottom: 1.5em;
+  text-align: center;
 }
 
 #login form,

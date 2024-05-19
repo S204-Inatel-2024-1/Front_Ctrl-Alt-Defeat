@@ -62,7 +62,7 @@ const Navbar = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/ProfileAluno">
+              <NavLink to="/LoginAdm">
                 <BsAwardFill />
               </NavLink>
             </li>

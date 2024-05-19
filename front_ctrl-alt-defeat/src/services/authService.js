@@ -53,6 +53,22 @@ const getEquipeData = async (email) => {
   }
 };
 
+const getEquipe = async (num) => {
+  const config = requestConfig("GET");
+
+  try {
+    const res = await fetch(api + "get/equipe/data/" + num, config)
+      .then((res) => res.json())
+      .catch((err) => err);
+
+      console.log(res);
+
+    return res;
+  } catch (err) {
+    console.log('Error in getEquipeData: ', err);
+  }
+};
+
 // // Get user details
 // const getUserDetails = async (id) => {
 //     const config = requestConfig("GET");
@@ -73,6 +89,7 @@ const authService = {
   logout,
   login,
   getEquipeData,
+  getEquipe,
   // getUserDetails,
 };
 
