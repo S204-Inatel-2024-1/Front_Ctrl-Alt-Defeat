@@ -32,10 +32,10 @@ const Navbar = () => {
       <Link to="/">
         FETIN
       </Link>
-      <form id="search-form">
+      {/* <form id="search-form">
         <BsSearch />
         <input type='text' placeholder='Pesquisar' />
-      </form>
+      </form> */}
       <ul id='nav-links'>
         {!auth ? (
           <>

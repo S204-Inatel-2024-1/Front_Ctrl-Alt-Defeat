@@ -36,8 +36,8 @@ function App() {
         <Navbar />
         <div className="container">
           <Routes>
-            <Route path='/' element={!auth ? <Home /> : <Navigate to="/ProfileAluno" />} />
-            <Route path='/LoginAluno' element={!auth ? <Navigate to="/ProfileAluno" /> : <LoginAluno />} />
+            <Route path='/' element={!auth ? <Home /> : <Navigate to="" />} />
+            <Route path='/LoginAluno' element={!auth ? <LoginAluno /> : <Navigate to="/" />} />
             <Route path='/RegisterAluno' element={!auth ? <RegisterAluno /> : <Navigate to="/" />} />
             <Route path='/LoginOrientador' element={!auth ? <LoginOrientador /> : <Navigate to="/" />} />
             <Route path='/RegisterOrientador' element={!auth ? <RegisterOrientador /> : <Navigate to="/" />} />
