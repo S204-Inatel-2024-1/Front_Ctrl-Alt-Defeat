@@ -68,12 +68,30 @@ const getEquipe = async (num) => {
   }
 };
 
+const getEquipeOrientadorData = async (email) => {
+  const config = requestConfig("GET");
+
+  try {
+    const res = await fetch(api + "get/orientador/data/" + email, config)
+      .then((res) => res.json())
+      .catch((err) => err);
+
+    console.log(res);
+
+    return res;
+
+  } catch (err) {
+    console.log('Error in getEquipeOrientadorData: ', err);
+  }
+};
+
 const authService = {
   register,
   logout,
   login,
   getEquipeData,
   getEquipe,
+  getEquipeOrientadorData
   // getUserDetails,
 };
 

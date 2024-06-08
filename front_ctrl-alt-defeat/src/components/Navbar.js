@@ -21,10 +21,10 @@ const Navbar = () => {
   const dispatch = useDispatch()
 
   const handleLogout = () => {
+
+    navigate("")
     dispatch(logout()) // Limpo o usuario do sistema
     dispatch(reset()) // Garantia a mais de que o usuario foi removido
-
-    navigate("/LoginAluno")
   }
 
   return (
@@ -32,10 +32,10 @@ const Navbar = () => {
       <Link to="/">
         FETIN
       </Link>
-      <form id="search-form">
+      {/* <form id="search-form">
         <BsSearch />
         <input type='text' placeholder='Pesquisar' />
-      </form>
+      </form> */}
       <ul id='nav-links'>
         {!auth ? (
           <>
