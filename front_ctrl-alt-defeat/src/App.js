@@ -20,7 +20,8 @@ import LoginOrientador from './pages/auth/LoginOrientador';
 import LoginAdm from './pages/auth/LoginAdm';
 import RegisterAdm from './pages/auth/RegisterAdm';
 import ProfileAluno from './pages/profile/ProfileAluno';
-import EquipeDetalhes from './pages/equipe/Equipe'; // Update the import to match the file name
+import EquipeDetalhes from './pages/equipe/Equipe';
+import ProfileOrientador from './pages/profile/ProfileOrientador'; 
 
 function App() {
   const { auth, loading } = useAuth();
@@ -36,7 +37,7 @@ function App() {
         <div className="container">
           <Routes>
             <Route path='/' element={!auth ? <Home /> : <Navigate to="/ProfileAluno" />} />
-            <Route path='/LoginAluno' element={auth ? <Navigate to="/ProfileAluno" /> : <LoginAluno />} />
+            <Route path='/LoginAluno' element={!auth ? <Navigate to="/ProfileAluno" /> : <LoginAluno />} />
             <Route path='/RegisterAluno' element={!auth ? <RegisterAluno /> : <Navigate to="/" />} />
             <Route path='/LoginOrientador' element={!auth ? <LoginOrientador /> : <Navigate to="/" />} />
             <Route path='/RegisterOrientador' element={!auth ? <RegisterOrientador /> : <Navigate to="/" />} />
@@ -44,6 +45,7 @@ function App() {
             <Route path='/RegisterAdm' element={!auth ? <RegisterAdm /> : <Navigate to="/" />} />
             <Route path='/ProfileAluno/:email' element={<ProfileAluno />} /> {/* Dynamic route */}
             <Route path='/equipe/:equipeId' element={<EquipeDetalhes />} /> {/* Dynamic route */}
+            <Route path='/ProfileOrientador/:email' element={<ProfileOrientador />} />
           </Routes>
         </div>
         <Footer />

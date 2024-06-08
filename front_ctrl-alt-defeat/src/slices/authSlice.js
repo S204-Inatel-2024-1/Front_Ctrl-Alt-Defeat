@@ -32,7 +32,7 @@ export const login = createAsyncThunk("auth/login", async ({ userData, route }, 
     
     const data = await authService.login(userData, route);
 
-    const mensagem = 'Auntenticação Aluno realizada com sucesso!'
+    const mensagem = 'Auntenticação Orientador realizada com sucesso!'
     const response = data.msg == mensagem ? userData.email : null
 
     localStorage.setItem("user", JSON.stringify(response));
