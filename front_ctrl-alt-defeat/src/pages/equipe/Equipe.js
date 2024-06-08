@@ -31,14 +31,18 @@ const EquipeDetalhes = () => {
   return (
     <div id="equipe-detalhes">
       <div className="equipe-header">
-        <h2>Equipe {equipeData.número}</h2>
-        <h3>{equipeData.nomeProjeto}</h3>
+        <h2>Equipe número: {equipeData.number}</h2>
+        <h3>{equipeData.name}</h3>
       </div>
       <ul className="equipe-info">
         <li className="orientador">
           <span className="label">Orientador:</span>
           <span className="value">{equipeData.nomeOrientador}</span>
           <span className="email">{equipeData.emailOrientador}</span>
+        </li>
+        <li className="description">
+          <span className="label">Description:</span>
+          <span className="value">{equipeData.description}</span>
         </li>
         <li className="status">
           <span className="label">Status:</span>
