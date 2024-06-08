@@ -44,8 +44,8 @@ const EquipeDetalhes = () => {
           <span className="label">Status:</span>
           <span className="value">{equipeData.status}</span>
         </li>
-        {Array.isArray(equipeData.membros) && equipeData.membros.length > 0 ? (
-          equipeData.membros.map((membro, index) => (
+        {equipeData.members.length > 0 ? (
+          equipeData.members.map((membro, index) => (
             <li key={index} className="membro">
               <span className="label">Membro {index + 1}:</span>
               <span className="value">{membro.name}</span>

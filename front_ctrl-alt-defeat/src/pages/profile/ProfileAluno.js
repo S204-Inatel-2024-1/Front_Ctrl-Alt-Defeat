@@ -9,7 +9,6 @@ import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
 const ProfileAluno = () => {
   const dispatch = useDispatch();
   const { user, loading } = useSelector((state) => state.auth);
-  const { email } = useParams();
   const [profileData, setProfileData] = useState(null);
   const [error, setError] = useState(null);
   const [showTeams, setShowTeams] = useState(false);
@@ -21,8 +20,8 @@ const ProfileAluno = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (email) {
-          const data = await authService.getEquipeData(email);
+        if (user) {
+          const data = await authService.getEquipeData(user);
           setProfileData(data);
         }
       } catch (err) {
@@ -34,7 +33,7 @@ const ProfileAluno = () => {
     return () => {
       setProfileData(null);
     };
-  }, [email]);
+  }, [user]);
 
   if (error) {
     return <div className="error-message">Error: {error}</div>;

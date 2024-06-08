@@ -15,9 +15,9 @@ export const register = createAsyncThunk("auth/register", async ({ userData, rou
     const data = await authService.register(userData, route);
 
     // checando errors
-    if (data.msg) {
-        return thunkAPI.rejectWithValue(data.msg)
-    }
+    // if (data.msg) {
+    //     return thunkAPI.rejectWithValue(data.msg)
+    // }
 
     return data
 })
@@ -32,12 +32,21 @@ export const login = createAsyncThunk("auth/login", async ({ userData, route }, 
     
     const data = await authService.login(userData, route);
 
-    // checando errors
-    if (data.msg) {
-        return thunkAPI.rejectWithValue(data.msg)
-    }
+    const mensagem = 'Auntenticação Aluno realizada com sucesso!'
+    const response = data.msg == mensagem ? userData.email : null
 
-    return data
+    localStorage.setItem("user", JSON.stringify(response));
+
+    // console.log("LOGIN: ", response)
+
+    // console.log("DADOS ENVIADOS PARA O BACKEND ", userData)
+
+    // checando errors
+    // if (data.msg) {
+    //     return thunkAPI.rejectWithValue(data.msg)
+    // }
+    // console.log(data)
+    return response
 })
 
 export const authSlice = createSlice({

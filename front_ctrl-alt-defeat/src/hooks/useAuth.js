@@ -8,12 +8,15 @@ export const useAuth = () => {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        console.log("BBBBBBBBBBBBBB:", auth);
-        console.log("AAAAAAAAAAAAA:", user);
+        // console.log("AUTH ANTES DA VERIFICACAO DE USUARIO:", auth);
+        // console.log("RESPOSTA DO BACKEND PARA A AUTENTICACAO:", user);
         if(user){
             setAuth(true)
+            // console.log("AUTH CASO TENHA UM USUARIO:", auth);
+
         }else{
             setAuth(false)
+            // console.log("AUTH CASO NAO TENHA UM USUARIO:", auth);
         }
 
         setLoading(false)

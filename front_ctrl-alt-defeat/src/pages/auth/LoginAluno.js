@@ -12,8 +12,8 @@ import { useSelector, useDispatch } from "react-redux"
 import { login, reset } from "../../slices/authSlice"
 
 const LoginAluno = () => {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const [email, setEmail] = useState("eduardo.costa@ges.inatel.br")
+  const [password, setPassword] = useState("teste")
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -28,13 +28,19 @@ const LoginAluno = () => {
       password,
     };
 
-    dispatch(login({ userData: user, route: "aluno" }));
+    // const mensagem = 'Auntenticação Aluno realizada com sucesso!'
+    // const response = login({ userData: user, route: "aluno" })
+    // console.log("Teste autenticacao: ", response.msg == mensagem ? {email} : null)
+    // console.log(response)
+    dispatch(login({ userData: user, route: "aluno" }))
+
   };
 
   // Redirecionar após login bem-sucedido
   useEffect(() => {
     if (user) {
-      navigate(`/ProfileAluno/${user.email}`); // Redireciona para o perfil do aluno com o email
+      console.log("User do LoginAluno: ", user)
+      navigate(`/ProfileAluno/${user}`); // Redireciona para o perfil do aluno com o email
     }
   }, [user, navigate]);
 
