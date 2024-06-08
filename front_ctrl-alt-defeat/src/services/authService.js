@@ -29,8 +29,6 @@ const login = async (data, route) => {
       .then((res) => res.json())
       .catch((err) => err);
 
-    localStorage.setItem("user", JSON.stringify(res));
-
     return res;
   } catch (err) {
     console.log(err);
@@ -45,9 +43,10 @@ const getEquipeData = async (email) => {
       .then((res) => res.json())
       .catch((err) => err);
 
-      console.log(res);
+    // console.log(res);
 
     return res;
+
   } catch (err) {
     console.log('Error in getEquipeData: ', err);
   }
@@ -61,28 +60,13 @@ const getEquipe = async (num) => {
       .then((res) => res.json())
       .catch((err) => err);
 
-      console.log(res);
+    console.log(res);
 
     return res;
   } catch (err) {
     console.log('Error in getEquipeData: ', err);
   }
 };
-
-// // Get user details
-// const getUserDetails = async (id) => {
-//     const config = requestConfig("GET");
-  
-//     try {
-//       const res = await fetch(api + "/users/" + id, config)
-//         .then((res) => res.json())
-//         .catch((err) => err);
-  
-//       return res;
-//     } catch (error) {
-//       console.log(error);
-//     }
-// };
 
 const authService = {
   register,

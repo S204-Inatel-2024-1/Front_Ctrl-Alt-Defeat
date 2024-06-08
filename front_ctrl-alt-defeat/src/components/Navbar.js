@@ -24,7 +24,7 @@ const Navbar = () => {
     dispatch(logout()) // Limpo o usuario do sistema
     dispatch(reset()) // Garantia a mais de que o usuario foi removido
 
-    navigate("/")
+    navigate("/LoginAluno")
   }
 
   return (

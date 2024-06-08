@@ -5,54 +5,66 @@ import Message from "../../components/Message"
 import { useEffect, useState } from "react"
 
 // Hooks
-import { Link, NavLink, Navigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 
 // Redux
 import { login, reset } from "../../slices/authSlice"
 
 const LoginAluno = () => {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const [email, setEmail] = useState("eduardo.costa@ges.inatel.br")
+  const [password, setPassword] = useState("teste")
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-  const {loading, msg, user} = useSelector((state) => state.auth)
+  const { loading, msg, user } = useSelector((state) => state.auth)
 
   const handleSubmit = (e) => {
-    e.preventDefault() 
+    e.preventDefault();
 
-    const user ={
+    const user = {
       email,
-      password
-    }
+      password,
+    };
 
+    // const mensagem = 'Auntenticação Aluno realizada com sucesso!'
+    // const response = login({ userData: user, route: "aluno" })
+    // console.log("Teste autenticacao: ", response.msg == mensagem ? {email} : null)
+    // console.log(response)
     dispatch(login({ userData: user, route: "aluno" }))
-  }
+
+  };
+
+  // Redirecionar após login bem-sucedido
+  useEffect(() => {
+    if (user) {
+      console.log("User do LoginAluno: ", user)
+      navigate(`/ProfileAluno/${user}`); // Redireciona para o perfil do aluno com o email
+    }
+  }, [user, navigate]);
 
   // Limpando todos os estados auth
-  useEffect(() => {
-    dispatch(reset())
-  }, [dispatch])
+  // useEffect(() => {
+  //   dispatch(reset());
+  // }, [dispatch]);
 
   return (
     <div id="login">
-      <h2>
-        Entre como Aluno
-      </h2>
-      <p className="subtitle">Faca login para cadastrar um projeto</p>
+      <h2>Entre como Aluno</h2>
+      <p className="subtitle">Faça login para cadastrar um projeto</p>
       <form onSubmit={handleSubmit}>
         <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} value={email || ""} />
-        <input type="password" placeholder="Senha" onChange={(e) => setPassword(e.target.value)} value={password || ""}/>
-        {!loading && <input type="submit" value="Entrar"/>}
-        {loading && <input type="submit" value="Aguarde..." disabled/>}
-        {msg && <Message msg={msg} type="error"/>}
+        <input type="password" placeholder="Senha" onChange={(e) => setPassword(e.target.value)} value={password || ""} />
+        {!loading && <input type="submit" value="Entrar" />}
+        {loading && <input type="submit" value="Aguarde..." disabled />}
+        {msg && <Message msg={msg} type="error" />}
       </form>
       <p>
-        Nao se cadastrou ainda? <Link to="/RegisterAluno">Clique aqui</Link>
+        Não se cadastrou ainda? <Link to="/RegisterAluno">Clique aqui</Link>
       </p>
     </div>
-  )
-}
+  );
+};
 
-export default LoginAluno
+export default LoginAluno;
