@@ -92,7 +92,7 @@ const updateEquipeData = async (data) => {
       .then((res) => res.json())
       .catch((err) => err);
 
-    console.log(res)
+    console.log("Update Equipe Data: ", res)
     return res;
   } catch (err) {
     console.log('Error in updateEquipeData: ', err);

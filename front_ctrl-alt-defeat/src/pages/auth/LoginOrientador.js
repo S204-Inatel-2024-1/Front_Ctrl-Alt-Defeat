@@ -13,8 +13,8 @@ import { login, reset } from "../../slices/authSlice"
 
 
 const LoginOrientador = () => {
-    const [email, setEmail] = useState("chris@ges.inatel.br")
-    const [password, setPassword] = useState("teste")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
 
     const dispatch = useDispatch()
     const navigate = useNavigate()

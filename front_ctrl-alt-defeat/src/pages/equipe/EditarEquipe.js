@@ -12,8 +12,8 @@ const EditarEquipe = () => {
   const [error, setError] = useState(null);
   const [formData, setFormData] = useState({
     newName: '',
-    newNameProfessor: '',
-    newEmailProfessor: '',
+    newNameOrientador: '',
+    newEmailOrientador: '',
     description: ''
   });
 
@@ -22,10 +22,11 @@ const EditarEquipe = () => {
       try {
         const data = await authService.getEquipe(equipeId);
         setEquipeData(data);
+        console.log("Informacoes do Orientador: ", data)
         setFormData({
           newName: data.name,
-          newNameProfessor: data.nomeOrientador,
-          newEmailProfessor: data.emailOrientador,
+          newNameOrientador: data.nameOrientador,
+          newEmailOrientador: data.emailOrientador,
           description: data.description
         });
       } catch (err) {
@@ -48,6 +49,7 @@ const EditarEquipe = () => {
     };
     try {
       await authService.updateEquipeData(updatedData);
+      console.log(updatedData)
       navigate(`/equipe/${equipeId}`);
     } catch (err) {
       setError('Failed to update equipe data.');
@@ -80,7 +82,7 @@ const EditarEquipe = () => {
           <input
             type="text"
             name="newNameProfessor"
-            value={formData.newNameProfessor}
+            value={formData.newNameOrientador}
             onChange={handleInputChange}
           />
         </div>
@@ -89,7 +91,7 @@ const EditarEquipe = () => {
           <input
             type="email"
             name="newEmailProfessor"
-            value={formData.newEmailProfessor}
+            value={formData.newEmailOrientador}
             onChange={handleInputChange}
           />
         </div>
