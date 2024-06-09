@@ -29,25 +29,21 @@ export const logout = createAsyncThunk("auth/logout", async () => {
 
 // Entrando com um usuario
 export const login = createAsyncThunk("auth/login", async ({ userData, route }, thunkAPI) => {
-    
     const data = await authService.login(userData, route);
 
-    const mensagem = 'Auntenticação Orientador realizada com sucesso!'
-    const response = data.msg == mensagem ? userData.email : null
+    const alunoMsg = 'Auntenticação Aluno realizada com sucesso!';
+    const orientadorMsg = 'Auntenticação Orientador realizada com sucesso!';
 
-    localStorage.setItem("user", JSON.stringify(response));
+    let response = null;
 
-    // console.log("LOGIN: ", response)
+    if (data.msg === alunoMsg || data.msg === orientadorMsg) {
+        response = userData.email
+        localStorage.setItem("user", JSON.stringify(response));
+    }
 
-    // console.log("DADOS ENVIADOS PARA O BACKEND ", userData)
-
-    // checando errors
-    // if (data.msg) {
-    //     return thunkAPI.rejectWithValue(data.msg)
-    // }
-    // console.log(data)
-    return response
-})
+    console.log(response)
+    return response;
+});
 
 export const authSlice = createSlice({
     name: "auth",

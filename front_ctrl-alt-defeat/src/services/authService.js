@@ -76,12 +76,26 @@ const getEquipeOrientadorData = async (email) => {
       .then((res) => res.json())
       .catch((err) => err);
 
-    console.log(res);
-
+    console.log("Dados do orientador: ", res);
     return res;
 
   } catch (err) {
     console.log('Error in getEquipeOrientadorData: ', err);
+  }
+};
+
+const updateEquipeData = async (data) => {
+  const config = requestConfig("PUT", data);
+
+  try {
+    const res = await fetch(api + "set/equipe/data", config)
+      .then((res) => res.json())
+      .catch((err) => err);
+
+    console.log("Update Equipe Data: ", res)
+    return res;
+  } catch (err) {
+    console.log('Error in updateEquipeData: ', err);
   }
 };
 
@@ -91,7 +105,8 @@ const authService = {
   login,
   getEquipeData,
   getEquipe,
-  getEquipeOrientadorData
+  getEquipeOrientadorData,
+  updateEquipeData
   // getUserDetails,
 };
 
