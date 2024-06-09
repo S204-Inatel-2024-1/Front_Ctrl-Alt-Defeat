@@ -45,9 +45,9 @@ const LoginAluno = () => {
   }, [user, navigate]);
 
   // Limpando todos os estados auth
-  // useEffect(() => {
-  //   dispatch(reset());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(reset());
+  }, [dispatch]);
 
   return (
     <div id="login">

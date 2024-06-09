@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import authService from '../../services/authService';
 import "./Equipe.css";
 
 const EquipeDetalhes = () => {
   const { equipeId } = useParams();
   const [equipeData, setEquipeData] = useState(null);
+  const [orientadorData, setOrientadorData] = useState(null);
   const [error, setError] = useState(null);
+  const { user } = useSelector((state) => state.auth);
 
   useEffect(() => {
     const fetchEquipeData = async () => {
@@ -17,15 +20,26 @@ const EquipeDetalhes = () => {
         setError('Failed to fetch equipe data.');
       }
     };
+
+    const fetchOrientadorData = async () => {
+      try {
+        const data = await authService.getEquipeOrientadorData(user);
+        setOrientadorData(data);
+      } catch (err) {
+        setError('Failed to fetch orientador data.');
+      }
+    };
+
     fetchEquipeData();
-  }, [equipeId]);
+    fetchOrientadorData();
+  }, [equipeId, user]);
 
   if (error) {
     return <div className="error-message">Error: {error}</div>;
   }
 
-  if (!equipeData) {
-    return <div>Loading equipe data...</div>;
+  if (!equipeData || !orientadorData) {
+    return <div>Loading data...</div>;
   }
 
   return (
@@ -63,6 +77,11 @@ const EquipeDetalhes = () => {
           </li>
         )}
       </ul>
+      {orientadorData.acesso === 'Orientador' && (
+        <NavLink to={`/equipe/${equipeId}/editar`}>
+          <button className="editar-button">Editar</button>
+        </NavLink>
+      )}
     </div>
   );
 };
