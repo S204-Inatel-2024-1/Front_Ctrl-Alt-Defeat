@@ -10,3 +10,44 @@
   text-align: center;
   margin: 0.5em 0 2em 0;
 }
+
+/* Home.css */
+.home-container {
+  background-color: #222;
+  border-radius: 15px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.3);
+  padding: 40px;
+  max-width: 600px;
+  margin: 80px auto;
+  text-align: center;
+  color: #fff;
+}
+
+.home-container h2 {
+  color: #fff;
+  font-size: 2.5em;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin-bottom: 30px;
+}
+
+.home-button {
+  display: block;
+  width: 80%;
+  padding: 15px;
+  margin: 15px auto;
+  border-radius: 10px;
+  border: none;
+  background-color: #1a73e8;
+  color: #fff;
+  font-size: 1.2em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.home-button:hover {
+  background-color: #1669c1;
+  transform: scale(1.05);
+}
+

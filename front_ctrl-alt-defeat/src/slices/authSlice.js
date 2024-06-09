@@ -33,10 +33,13 @@ export const login = createAsyncThunk("auth/login", async ({ userData, route }, 
 
     const alunoMsg = 'Auntenticação Aluno realizada com sucesso!';
     const orientadorMsg = 'Auntenticação Orientador realizada com sucesso!';
+    const admMsg = "Auntenticação Administrador realizada com sucesso!"
+
+    console.log(data.msg)
 
     let response = null;
 
-    if (data.msg === alunoMsg || data.msg === orientadorMsg) {
+    if (data.msg === alunoMsg || data.msg === orientadorMsg || data.msg === admMsg) {
         response = userData.email
         localStorage.setItem("user", JSON.stringify(response));
     }

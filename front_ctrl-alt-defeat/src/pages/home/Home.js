@@ -1,21 +1,22 @@
-import "./Home.css"
-import { Link } from "react-router-dom";
-
-import { useSelecto, useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import "./Home.css";
 
 const Home = () => {
+  const navigate = useNavigate();
 
-    const dispatch = useDispatch()
-    const {user} = useSelector((state) => state.auth)
+  const handleNavigate = (path) => {
+    navigate(path);
+  };
 
-    return (
-        <div id="home">
-
-        </div>
-    );
+  return (
+    <div className="home-container">
+      <h2>Bem-vindo</h2>
+      <button className="home-button" onClick={() => handleNavigate('/loginAluno')}>Login Aluno</button>
+      <button className="home-button" onClick={() => handleNavigate('/loginOrientador')}>Login Orientador</button>
+      <button className="home-button" onClick={() => handleNavigate('/loginAdm')}>Login Admin</button>
+    </div>
+  );
 };
-
 
 export default Home;
