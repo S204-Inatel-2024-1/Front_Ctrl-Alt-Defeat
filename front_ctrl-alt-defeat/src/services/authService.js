@@ -131,6 +131,23 @@ const registerEquipe = async (data) => {
   }
 };
 
+const updateEquipeStatus = async (number, newStatus) => {
+  const config = requestConfig("PUT", {
+    number,
+    newStatus,
+  });
+
+  try {
+    const res = await fetch(api + "set/equipe/status", config)
+      .then((res) => res.json())
+      .catch((err) => err);
+
+    return res;
+  } catch (err) {
+    console.error('Error in updateEquipeStatus: ', err);
+  }
+};
+
 const authService = {
   register,
   logout,
@@ -140,7 +157,8 @@ const authService = {
   getEquipeOrientadorData,
   updateEquipeData,
   registerEquipe,
-  getEquipes
+  getEquipes,
+  updateEquipeStatus
   // getUserDetails,
 };
 

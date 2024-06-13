@@ -1,0 +1,94 @@
+/* EditarStatusEquipes.css */
+#editar-status-equipes {
+  background-color: #222;
+  border-radius: 15px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.3);
+  padding: 40px;
+  max-width: 800px;
+  margin: 80px auto;
+  color: #fff;
+  text-align: center;
+}
+
+#editar-status-equipes h2 {
+  color: #fff;
+  font-size: 2.5em;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin-bottom: 30px;
+}
+
+.status-update-section {
+  margin-bottom: 30px;
+}
+
+.status-update-section label {
+  display: inline-block;
+  margin-right: 10px;
+  font-size: 1.2em;
+}
+
+.status-update-section select {
+  padding: 5px;
+  font-size: 1em;
+}
+
+.status-update-section button {
+  background-color: #1a73e8;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  margin-left: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.status-update-section button:hover {
+  background-color: #155aab;
+}
+
+.select-all-section {
+  margin-bottom: 20px;
+}
+
+.select-all-section button {
+  background-color: #1a73e8;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.select-all-section button:hover {
+  background-color: #155aab;
+}
+
+.equipes-list {
+  text-align: left;
+}
+
+.equipes-list h3 {
+  margin-bottom: 10px;
+  font-size: 1.5em;
+}
+
+.equipe-item {
+  background-color: #333;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.equipe-item label {
+  font-size: 1.1em;
+  cursor: pointer;
+}
+
+.equipe-item input {
+  margin-right: 10px;
+}
