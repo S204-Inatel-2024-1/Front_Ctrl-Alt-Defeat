@@ -23,6 +23,9 @@ import ProfileAluno from './pages/profile/ProfileAluno';
 import EquipeDetalhes from './pages/equipe/Equipe';
 import ProfileOrientador from './pages/profile/ProfileOrientador';
 import EditarEquipe from './pages/equipe/EditarEquipe';
+import ProfileAdm from './pages/profile/ProfileAdm';
+import EditarEquipeAdm from './pages/equipe/EditarEquipeAdm';
+import TodasEquipes from './pages/equipe/TodasEquipes';
 
 function App() {
   const { auth, loading } = useAuth();
@@ -51,6 +54,9 @@ function App() {
               path='/equipe/:equipeId/editar' 
               element={<EditarEquipe />} 
             />
+            <Route path='/ProfileAdm/:email' element={<ProfileAdm />} />
+            <Route path='/EditarEquipeAdm' element={<EditarEquipeAdm />} />
+            <Route path='/TodasEquipes' element={<TodasEquipes />} />
           </Routes>
         </div>
         <Footer />

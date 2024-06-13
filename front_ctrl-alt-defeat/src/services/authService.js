@@ -29,6 +29,8 @@ const login = async (data, route) => {
       .then((res) => res.json())
       .catch((err) => err);
 
+      console.log("Adm: ", res)
+
     return res;
   } catch (err) {
     console.log(err);
@@ -99,6 +101,36 @@ const updateEquipeData = async (data) => {
   }
 };
 
+const getEquipes = async () => {
+  const config = requestConfig("GET");
+
+  try {
+    const res = await fetch(api + "get/equipes/", config)
+      .then((res) => res.json())
+      .catch((err) => err);
+
+    return res;
+  } catch (err) {
+    console.log('Error in getEquipes: ', err);
+  }
+};
+
+const registerEquipe = async (data) => {
+  const config = requestConfig("POST", data);
+
+  try {
+    const res = await fetch(api + "auth/register/equipe", config)
+      .then((res) => res.json())
+      .catch((err) => err);
+
+      console.log("Register Equipe: ", res)
+
+    return res;
+  } catch (err) {
+    console.log('Error in registerEquipe: ', err);
+  }
+};
+
 const authService = {
   register,
   logout,
@@ -106,7 +138,9 @@ const authService = {
   getEquipeData,
   getEquipe,
   getEquipeOrientadorData,
-  updateEquipeData
+  updateEquipeData,
+  registerEquipe,
+  getEquipes
   // getUserDetails,
 };
 

@@ -5,7 +5,7 @@ import Message from "../../components/Message"
 import { useEffect, useState } from "react"
 
 // Hooks
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 
 // Redux
@@ -17,8 +17,9 @@ const LoginAdm = () => {
     const [password, setPassword] = useState("")
 
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
-    const { loading, msg } = useSelector((state) => state.auth)
+    const { loading, msg, user } = useSelector((state) => state.auth)
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -28,13 +29,21 @@ const LoginAdm = () => {
             password
         }
 
-        dispatch(login({ userData: user, route: "adm" }))
+        dispatch(login({ userData: user, route: "admin" }))
     }
 
     // Limpando todos os estados auth
-    // useEffect(() => {
-    //     dispatch(reset())
-    // }, [dispatch])
+    useEffect(() => {
+        dispatch(reset())
+    }, [dispatch])
+
+    useEffect(() => {
+        console.log("Usuario: ", user)
+        if (user) {
+            console.log("User do LoginAluno: ", email)
+            navigate(`/ProfileAdm/${user}`); // Redireciona para o perfil do aluno com o email
+        }
+    }, [user, navigate]);
 
     return (
         <div id="login">
