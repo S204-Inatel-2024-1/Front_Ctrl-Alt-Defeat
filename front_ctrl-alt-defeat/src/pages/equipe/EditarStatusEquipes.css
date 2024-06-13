@@ -92,3 +92,34 @@
 .equipe-item input {
   margin-right: 10px;
 }
+
+/* EditarStatusEquipes.css */
+.editar-status-equipes-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.status-update-section, .search-section, .select-all-section {
+  margin-bottom: 20px;
+}
+
+.status-update-section label,
+.search-section label {
+  margin-right: 10px;
+}
+
+.status-update-section select,
+.search-section select,
+.search-section input {
+  margin-right: 10px;
+  padding: 5px;
+}
+
+.equipes-list {
+  margin-top: 20px;
+}
+
+.equipe-item {
+  margin-bottom: 10px;
+}
