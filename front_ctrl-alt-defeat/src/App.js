@@ -27,6 +27,7 @@ import ProfileAdm from './pages/profile/ProfileAdm';
 import EditarEquipeAdm from './pages/equipe/EditarEquipeAdm';
 import TodasEquipes from './pages/equipe/TodasEquipes';
 import EditarStatusEquipes from './pages/equipe/EditarStatusEquipes';
+import ExcluirPage from './pages/excluir/ExcluirPage';
 
 function App() {
   const { auth, loading } = useAuth();
@@ -58,7 +59,8 @@ function App() {
             <Route path='/ProfileAdm/:email' element={<ProfileAdm />} />
             <Route path='/EditarEquipeAdm' element={<EditarEquipeAdm />} />
             <Route path='/TodasEquipes' element={<TodasEquipes />} />
-            <Route path='/EditarStatusEquipes' element={<EditarStatusEquipes />} />  
+            <Route path='/EditarStatusEquipes' element={<EditarStatusEquipes />} />
+            <Route path='/adicionar-remover-membro' element={<ExcluirPage />} />  
           </Routes>
         </div>
         <Footer />

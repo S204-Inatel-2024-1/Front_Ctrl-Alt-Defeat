@@ -96,11 +96,11 @@ const ProfileAluno = () => {
             <span className="value">{profileData.acesso}</span>
           </li>
           <li className="global-phase">
-            <span className="label">Fase Global:</span>
+            <span className="label">Fase atual da FETIN:</span>
             <span className="value">{globalPhase}</span>
           </li>
           <li className="global-date">
-            <span className="label">Data Global:</span>
+            <span className="label">Data de Entrega:</span>
             <span className="value">{globalDate}</span>
           </li>
         </ul>

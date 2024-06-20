@@ -29,7 +29,7 @@ const login = async (data, route) => {
       .then((res) => res.json())
       .catch((err) => err);
 
-      console.log("Adm: ", res)
+    console.log("Adm: ", res)
 
     return res;
   } catch (err) {
@@ -44,8 +44,6 @@ const getEquipeData = async (email) => {
     const res = await fetch(api + "get/aluno/data/" + email, config)
       .then((res) => res.json())
       .catch((err) => err);
-
-    // console.log(res);
 
     return res;
 
@@ -123,7 +121,7 @@ const registerEquipe = async (data) => {
       .then((res) => res.json())
       .catch((err) => err);
 
-      console.log("Register Equipe: ", res)
+    console.log("Register Equipe: ", res)
 
     return res;
   } catch (err) {
@@ -148,6 +146,41 @@ const updateEquipeStatus = async (number, newStatus) => {
   }
 };
 
+const uploadExcelFile = async (file) => {
+  const formData = new FormData();
+  formData.append('file', file);
+
+  const config = {
+    method: 'POST',
+    body: formData,
+  };
+
+  try {
+    const res = await fetch(api + "import/data/excel", config)
+      .then((res) => res.json())
+      .catch((err) => err);
+
+    return res;
+  } catch (err) {
+    console.log('Error in uploadExcelFile: ', err);
+  }
+};
+
+const deleteUser = async (email, userType) => {
+  const config = requestConfig("DELETE", { email });
+
+  try {
+    const route = userType === 'orientador' ? 'delete/orientador' : 'delete/aluno';
+    const res = await fetch(api + route, config)
+      .then((res) => res.json())
+      .catch((err) => err);
+
+    return res;
+  } catch (err) {
+    console.error('Error in deleteUser:', err);
+  }
+};
+
 const authService = {
   register,
   logout,
@@ -158,8 +191,9 @@ const authService = {
   updateEquipeData,
   registerEquipe,
   getEquipes,
-  updateEquipeStatus
-  // getUserDetails,
+  updateEquipeStatus,
+  uploadExcelFile,
+  deleteUser
 };
 
 export default authService;
