@@ -37,4 +37,41 @@
     background-color: #1669c1;
     transform: scale(1.05);
   }
+  .global-settings {
+    margin-bottom: 20px;
+  }
   
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+  }
+
+/* .profile-adm-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.profile-adm-button {
+  display: block;
+  margin: 10px 0;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.profile-adm-button:hover {
+  background-color: #0056b3;
+} */
