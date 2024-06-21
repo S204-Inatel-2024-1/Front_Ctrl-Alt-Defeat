@@ -38,11 +38,14 @@ const LoginOrientador = () => {
     }, [dispatch])
 
     useEffect(() => {
-        if (user) {
-        //   console.log("User do Login Orientador: ", user)
-          navigate(`/ProfileOrientador/${user}`); // Redireciona para o perfil do aluno com o email
+        if (user == email) {
+            //   console.log("User do Login Orientador: ", user)
+            navigate(`/ProfileOrientador/${user}`); // Redireciona para o perfil do aluno com o email
         }
-      }, [user, navigate]);
+        else {
+            navigate("/LoginOrientador")
+        }
+    }, [user, navigate]);
 
     return (
         <div id="login">

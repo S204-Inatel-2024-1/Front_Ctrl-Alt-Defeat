@@ -39,9 +39,12 @@ const LoginAdm = () => {
 
     useEffect(() => {
         console.log("Usuario: ", user)
-        if (user) {
+        if (user == email) {
             console.log("User do LoginAluno: ", email)
             navigate(`/ProfileAdm/${user}`); // Redireciona para o perfil do aluno com o email
+        }
+        else { 
+            navigate('/LoginAdm')
         }
     }, [user, navigate]);
 
