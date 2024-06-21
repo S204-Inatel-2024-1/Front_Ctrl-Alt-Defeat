@@ -40,12 +40,12 @@ export const login = createAsyncThunk("auth/login", async ({ userData, route }, 
     let response = null;
 
     if (data.msg === alunoMsg || data.msg === orientadorMsg || data.msg === admMsg) {
-        response = userData.email
+        response = userData.email;
         localStorage.setItem("user", JSON.stringify(response));
+        return response;
+    } else {
+        return thunkAPI.rejectWithValue(data.msg);
     }
-
-    console.log(response)
-    return response;
 });
 
 export const authSlice = createSlice({
@@ -55,42 +55,54 @@ export const authSlice = createSlice({
         reset: (state) => {
             state.loading = false
             state.success = false
-            state.success = false
+            state.error = false
+            state.msg = null // Certifique-se de redefinir a mensagem também
         },
     },
     extraReducers: (builder) => {
-        builder.addCase(register.pending, (state) => {
-            state.loading = true
-            state.error = false
-        }).addCase(register.fulfilled, (state, action) => {
-            state.loading = false
-            state.success = true
-            state.error = null
-            state.user = action.payload
-        }).addCase(register.rejected, (state, action) => {
-            state.loading = false
-            state.msg = action.payload
-            state.user = null
-        }).addCase(logout.fulfilled, (state, action) => {
-            state.loading = false
-            state.success = true
-            state.error = null
-            state.user = null
-        }).addCase(login.pending, (state) => {
-            state.loading = true
-            state.error = false
-        }).addCase(login.fulfilled, (state, action) => {
-            state.loading = false
-            state.success = true
-            state.error = null
-            state.user = action.payload
-        }).addCase(login.rejected, (state, action) => {
-            state.loading = false
-            state.msg = action.payload
-            state.user = null
-        })
+        builder
+            .addCase(register.pending, (state) => {
+                state.loading = true
+                state.error = false
+                state.msg = null
+            })
+            .addCase(register.fulfilled, (state, action) => {
+                state.loading = false
+                state.success = true
+                state.error = null
+                state.user = action.payload
+                state.msg = null
+            })
+            .addCase(register.rejected, (state, action) => {
+                state.loading = false
+                state.msg = action.payload
+                state.user = null
+            })
+            .addCase(logout.fulfilled, (state, action) => {
+                state.loading = false
+                state.success = true
+                state.error = null
+                state.user = null
+                state.msg = null
+            })
+            .addCase(login.pending, (state) => {
+                state.loading = true
+                state.error = false
+                state.msg = null
+            })
+            .addCase(login.fulfilled, (state, action) => {
+                state.loading = false
+                state.success = true
+                state.error = null
+                state.user = action.payload
+                state.msg = null
+            })
+            .addCase(login.rejected, (state, action) => {
+                state.loading = false
+                state.msg = action.payload
+                state.user = null
+            })
     },
 })
-
 export const { reset } = authSlice.actions
 export default authSlice.reducer
