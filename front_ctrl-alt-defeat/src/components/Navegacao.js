@@ -41,6 +41,7 @@ export const NavigationProvider = ({ children }) => {
             }
         } else {
             // console.log("CCCCCCCCCCCCCCCCCCCCCCCC")
+            handleLogout();
             navigate('/');
         }
     };
