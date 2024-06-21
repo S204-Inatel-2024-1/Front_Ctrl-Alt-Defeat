@@ -26,9 +26,7 @@ export const NavigationProvider = ({ children }) => {
             const previousPath = historyRef.current.pop();
             const nextPath = historyRef.current[historyRef.current.length - 1];
 
-            // Regex for profile pages
             const profileRegex = /\/Profile(Aluno|Orientador|Adm)\/.*/;
-            // Regex for login pages
             const loginRegex = /\/(?:Login|login)(Aluno|Orientador|Adm)$/;
 
             if (profileRegex.test(previousPath) && loginRegex.test(nextPath)) {
