@@ -7,7 +7,6 @@ import "./EditarEquipe.css";
 const EditarEquipe = () => {
   const { equipeId } = useParams();
   const navigate = useNavigate();
-  const { user } = useSelector((state) => state.auth);
   const [equipeData, setEquipeData] = useState(null);
   const [error, setError] = useState(null);
   const [formData, setFormData] = useState({

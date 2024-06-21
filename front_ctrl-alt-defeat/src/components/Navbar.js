@@ -2,7 +2,7 @@ import './Navbar.css'
 
 // Components
 import { NavLink, Link } from 'react-router-dom'
-import { BsSearch, BsHouseDoorFill, BsBackpack2, BsAward, BsFillCameraFill, BsAwardFill } from 'react-icons/bs'
+import { BsHouseDoorFill, BsBackpack2, BsAward, BsFillCameraFill, BsAwardFill } from 'react-icons/bs'
 
 // hooks
 import { useAuth } from '../hooks/useAuth'
