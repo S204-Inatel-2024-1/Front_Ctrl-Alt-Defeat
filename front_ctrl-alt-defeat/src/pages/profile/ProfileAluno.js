@@ -12,6 +12,8 @@ const ProfileAluno = () => {
   const [profileData, setProfileData] = useState(null);
   const [error, setError] = useState(null);
   const [showTeams, setShowTeams] = useState(false);
+  const [globalPhase, setGlobalPhase] = useState('');
+  const [globalDate, setGlobalDate] = useState('teste');
 
   const toggleTeamsVisibility = () => {
     setShowTeams(!showTeams);
@@ -28,6 +30,12 @@ const ProfileAluno = () => {
         setError('Failed to fetch profile data.');
       }
     };
+
+    const storedPhase = localStorage.getItem('globalPhase');
+    const storedDate = localStorage.getItem('globalDate');
+    if (storedPhase) setGlobalPhase(storedPhase);
+    if (storedDate) setGlobalDate(storedDate);
+
     fetchData();
 
     return () => {
@@ -86,6 +94,14 @@ const ProfileAluno = () => {
           <li className="acesso">
             <span className="label">Acesso:</span>
             <span className="value">{profileData.acesso}</span>
+          </li>
+          <li className="global-phase">
+            <span className="label">Fase atual da FETIN:</span>
+            <span className="value">{globalPhase}</span>
+          </li>
+          <li className="global-date">
+            <span className="label">Data de Entrega:</span>
+            <span className="value">{globalDate}</span>
           </li>
         </ul>
       </div>

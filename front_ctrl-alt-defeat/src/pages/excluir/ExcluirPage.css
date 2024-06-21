@@ -1,0 +1,102 @@
+#excluir-page {
+  background-color: #222; /* Black background */
+  border-radius: 15px; /* Rounded corners */
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.3); /* Darker drop shadow */
+  padding: 40px;
+  max-width: 600px; /* Adjust width as needed */
+  margin: 80px auto; /* Center the page container */
+  color: #fff; /* Text color: white */
+}
+
+.excluir-page-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.excluir-page-header h2 {
+  color: #fff; /* White heading color */
+  font-size: 3em;
+  font-weight: bold;
+  letter-spacing: 2px; /* Add letter spacing for a modern look */
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #ddd;
+}
+
+.form-group select,
+.form-group input[type="email"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #333;
+  color: #fff;
+}
+
+.form-group button {
+  margin-top: 10px;
+  padding: 10px 15px;
+  background-color: #5bc0de;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form-group button:hover {
+  background-color: #46a2c8;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.error-message button {
+  background-color: #d9534f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.error-message button:hover {
+  opacity: 0.8;
+}
+
+.user-data {
+  margin-top: 20px;
+  border-top: 1px solid #444;
+  padding-top: 20px;
+}
+
+.user-data p {
+  margin-bottom: 10px;
+  color: #ddd;
+}
+
+.delete-button {
+  margin-top: 20px;
+  padding: 10px 15px;
+  background-color: #d9534f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.delete-button:hover {
+  opacity: 0.8;
+}

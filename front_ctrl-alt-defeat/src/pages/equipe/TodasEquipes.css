@@ -52,4 +52,87 @@
   .equipe-card .members {
     margin-top: 10px;
   }
+
+
+  /* TodasEquipes.css */
+.equipe-card {
+  background-color: #333;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  color: #fff;
+  text-align: left;
+}
+
+.equipe-card button {
+  background-color: #1a73e8;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.equipe-card button:hover {
+  background-color: #155aab;
+}
+
+
+
+/* TodasEquipes.css */
+.equipes-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.equipe-card {
+  background-color: #333;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  color: #fff;
+  text-align: left;
+  flex: 1 1 calc(33.333% - 40px); /* Adjust as necessary */
+}
+
+.equipe-card button {
+  background-color: #1a73e8;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.equipe-card button:hover {
+  background-color: #155aab;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  .equipe-card {
+    flex: 1 1 calc(50% - 20px);
+  }
+}
+
+@media (max-width: 480px) {
+  .equipe-card {
+    flex: 1 1 100%;
+  }
+}
+
+
   

@@ -13,8 +13,8 @@ import { login, reset } from "../../slices/authSlice"
 
 
 const LoginAdm = () => {
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+    const [email, setEmail] = useState("Fetin@inatel.br")
+    const [password, setPassword] = useState("teste")
 
     const dispatch = useDispatch()
     const navigate = useNavigate()

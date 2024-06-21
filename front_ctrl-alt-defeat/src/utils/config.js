@@ -13,7 +13,10 @@ export const requestConfig = (method, data, token = null, image = null) => {
     } else if (method === "DELETE" || data === null) {
         config = {
             method,
-            headers: {}
+            body:JSON.stringify(data),
+            headers: {
+                "Content-Type": "application/json"
+            }
         }
     } else {
         config = {

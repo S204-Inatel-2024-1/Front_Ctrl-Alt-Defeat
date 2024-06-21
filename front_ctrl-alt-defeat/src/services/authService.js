@@ -29,7 +29,7 @@ const login = async (data, route) => {
       .then((res) => res.json())
       .catch((err) => err);
 
-      console.log("Adm: ", res)
+    console.log("Adm: ", res)
 
     return res;
   } catch (err) {
@@ -45,12 +45,13 @@ const getEquipeData = async (email) => {
       .then((res) => res.json())
       .catch((err) => err);
 
-    // console.log(res);
-
     return res;
 
-  } catch (err) {
-    console.log('Error in getEquipeData: ', err);
+  } catch (error) {
+    if (error.response && error.response.status === 400) {
+      throw new Error('Usuário não encontrado');
+    }
+    throw error;
   }
 };
 
@@ -81,8 +82,11 @@ const getEquipeOrientadorData = async (email) => {
     console.log("Dados do orientador: ", res);
     return res;
 
-  } catch (err) {
-    console.log('Error in getEquipeOrientadorData: ', err);
+  } catch (error) {
+    if (error.response && error.response.status === 400) {
+      throw new Error('Usuário não encontrado');
+    }
+    throw error;
   }
 };
 
@@ -123,11 +127,63 @@ const registerEquipe = async (data) => {
       .then((res) => res.json())
       .catch((err) => err);
 
-      console.log("Register Equipe: ", res)
+    console.log("Register Equipe: ", res)
 
     return res;
   } catch (err) {
     console.log('Error in registerEquipe: ', err);
+  }
+};
+
+const updateEquipeStatus = async (number, newStatus) => {
+  const config = requestConfig("PUT", {
+    number,
+    newStatus,
+  });
+
+  try {
+    const res = await fetch(api + "set/equipe/status", config)
+      .then((res) => res.json())
+      .catch((err) => err);
+
+    return res;
+  } catch (err) {
+    console.error('Error in updateEquipeStatus: ', err);
+  }
+};
+
+const uploadExcelFile = async (file) => {
+  const formData = new FormData();
+  formData.append('file', file);
+
+  const config = {
+    method: 'POST',
+    body: formData,
+  };
+
+  try {
+    const res = await fetch(api + "import/data/excel", config)
+      .then((res) => res.json())
+      .catch((err) => err);
+
+    return res;
+  } catch (err) {
+    console.log('Error in uploadExcelFile: ', err);
+  }
+};
+
+const deleteUser = async (email, userType) => {
+  const config = requestConfig("DELETE", { email });
+
+  try {
+    const route = userType === 'orientador' ? 'delete/user/orientador' : 'delete/user/aluno';
+    const res = await fetch(api + route, config)
+      .then((res) => res.json())
+      .catch((err) => err);
+
+    return res;
+  } catch (err) {
+    console.error('Error in deleteUser:', err);
   }
 };
 
@@ -140,8 +196,10 @@ const authService = {
   getEquipeOrientadorData,
   updateEquipeData,
   registerEquipe,
-  getEquipes
-  // getUserDetails,
+  getEquipes,
+  updateEquipeStatus,
+  uploadExcelFile,
+  deleteUser
 };
 
 export default authService;
