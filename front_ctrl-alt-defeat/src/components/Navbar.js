@@ -26,9 +26,9 @@ const Navbar = () => {
       <button onClick={goBack} className="back-button">
         <BsArrowLeft />
       </button>
-      <Link to="/">
+      {/* <Link to="/">
         FETIN
-      </Link>
+      </Link> */}
       <ul id='nav-links'>
         {!auth ? (
           <>
