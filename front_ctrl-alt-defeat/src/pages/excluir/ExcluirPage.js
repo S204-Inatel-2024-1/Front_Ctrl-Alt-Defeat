@@ -19,6 +19,11 @@ const ExcluirPage = () => {
   };
 
   const handleSearch = async () => {
+    if (!email) {
+      setError('Por favor, insira um email para buscar.');
+      return;
+    }
+
     try {
       let res;
       if (userType === 'orientador') {
@@ -30,44 +35,45 @@ const ExcluirPage = () => {
       setError('');
     } catch (err) {
       console.error('Failed to fetch user data:', err);
-      setError('Erro ao buscar os dados. Verifique o email e tente novamente.');
+      if (err.message === 'Usuário não encontrado') {
+        setError('Usuário não encontrado no sistema. Verifique o email e tente novamente.');
+      } else {
+        setError('Erro ao buscar os dados. Verifique o email e o tipo de usuário selecionado e tente novamente.');
+      }
     }
   };
 
   const handleDelete = async () => {
-    alert('Usuário excluído com sucesso!');
-    setUserData(null);
-    setEmail('');
+    try {
+      await authService.deleteUser(email, userType);
+      alert('Usuário excluído com sucesso!');
+      setUserData(null);
+      setEmail('');
+      window.location.reload(); // Atualiza a página
+    } catch (err) {
+      console.error('Failed to delete user:', err);
+      setError('Erro ao excluir o usuário. Tente novamente.');
+    }
   };
 
-  const handleBack = () => {
-    navigate('/ProfileAdm');
+  const handleClearError = () => {
+    setError('');
+    setEmail('');
+    setUserData(null);
+    window.location.reload(); // Atualiza a página
   };
 
   return (
     <div id="excluir-page" className="excluir-page-container">
-      <h2>Excluir Aluno/Orientador</h2>
+      <div className="excluir-page-header">
+        <h2>Excluir Aluno/Orientador</h2>
+      </div>
       <div className="form-group">
-        <label>
-          <input
-            type="radio"
-            name="userType"
-            value="aluno"
-            checked={userType === 'aluno'}
-            onChange={handleUserTypeChange}
-          />
-          Aluno
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="userType"
-            value="orientador"
-            checked={userType === 'orientador'}
-            onChange={handleUserTypeChange}
-          />
-          Orientador
-        </label>
+        <label htmlFor="userType">Tipo de Usuário:</label>
+        <select id="userType" value={userType} onChange={handleUserTypeChange}>
+          <option value="aluno">Aluno</option>
+          <option value="orientador">Orientador</option>
+        </select>
       </div>
       <div className="form-group">
         <label>Email:</label>
@@ -78,7 +84,12 @@ const ExcluirPage = () => {
         />
         <button onClick={handleSearch}>Buscar</button>
       </div>
-      {error && <p className="error-message">{error}</p>}
+      {error && (
+        <div className="error-message">
+          <p>{error}</p>
+          <button onClick={handleClearError}>OK</button>
+        </div>
+      )}
       {userData && (
         <div className="user-data">
           <p>Nome: {userData.name}</p>
@@ -86,15 +97,14 @@ const ExcluirPage = () => {
           {userType === 'aluno' ? (
             <>
               <p>Matrícula: {userData.matricula}</p>
-              <p>Equipes Atuais: {userData.equipesAtuais.join(', ')}</p>
+              <p>Equipes Atuais: {userData.equipesAtuais?.join(', ')}</p>
             </>
           ) : (
-            <p>Equipes Orientadas: {userData.equipesOrientadas.join(', ')}</p>
+            <p>Equipes Orientadas: {userData.equipesOrientadas?.join(', ')}</p>
           )}
           <button className="delete-button" onClick={handleDelete}>Excluir</button>
         </div>
       )}
-      <button className="back-button" onClick={handleBack}>Voltar</button>
     </div>
   );
 };

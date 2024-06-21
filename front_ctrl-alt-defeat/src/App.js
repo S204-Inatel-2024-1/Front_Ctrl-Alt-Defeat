@@ -60,7 +60,7 @@ function App() {
             <Route path='/EditarEquipeAdm' element={<EditarEquipeAdm />} />
             <Route path='/TodasEquipes' element={<TodasEquipes />} />
             <Route path='/EditarStatusEquipes' element={<EditarStatusEquipes />} />
-            <Route path='/adicionar-remover-membro' element={<ExcluirPage />} />  
+            <Route path='/ExcluirPage' element={<ExcluirPage />} />
           </Routes>
         </div>
         <Footer />

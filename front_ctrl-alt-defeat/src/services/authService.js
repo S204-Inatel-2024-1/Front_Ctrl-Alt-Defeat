@@ -47,8 +47,11 @@ const getEquipeData = async (email) => {
 
     return res;
 
-  } catch (err) {
-    console.log('Error in getEquipeData: ', err);
+  } catch (error) {
+    if (error.response && error.response.status === 400) {
+      throw new Error('Usuário não encontrado');
+    }
+    throw error;
   }
 };
 
@@ -79,8 +82,11 @@ const getEquipeOrientadorData = async (email) => {
     console.log("Dados do orientador: ", res);
     return res;
 
-  } catch (err) {
-    console.log('Error in getEquipeOrientadorData: ', err);
+  } catch (error) {
+    if (error.response && error.response.status === 400) {
+      throw new Error('Usuário não encontrado');
+    }
+    throw error;
   }
 };
 
@@ -170,7 +176,7 @@ const deleteUser = async (email, userType) => {
   const config = requestConfig("DELETE", { email });
 
   try {
-    const route = userType === 'orientador' ? 'delete/orientador' : 'delete/aluno';
+    const route = userType === 'orientador' ? 'delete/user/orientador' : 'delete/user/aluno';
     const res = await fetch(api + route, config)
       .then((res) => res.json())
       .catch((err) => err);
