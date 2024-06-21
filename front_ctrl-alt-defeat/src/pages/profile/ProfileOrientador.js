@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import authService from '../../services/authService';
 import "./Profile.css";
 import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
 
 const ProfileOrientador = () => {
-  const dispatch = useDispatch();
   const { user, loading } = useSelector((state) => state.auth);
   const [profileData, setProfileData] = useState(null);
   const [error, setError] = useState(null);

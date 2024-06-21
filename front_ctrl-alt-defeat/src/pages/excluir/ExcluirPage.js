@@ -4,7 +4,6 @@ import authService from '../../services/authService';
 import './ExcluirPage.css';
 
 const ExcluirPage = () => {
-  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [userType, setUserType] = useState('aluno');
   const [userData, setUserData] = useState(null);
