@@ -15,7 +15,7 @@ const ProfileAdm = () => {
       try {
         const data = await authService.getGlobalSettings();
         setGlobalPhase(data.faseAtual);
-        setGlobalDate(data.prazoEntrega);
+        setGlobalDate(formatDateForInput(data.prazoEntrega));
       } catch (error) {
         console.error('Failed to fetch global settings:', error);
       }
@@ -54,6 +54,11 @@ const ProfileAdm = () => {
   const formatDate = (dateString) => {
     const parsedDate = parseISO(dateString);
     return format(parsedDate, 'dd/MM/yyyy HH:mm');
+  };
+
+  const formatDateForInput = (dateString) => {
+    const parsedDate = parseISO(dateString);
+    return parsedDate.toISOString().slice(0, 16);
   };
 
   const handlePhaseUpdate = async () => {

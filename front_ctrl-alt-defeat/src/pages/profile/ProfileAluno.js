@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import authService from '../../services/authService';
-import { NavLink } from 'react-router-dom';
 import "./Profile.css";
 import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
 import { parseISO, format } from 'date-fns';
+import { zonedTimeToUtc, format as formatTz } from 'date-fns-tz';
 
 const ProfileAluno = () => {
   const { user, loading } = useSelector((state) => state.auth);
@@ -34,7 +35,7 @@ const ProfileAluno = () => {
       try {
         const data = await authService.getGlobalSettings();
         setGlobalPhase(data.faseAtual);
-        setGlobalDate(data.prazoEntrega);
+        setGlobalDate(formatDate(data.prazoEntrega));
       } catch (error) {
         console.error('Failed to fetch global settings:', error);
       }
@@ -49,8 +50,8 @@ const ProfileAluno = () => {
   }, [user]);
 
   const formatDate = (dateString) => {
-    const parsedDate = parseISO(dateString);
-    return format(parsedDate, 'dd/MM/yyyy HH:mm');
+    const zonedDate = zonedTimeToUtc(parseISO(dateString), 'America/Sao_Paulo');
+    return formatTz(zonedDate, 'yyyy-MM-dd\'T\'HH:mm', { timeZone: 'America/Sao_Paulo' });
   };
 
   if (error) {
