@@ -6,6 +6,9 @@ import './TodasEquipes.css';
 const TodasEquipes = () => {
   const [equipes, setEquipes] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
+  const [selectedEquipe, setSelectedEquipe] = useState(null);
+  const [deleteMessage, setDeleteMessage] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,6 +24,27 @@ const TodasEquipes = () => {
     navigate(`/equipe/${equipeId}/editar`);
   };
 
+  const handleDelete = (equipe) => {
+    setSelectedEquipe(equipe);
+    setShowPopup(true);
+  };
+
+  const confirmDelete = async () => {
+    try {
+      const response = await authService.deleteEquipe(selectedEquipe.number);
+      console.log(response)
+      if (response.msg === "Equipe deletada com sucesso!") {
+        setDeleteMessage(response);
+        setDeleteMessage("");
+        setShowPopup(false);
+        setEquipes(equipes.filter(e => e.number !== selectedEquipe.number));
+        navigate("/TodasEquipes")
+      }
+    } catch (error) {
+      console.error('Failed to delete the equipe:', error);
+    }
+  };
+
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
   };
@@ -32,9 +56,9 @@ const TodasEquipes = () => {
   return (
     <div id="todas-equipes">
       <h2>Todas as Equipes</h2>
-      <input 
-        type="text" 
-        placeholder="Pesquisar por número do projeto..." 
+      <input
+        type="text"
+        placeholder="Pesquisar por número do projeto..."
         value={searchTerm}
         onChange={handleSearch}
         className="search-input"
@@ -55,12 +79,27 @@ const TodasEquipes = () => {
                 ))}
               </div>
               <button onClick={() => handleEdit(equipe.number)}>Editar</button>
+              <button className="delete-button" onClick={() => handleDelete(equipe)}>Excluir</button>
             </div>
           ))
         ) : (
           <p>Nenhuma equipe encontrada</p>
         )}
       </div>
+      {showPopup && (
+        <div className="popup">
+          <div className="popup-content">
+            <p>Certeza que deseja excluir essa equipe?</p>
+            <button className="confirm-button" onClick={confirmDelete}>Sim</button>
+            <button className="cancel-button" onClick={() => setShowPopup(false)}>Não</button>
+          </div>
+        </div>
+      )}
+      {deleteMessage && (
+        <div className="delete-message">
+          {deleteMessage}
+        </div>
+      )}
     </div>
   );
 };
