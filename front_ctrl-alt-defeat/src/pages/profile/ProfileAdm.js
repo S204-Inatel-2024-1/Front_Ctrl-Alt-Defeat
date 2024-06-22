@@ -107,18 +107,19 @@ const ProfileAdm = () => {
             value={globalDate}
             onChange={handleDateChange}
           />
-          <button onClick={handleDateUpdate}>Atualizar Data e Hora</button>
+          <button className="small-button" onClick={handleDateUpdate}>Atualizar Data e Hora</button>
         </div>
-        <div className="form-group">
-          <label htmlFor="fileUpload">Enviar Arquivo com os dados das Equipes:</label>
-          <input
-            type="file"
-            id="fileUpload"
-            accept=".xlsx"
-            onChange={handleFileChange}
-          />
-          <button onClick={handleFileUpload}>Enviar Arquivo</button>
-        </div>
+      </div>
+
+      <div className="file-upload-container">
+        <label htmlFor="fileUpload">Enviar Arquivo com os dados das Equipes:</label>
+        <input
+          type="file"
+          id="fileUpload"
+          accept=".xlsx"
+          onChange={handleFileChange}
+        />
+        <button onClick={handleFileUpload}>Enviar Arquivo</button>
       </div>
     </div>
   );

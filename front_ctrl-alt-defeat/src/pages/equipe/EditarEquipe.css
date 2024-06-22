@@ -107,3 +107,31 @@ button[type="submit"]:hover {
 .close-button:hover {
   background-color: #1669c1;
 }
+
+.member-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.member-list li {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+  padding: 5px 10px;
+  background: #222;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.remove-button {
+  background: #e74c3c;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.remove-button:hover {
+  background: #c0392b;
+}

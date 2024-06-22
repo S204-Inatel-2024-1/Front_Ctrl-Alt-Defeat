@@ -187,6 +187,20 @@ const deleteUser = async (email, userType) => {
   }
 };
 
+const removeAlunoFromEquipe = async (email, equipeId) => {
+  const config = requestConfig("DELETE", { email, number: equipeId });
+
+  try {
+    const res = await fetch(api + "delete/user/aluno", config)
+      .then((res) => res.json())
+      .catch((err) => err);
+
+    return res;
+  } catch (err) {
+    console.error('Error in removeAlunoFromEquipe:', err);
+  }
+};
+
 
 const deleteEquipe = async (number) => {
   const config = requestConfig("DELETE", { number });
@@ -245,7 +259,8 @@ const authService = {
   deleteUser,
   deleteEquipe,
   updateGlobalSettings,
-  getGlobalSettings
+  getGlobalSettings,
+  removeAlunoFromEquipe
 };
 
 export default authService;

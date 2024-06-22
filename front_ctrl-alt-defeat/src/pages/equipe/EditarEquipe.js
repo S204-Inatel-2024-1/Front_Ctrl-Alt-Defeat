@@ -65,6 +65,24 @@ const EditarEquipe = () => {
     setPopupMessage('');
   };
 
+  const handleRemoveMember = async (email) => {
+    try {
+      const response = await authService.removeAlunoFromEquipe(email, equipeId);
+      if (response.msg === 'Aluno Deletado com Sucesso.') {
+        setEquipeData((prevData) => ({
+          ...prevData,
+          members: prevData.members.filter(member => member.email !== email)
+        }));
+      } else {
+        setPopupMessage(response.msg || 'Failed to remove member.');
+        setShowPopup(true);
+      }
+    } catch (err) {
+      setPopupMessage('Failed to remove member.');
+      setShowPopup(true);
+    }
+  };
+
   if (error) {
     return <div className="error-message">Error: {error}</div>;
   }
@@ -114,6 +132,20 @@ const EditarEquipe = () => {
         </div>
         <button type="submit">Enviar</button>
       </form>
+      <h3>Membros da Equipe:</h3>
+      <ul className="member-list">
+        {equipeData.members.map((member) => (
+          <li key={member.email}>
+            <span>{member.name} ({member.email})</span>
+            <button
+              className="remove-button"
+              onClick={() => handleRemoveMember(member.email)}
+            >
+              Remover
+            </button>
+          </li>
+        ))}
+      </ul>
       {showPopup && (
         <div className="popup">
           <div className="popup-content">
