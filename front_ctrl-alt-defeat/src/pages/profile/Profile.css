@@ -1,12 +1,11 @@
-/* Profile container */
 #profile {
-  background-color: #222; /* Black background */
-  border-radius: 15px; /* Rounded corners */
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.3); /* Darker drop shadow */
+  background-color: #222;
+  border-radius: 15px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.3);
   padding: 40px;
-  max-width: 600px; /* Adjust width as needed */
-  margin: 80px auto; /* Center the profile container */
-  color: #fff; /* Text color: white */
+  max-width: 600px;
+  margin: 80px auto;
+  color: #fff;
 }
 
 .profile-header {
@@ -15,10 +14,10 @@
 }
 
 .profile-header h2 {
-  color: #fff; /* White heading color */
+  color: #fff;
   font-size: 3em;
   font-weight: bold;
-  letter-spacing: 2px; /* Add letter spacing for a modern look */
+  letter-spacing: 2px;
 }
 
 .profile-info {
@@ -32,51 +31,51 @@
   align-items: center;
   justify-content: space-between;
   padding: 20px 30px;
-  border-radius: 10px; /* More rounded corners */
-  background-color: #333; /* Darker gray background for list items */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Darker shadow */
+  border-radius: 10px;
+  background-color: #333;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   margin-bottom: 20px;
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .profile-info li:hover {
-  background-color: #444; /* Darker background on hover */
-  transform: scale(1.05); /* Slightly enlarge on hover */
+  background-color: #444;
+  transform: scale(1.05);
 }
 
 .profile-info li.name {
-  background-color: #555; /* Slightly lighter gray for "Name" field */
+  background-color: #555;
 }
 
 .profile-info li span.label {
   font-weight: bold;
-  color: #fff; /* White label text */
+  color: #fff;
   font-size: 1em;
   margin-right: 15px;
 }
 
 .profile-info li span.value {
-  color: #ddd; /* Lighter gray for values */
+  color: #ddd;
   font-size: 1em;
 }
 
 .profile-info li.teams {
-  cursor: pointer; /* Pointer cursor to indicate clickable item */
-  flex-direction: column; /* Stack items vertically */
-  align-items: flex-start; /* Align items to the start */
+  cursor: pointer;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .profile-info li.teams span.value {
-  display: block; /* Ensure each team appears on a new line */
-  margin-top: 10px; /* Add some space between teams */
+  display: block;
+  margin-top: 10px;
 }
 
 .profile-info li.teams .arrow {
   font-size: 1.5em;
-  color: #ddd; /* Lighter gray for arrow */
+  color: #ddd;
   transition: transform 0.3s ease;
 }
 
 .profile-info li.teams .arrow.up {
-  transform: rotate(180deg); /* Rotate the arrow up */
+  transform: rotate(180deg);
 }

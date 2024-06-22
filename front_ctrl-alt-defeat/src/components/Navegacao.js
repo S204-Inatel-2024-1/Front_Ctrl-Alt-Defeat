@@ -30,15 +30,12 @@ export const NavigationProvider = ({ children }) => {
             const loginRegex = /\/(?:Login|login)(Aluno|Orientador|Adm)$/;
 
             if (profileRegex.test(previousPath) && loginRegex.test(nextPath)) {
-                // console.log("AAAAAAAAAAAAAAAAAA", previousPath)
                 handleLogout();
             } else {
                 const previousPath = historyRef.current.pop();
-                // console.log("BBBBBBBBBBBBBBBBBB", previousPath)
                 navigate(previousPath);
             }
         } else {
-            // console.log("CCCCCCCCCCCCCCCCCCCCCCCC")
             handleLogout();
             navigate('/');
         }
