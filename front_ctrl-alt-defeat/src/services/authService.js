@@ -203,6 +203,33 @@ const deleteEquipe = async (number) => {
   }
 };
 
+const updateGlobalSettings = async (data) => {
+  const config = requestConfig("PUT", data);
+  console.log("GLOBAL DATA: ", data)
+  try {
+    const res = await fetch(api + "set/fase/atual", config)
+      .then((res) => res.json())
+      .catch((err) => err);
+
+    return res;
+  } catch (err) {
+    console.error('Error in updateGlobalSettings:', err);
+  }
+};
+
+const getGlobalSettings = async () => {
+  const config = requestConfig("GET");
+
+  try {
+    const res = await fetch(api + "get/fase/atual", config)
+      .then((res) => res.json())
+      .catch((err) => err);
+
+    return res;
+  } catch (err) {
+    console.error('Error in getGlobalSettings:', err);
+  }
+};
 const authService = {
   register,
   logout,
@@ -216,7 +243,9 @@ const authService = {
   updateEquipeStatus,
   uploadExcelFile,
   deleteUser,
-  deleteEquipe
+  deleteEquipe,
+  updateGlobalSettings,
+  getGlobalSettings
 };
 
 export default authService;

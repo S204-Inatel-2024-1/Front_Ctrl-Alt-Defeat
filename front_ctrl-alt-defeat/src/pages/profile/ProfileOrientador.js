@@ -4,6 +4,8 @@ import { useSelector } from 'react-redux';
 import authService from '../../services/authService';
 import "./Profile.css";
 import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
+import { parseISO, format } from 'date-fns';
+import { toZonedTime } from 'date-fns-tz'
 
 const ProfileOrientador = () => {
   const { user, loading } = useSelector((state) => state.auth);
@@ -21,26 +23,41 @@ const ProfileOrientador = () => {
     const fetchData = async () => {
       try {
         if (user) {
-            console.log("Orientador: ", user)
-            const data = await authService.getEquipeOrientadorData(user);
-            setProfileData(data);
+          console.log("Orientador: ", user)
+          const data = await authService.getEquipeOrientadorData(user);
+          setProfileData(data);
         }
       } catch (err) {
         setError('Failed to fetch profile data.');
       }
     };
 
-    const storedPhase = localStorage.getItem('globalPhase');
-    const storedDate = localStorage.getItem('globalDate');
-    if (storedPhase) setGlobalPhase(storedPhase);
-    if (storedDate) setGlobalDate(storedDate);
+    const fetchGlobalSettings = async () => {
+      try {
+        const data = await authService.getGlobalSettings();
+        setGlobalPhase(data.faseAtual);
+        setGlobalDate(data.prazoEntrega);
+      } catch (error) {
+        console.error('Failed to fetch global settings:', error);
+      }
+    };
 
+    fetchGlobalSettings();
     fetchData();
 
     return () => {
       setProfileData(null);
     };
   }, [user]);
+
+  // const formatDate = (dateString) => {
+  //   console.log(dateString)
+  //   const parsedDate = parseISO(dateString);
+  //   const gmt_date = toZonedTime(dateString, 'Brazil/Brasilia')
+  //   console.log(gmt_date)
+  //   console.log(format(gmt_date, 'yyyy-MM-dd HH:mm', {timeZone: 'Brazil/Brasilia'}))
+  //   return format(gmt_date, 'yyyy-MM-dd HH:mm', {timeZone: 'Brazil/Brasilia'});
+  // };
 
   if (error) {
     return <div className="error-message">Error: {error}</div>;
@@ -117,3 +134,4 @@ const ProfileOrientador = () => {
 };
 
 export default ProfileOrientador;
+
