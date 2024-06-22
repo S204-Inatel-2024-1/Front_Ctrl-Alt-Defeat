@@ -46,7 +46,7 @@ function App() {
           <div className="container">
             <Routes>
               <Route path='/' element={!auth ? <Home /> : <Navigate to="" />} />
-              <Route path='/LoginAluno' element={!auth ? <LoginAluno /> : <Navigate to="/LoginAluno" />} />
+              <Route path='/loginAluno' element={!auth ? <LoginAluno /> : <Navigate to="/loginAluno" />} />
               <Route path='/RegisterAluno' element={!auth ? <RegisterAluno /> : <Navigate to="/" />} />
               <Route path='/LoginOrientador' element={!auth ? <LoginOrientador /> : <Navigate to="/" />} />
               <Route path='/RegisterOrientador' element={!auth ? <RegisterOrientador /> : <Navigate to="/" />} />

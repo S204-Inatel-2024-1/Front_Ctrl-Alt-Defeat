@@ -19,6 +19,7 @@ export const NavigationProvider = ({ children }) => {
         dispatch(logout());
         dispatch(reset());
         navigate('/');
+        window.location.reload();
     };
 
     const goBack = () => {
@@ -26,6 +27,7 @@ export const NavigationProvider = ({ children }) => {
             const previousPath = historyRef.current.pop();
             const nextPath = historyRef.current[historyRef.current.length - 1];
 
+            // const navigationRegex = /\/Register(Aluno|Orientador|Adm)$/
             const profileRegex = /\/Profile(Aluno|Orientador|Adm)\/.*/;
             const loginRegex = /\/(?:Login|login)(Aluno|Orientador|Adm)$/;
 
@@ -37,7 +39,6 @@ export const NavigationProvider = ({ children }) => {
             }
         } else {
             handleLogout();
-            navigate('/');
         }
     };
 
