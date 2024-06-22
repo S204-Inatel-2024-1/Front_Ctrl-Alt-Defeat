@@ -57,7 +57,7 @@ const ProfileOrientador = () => {
   return (
     <div id="profile">
       <div className="profile-header">
-        <h2>Profile</h2>
+        <h2>Perfil Orientador</h2>
         <ul className="profile-info">
           <li className="name">
             <span className="label">Nome:</span>
@@ -97,6 +97,18 @@ const ProfileOrientador = () => {
           <li className="global-date">
             <span className="label">Data de Entrega:</span>
             <span className="value">{globalDate}</span>
+          </li>
+          <li className="tutorial-link">
+            <span className="label">Formulários:</span>
+            <span className="value">
+              <NavLink to="https://siteseguro.inatel.br/PortalAcademico/WebLogin.aspx?ReturnUrl=%2fPortalacademico%2f">Formulário de Avaliações</NavLink>
+            </span>
+          </li>
+          <li className="info-link">
+            <span className="label">Manual:</span>
+            <span className="value">
+              <NavLink to="https://inatel.br/mestrado-doutorado/?utm_source=search&utm_medium=cpc&utm_campaign=2024-mestrado-doutorado&utm_content=AD-texto-institucional&gad_source=1&gclid=CjwKCAjw7NmzBhBLEiwAxrHQ-YaA8ENgnJXPpXoqoC-giMCRSNah67xN6ejz5FEDp6v3Dc5kPl13lhoCVywQAvD_BwE">Manual do Orientador</NavLink>
+            </span>
           </li>
         </ul>
       </div>
