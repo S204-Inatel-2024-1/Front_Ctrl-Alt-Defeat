@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import authService from "../services/authService";
 
-const user = JSON.parse(localStorage.getItem("user"))
+const user = JSON.parse(localStorage.getItem("user"));
 
 const initialState = {
     user: user ? user : null,
@@ -14,12 +14,21 @@ const initialState = {
 export const register = createAsyncThunk("auth/register", async ({ userData, route }, thunkAPI) => {
     const data = await authService.register(userData, route);
 
-    // checando errors
-    // if (data.msg) {
-    //     return thunkAPI.rejectWithValue(data.msg)
-    // }
+    const alunoMsg = 'Aluno criado com sucesso!';
+    const orientadorMsg = 'Orientador criado com sucesso!';
+    const admMsg = "Administrador criado com sucesso!"
 
-    return data
+    console.log(data)
+
+    let response = null;
+
+    if (data.msg === alunoMsg || data.msg === orientadorMsg || data.msg === admMsg) {
+        response = userData.email;
+        localStorage.setItem("user", JSON.stringify(response));
+        return response;
+    } else {
+        return thunkAPI.rejectWithValue(data.msg);
+    }
 })
 
 // Logout de um usuario

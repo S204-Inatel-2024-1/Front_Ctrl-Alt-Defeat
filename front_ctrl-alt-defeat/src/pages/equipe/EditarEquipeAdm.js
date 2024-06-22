@@ -12,6 +12,8 @@ const EditarEquipeAdm = () => {
     emailOrientador: '',
     members: [{ name: '', email: '', matricula: '' }]
   });
+  const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -42,17 +44,34 @@ const EditarEquipeAdm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        console.log(formData)
-      await authService.registerEquipe(formData);
-      navigate('/TodasEquipes');
+      const response = await authService.registerEquipe(formData);
+      if (response.msg === `Equipe ${formData.number} criada com sucesso!`) {
+        setSuccessMessage(response.msg);
+        setTimeout(() => {
+          navigate('/TodasEquipes');
+        }, 2000);
+      } else {
+        setError(response.msg || 'Erro ao cadastrar equipe');
+      }
     } catch (err) {
-      console.error('Failed to register equipe:', err);
+      setError('Failed to register equipe');
     }
   };
 
   return (
     <div id="editar-equipe-adm" className="editar-equipe-adm-container">
       <h2>Cadastrar Equipe</h2>
+      {error && (
+        <div className="error-popup">
+          <p>{error}</p>
+          <button onClick={() => setError('')}>Voltar</button>
+        </div>
+      )}
+      {successMessage && (
+        <div className="success-popup">
+          <p>{successMessage}</p>
+        </div>
+      )}
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Número do Projeto:</label>
