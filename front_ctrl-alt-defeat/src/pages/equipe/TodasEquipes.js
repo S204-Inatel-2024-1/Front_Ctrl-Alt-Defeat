@@ -32,13 +32,11 @@ const TodasEquipes = () => {
   const confirmDelete = async () => {
     try {
       const response = await authService.deleteEquipe(selectedEquipe.number);
-      console.log(response)
       if (response.msg === "Equipe deletada com sucesso!") {
-        setDeleteMessage(response);
+        setDeleteMessage(response.msg);
         setDeleteMessage("");
         setShowPopup(false);
         setEquipes(equipes.filter(e => e.number !== selectedEquipe.number));
-        navigate("/TodasEquipes")
       }
     } catch (error) {
       console.error('Failed to delete the equipe:', error);
@@ -55,7 +53,7 @@ const TodasEquipes = () => {
 
   return (
     <div id="todas-equipes">
-      <h2>Todas as Equipes</h2>
+      <h2>Todas as Equipes: {filteredEquipes.length}</h2>
       <input
         type="text"
         placeholder="Pesquisar por número do projeto..."

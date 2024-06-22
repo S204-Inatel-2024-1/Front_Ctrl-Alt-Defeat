@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import authService from '../../services/authService';
 import "./EditarEquipe.css";
 
@@ -9,6 +8,8 @@ const EditarEquipe = () => {
   const navigate = useNavigate();
   const [equipeData, setEquipeData] = useState(null);
   const [error, setError] = useState(null);
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupMessage, setPopupMessage] = useState('');
   const [formData, setFormData] = useState({
     newName: '',
     newNameOrientador: '',
@@ -21,7 +22,6 @@ const EditarEquipe = () => {
       try {
         const data = await authService.getEquipe(equipeId);
         setEquipeData(data);
-        console.log("Informacoes do Orientador: ", data)
         setFormData({
           newName: data.name,
           newNameOrientador: data.nameOrientador,
@@ -47,12 +47,22 @@ const EditarEquipe = () => {
       ...formData
     };
     try {
-      await authService.updateEquipeData(updatedData);
-      console.log(updatedData)
-      navigate(`/equipe/${equipeId}`);
+      const response = await authService.updateEquipeData(updatedData);
+      if (response.msg === 'Informações de equipe salvas!') {
+        navigate(`/equipe/${equipeId}`);
+      } else {
+        setPopupMessage(response.msg);
+        setShowPopup(true);
+      }
     } catch (err) {
-      setError('Failed to update equipe data.');
+      setPopupMessage('Failed to update equipe data.');
+      setShowPopup(true);
     }
+  };
+
+  const closePopup = () => {
+    setShowPopup(false);
+    setPopupMessage('');
   };
 
   if (error) {
@@ -80,7 +90,7 @@ const EditarEquipe = () => {
           <label>Nome do Orientador:</label>
           <input
             type="text"
-            name="newNameProfessor"
+            name="newNameOrientador"
             value={formData.newNameOrientador}
             onChange={handleInputChange}
           />
@@ -89,7 +99,7 @@ const EditarEquipe = () => {
           <label>Email do Orientador:</label>
           <input
             type="email"
-            name="newEmailProfessor"
+            name="newEmailOrientador"
             value={formData.newEmailOrientador}
             onChange={handleInputChange}
           />
@@ -104,6 +114,14 @@ const EditarEquipe = () => {
         </div>
         <button type="submit">Enviar</button>
       </form>
+      {showPopup && (
+        <div className="popup">
+          <div className="popup-content">
+            <p>{popupMessage}</p>
+            <button className="close-button" onClick={closePopup}>Voltar</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
