@@ -2,7 +2,7 @@ import React from 'react'
 import "./Auth.css"
 
 // Components
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import Message from "../../components/Message"
 
 // Hooks
@@ -20,8 +20,9 @@ const RegisterOrientador = () => {
     const [confirmPass, setconfirmPassword] = useState("")
 
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
-    const { loading, msg } = useSelector((state) => state.auth)
+    const { loading, msg, user } = useSelector((state) => state.auth)
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -35,6 +36,16 @@ const RegisterOrientador = () => {
 
           dispatch(register({ userData: userOrientador, route: "orientador" }))
     }
+
+    useEffect(() => {
+        if (user === email) {
+          console.log("User do LoginAluno: ", user)
+          navigate(`/ProfileOrientador/${user}`); // Redireciona para o perfil do aluno com o email
+        }
+        else {
+          navigate(`/RegisterOrientador`)
+        }
+      }, [user, navigate]);
 
     useEffect(() => {
         dispatch(reset())

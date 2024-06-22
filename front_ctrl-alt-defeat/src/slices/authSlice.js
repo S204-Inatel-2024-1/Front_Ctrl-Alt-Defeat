@@ -14,9 +14,9 @@ const initialState = {
 export const register = createAsyncThunk("auth/register", async ({ userData, route }, thunkAPI) => {
     const data = await authService.register(userData, route);
 
-    const alunoMsg = 'Aluno criado com sucesso.';
-    const orientadorMsg = 'Orientador criado com sucesso.';
-    const admMsg = "Administrador criado com sucesso."
+    const alunoMsg = 'Aluno criado com sucesso!';
+    const orientadorMsg = 'Orientador criado com sucesso!';
+    const admMsg = "Administrador criado com sucesso!"
 
     console.log(data)
 
