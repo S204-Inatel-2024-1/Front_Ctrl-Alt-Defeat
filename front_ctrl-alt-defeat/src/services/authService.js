@@ -187,6 +187,22 @@ const deleteUser = async (email, userType) => {
   }
 };
 
+
+const deleteEquipe = async (number) => {
+  const config = requestConfig("DELETE", { number });
+  console.log({number})
+
+  try {
+    const res = await fetch(api + "delete/equipe", config)
+      .then((res) => res.json())
+      .catch((err) => err);
+
+    return res;
+  } catch (err) {
+    console.error('Error in deleteEquipe:', err);
+  }
+};
+
 const authService = {
   register,
   logout,
@@ -199,7 +215,8 @@ const authService = {
   getEquipes,
   updateEquipeStatus,
   uploadExcelFile,
-  deleteUser
+  deleteUser,
+  deleteEquipe
 };
 
 export default authService;
