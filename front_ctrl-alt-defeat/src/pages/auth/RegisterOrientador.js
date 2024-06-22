@@ -49,8 +49,8 @@ const RegisterOrientador = () => {
                 <input type="email" placeholder="Email da instituicao" onChange={(e) => setEmail(e.target.value)} value={emailOrientador || ""} />
                 <input type="password" placeholder="Senha" onChange={(e) => setpassword(e.target.value)} value={passwordOrientador || ""} />
                 <input type="password" placeholder="Confirme a senha" onChange={(e) => setconfirmPassword(e.target.value)} value={confirmPass || ""} />
-                <input type="submit" value="Cadastrar" />
-                {loading && <input type="submit" value="Aguarde..." disabled />}
+                {!loading && <input type="submit" value="Cadastrar"/>}
+                {loading && <input type="submit" value="Aguarde..." disabled/>}
                 {msg && <Message msg={msg} type="error" />}
             </form>
             <p>

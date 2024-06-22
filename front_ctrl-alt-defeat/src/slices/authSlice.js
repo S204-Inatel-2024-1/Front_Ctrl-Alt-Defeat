@@ -14,12 +14,21 @@ const initialState = {
 export const register = createAsyncThunk("auth/register", async ({ userData, route }, thunkAPI) => {
     const data = await authService.register(userData, route);
 
-    // checando errors
-    // if (data.msg) {
-    //     return thunkAPI.rejectWithValue(data.msg)
-    // }
+    const alunoMsg = 'Aluno Registrado com Sucesso.';
+    const orientadorMsg = 'Orientador Registrado com Sucesso.';
+    const admMsg = "Administrador Registrado com Sucesso."
 
-    return data
+    console.log(data)
+
+    let response = null;
+
+    if (data.msg === alunoMsg || data.msg === orientadorMsg || data.msg === admMsg) {
+        response = userData.email;
+        localStorage.setItem("user", JSON.stringify(response));
+        return response;
+    } else {
+        return thunkAPI.rejectWithValue(data.msg);
+    }
 })
 
 // Logout de um usuario
