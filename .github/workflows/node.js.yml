@@ -9,6 +9,33 @@ on:
       - main
 
 jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '18.x'
+
+    - name: Install dependencies
+      run: npm install
+      working-directory: front_ctrl-alt-defeat
+
+    - name: Run Cypress tests and generate Mochawesome report
+      working-directory: front_ctrl-alt-defeat
+      run: |
+        npx cypress run --reporter mochawesome
+
+    - name: Upload Mochawesome report artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: mochawesome-report
+        path: front_ctrl-alt-defeat/mochawesome-report
+        
   build:
     runs-on: ubuntu-latest
 
