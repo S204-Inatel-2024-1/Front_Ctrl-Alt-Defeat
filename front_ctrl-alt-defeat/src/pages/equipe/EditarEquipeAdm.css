@@ -6,6 +6,7 @@
   max-width: 600px;
   margin: 80px auto;
   color: #fff;
+  font-family: "Roboto", sans-serif; /* Mantenha a fonte original */
 }
 
 .editar-equipe-adm-container h2 {
@@ -14,6 +15,7 @@
   font-weight: bold;
   letter-spacing: 2px;
   margin-bottom: 30px;
+  text-align: center;
 }
 
 .form-group {
@@ -34,6 +36,9 @@
   border-radius: 5px;
   border: 1px solid #ccc;
   font-size: 1em;
+  background-color: #333;
+  color: #fff;
+  font-family: "Roboto", sans-serif; /* Mantenha a fonte original */
 }
 
 .member-group {
@@ -53,10 +58,12 @@ button[type="button"] {
   border-radius: 5px;
   cursor: pointer;
   padding: 10px 15px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 button[type="button"]:hover {
   background-color: #cc0000;
+  transform: scale(1.05);
 }
 
 button[type="submit"] {
@@ -87,6 +94,7 @@ button[type="submit"]:hover {
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   z-index: 1000;
+  text-align: center;
 }
 
 .error-popup p, .success-popup p {
@@ -100,8 +108,22 @@ button[type="submit"]:hover {
   border-radius: 5px;
   padding: 10px 20px;
   cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .error-popup button:hover, .success-popup button:hover {
   background-color: #1669c1;
+  transform: scale(1.05);
+}
+
+button[type="button"] {
+  margin-top: 10px;
+}
+
+button[type="button"]:last-child {
+  background-color: #00c853;
+}
+
+button[type="button"]:last-child:hover {
+  background-color: #00a73e;
 }
