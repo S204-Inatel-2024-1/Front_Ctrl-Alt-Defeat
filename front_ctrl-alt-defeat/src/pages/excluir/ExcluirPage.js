@@ -8,6 +8,13 @@ const ExcluirPage = () => {
   const [userType, setUserType] = useState('aluno');
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState('');
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupMessage, setPopupMessage] = useState('');
+
+  const closePopup = () => {
+    setShowPopup(false);
+    setPopupMessage('');
+  };
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -19,25 +26,36 @@ const ExcluirPage = () => {
 
   const handleSearch = async () => {
     if (!email) {
-      setError('Por favor, insira um email para buscar.');
-      return;
+      setPopupMessage('Por favor, insira um email para buscar.');
+      setShowPopup(true);
     }
 
     try {
       let res;
       if (userType === 'orientador') {
         res = await authService.getEquipeOrientadorData(email);
+        if (email) {
+          setPopupMessage(res.msg);
+          setShowPopup(true);
+        }
+
+        console.log("Cai no if: ", res)
       } else {
         res = await authService.getEquipeData(email);
+        console.log("Cai no else: ", res)
+        if (email) {
+          setPopupMessage(res.msg);
+          setShowPopup(true);
+        }
       }
-      setUserData(res);
-      setError('');
     } catch (err) {
       console.error('Failed to fetch user data:', err);
       if (err.message === 'Usuário não encontrado') {
-        setError('Usuário não encontrado no sistema. Verifique o email e tente novamente.');
+        setPopupMessage('Usuário não encontrado no sistema. Verifique o email e tente novamente.');
+        setShowPopup(true);
       } else {
-        setError('Erro ao buscar os dados. Verifique o email e o tipo de usuário selecionado e tente novamente.');
+        setPopupMessage('Erro ao buscar os dados. Verifique o email e o tipo de usuário selecionado e tente novamente.');
+        setShowPopup(true);
       }
     }
   };
@@ -45,22 +63,25 @@ const ExcluirPage = () => {
   const handleDelete = async () => {
     try {
       await authService.deleteUser(email, userType);
-      alert('Usuário excluído com sucesso!');
+      setPopupMessage('Usuário excluído com sucesso!');
+      setShowPopup(true);
       setUserData(null);
       setEmail('');
       window.location.reload(); // Atualiza a página
     } catch (err) {
       console.error('Failed to delete user:', err);
-      setError('Erro ao excluir o usuário. Tente novamente.');
+      setPopupMessage('Erro ao excluir o usuário. Tente novamente.');
+      setShowPopup(true);
     }
   };
 
   const handleClearError = () => {
-    setError('');
+    closePopup()
     setEmail('');
     setUserData(null);
     window.location.reload(); // Atualiza a página
   };
+
 
   return (
     <div id="excluir-page" className="excluir-page-container">
@@ -102,6 +123,14 @@ const ExcluirPage = () => {
             <p>Equipes Orientadas: {userData.equipesOrientadas?.join(', ')}</p>
           )}
           <button className="delete-button" onClick={handleDelete}>Excluir</button>
+        </div>
+      )}
+      {showPopup && (
+        <div className="popup">
+          <div className="popup-content">
+            <p>{popupMessage}</p>
+            <button className="close-button" onClick={closePopup}>OK</button>
+          </div>
         </div>
       )}
     </div>
