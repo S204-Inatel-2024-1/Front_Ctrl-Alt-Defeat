@@ -28,6 +28,7 @@ import EditarEquipeAdm from './pages/equipe/EditarEquipeAdm';
 import TodasEquipes from './pages/equipe/TodasEquipes';
 import EditarStatusEquipes from './pages/equipe/EditarStatusEquipes';
 import ExcluirPage from './pages/excluir/ExcluirPage';
+import AlterarSenha from './pages/senhas/AlterarSenha';
 
 import { NavigationProvider } from './components/Navegacao';
 
@@ -61,6 +62,7 @@ function App() {
               <Route path='/TodasEquipes' element={<TodasEquipes />} />
               <Route path='/EditarStatusEquipes' element={<EditarStatusEquipes />} />
               <Route path='/ExcluirPage' element={<ExcluirPage />} />
+              <Route path='/AlterarSenha' element={<AlterarSenha />} />
             </Routes>
           </div>
           <Footer />

@@ -37,6 +37,36 @@ const login = async (data, route) => {
   }
 };
 
+// Forgot Password
+const forgotPassword = async (data) => {
+  const config = requestConfig("POST", data);
+  console.log(data)
+  try {
+    const res = await fetch(api + "forgot/password", config)
+      .then((res) => res.json())
+      .catch((err) => err);
+
+    return res;
+  } catch (err) {
+    console.error('Error in forgotPassword:', err);
+  }
+};
+
+// Reset Password
+const resetPassword = async (data) => {
+  const config = requestConfig("POST", data);
+  console.log(data)
+  try {
+    const res = await fetch(api + "password/reset", config)
+      .then((res) => res.json())
+      .catch((err) => err);
+
+    return res;
+  } catch (err) {
+    console.error('Error in resetPassword:', err);
+  }
+};
+
 const getEquipeData = async (email) => {
   const config = requestConfig("GET");
 
@@ -201,6 +231,19 @@ const removeAlunoFromEquipe = async (email, equipeId) => {
   }
 };
 
+const addAlunoToEquipe = async (data) => {
+  const config = requestConfig("POST", data);
+
+  try {
+    const res = await fetch(api + "add/aluno/equipe", config)
+      .then((res) => res.json())
+      .catch((err) => err);
+
+    return res;
+  } catch (err) {
+    console.error('Error in addAlunoToEquipe:', err);
+  }
+};
 
 const deleteEquipe = async (number) => {
   const config = requestConfig("DELETE", { number });
@@ -227,7 +270,7 @@ const updateGlobalSettings = async (data) => {
 
     return res;
   } catch (err) {
-    console.error('Error in updateGlobalSettings:', err);
+    console.error('Error in updateGlobalSettings: ', err);
   }
 };
 
@@ -244,10 +287,13 @@ const getGlobalSettings = async () => {
     console.error('Error in getGlobalSettings:', err);
   }
 };
+
 const authService = {
   register,
   logout,
   login,
+  forgotPassword,
+  resetPassword,
   getEquipeData,
   getEquipe,
   getEquipeOrientadorData,
@@ -260,7 +306,8 @@ const authService = {
   deleteEquipe,
   updateGlobalSettings,
   getGlobalSettings,
-  removeAlunoFromEquipe
+  removeAlunoFromEquipe,
+  addAlunoToEquipe
 };
 
 export default authService;

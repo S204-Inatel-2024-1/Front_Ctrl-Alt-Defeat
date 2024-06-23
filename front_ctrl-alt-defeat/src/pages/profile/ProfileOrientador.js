@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import authService from '../../services/authService';
 import "./Profile.css";
 import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
@@ -13,6 +14,8 @@ const ProfileOrientador = () => {
   const [showTeams, setShowTeams] = useState(false);
   const [globalPhase, setGlobalPhase] = useState('');
   const [globalDate, setGlobalDate] = useState('');
+
+  const navigate = useNavigate();
 
   const toggleTeamsVisibility = () => {
     setShowTeams(!showTeams);
@@ -122,6 +125,7 @@ const ProfileOrientador = () => {
             </span>
           </li>
         </ul>
+        <button className="profile-adm-button" onClick={() => navigate('/AlterarSenha')}>Alterar Senha</button>
       </div>
     </div>
   );

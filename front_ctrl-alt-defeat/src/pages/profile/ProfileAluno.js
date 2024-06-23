@@ -5,6 +5,7 @@ import authService from '../../services/authService';
 import "./Profile.css";
 import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
 import { parseISO, format } from 'date-fns';
+import { useNavigate } from 'react-router-dom';
 
 const ProfileAluno = () => {
   const { user, loading } = useSelector((state) => state.auth);
@@ -13,6 +14,8 @@ const ProfileAluno = () => {
   const [showTeams, setShowTeams] = useState(false);
   const [globalPhase, setGlobalPhase] = useState('');
   const [globalDate, setGlobalDate] = useState('');
+
+  const navigate = useNavigate();
 
   const toggleTeamsVisibility = () => {
     setShowTeams(!showTeams);
@@ -114,6 +117,7 @@ const ProfileAluno = () => {
             <span className="value">{globalDate}</span>
           </li>
         </ul>
+        <button className="profile-adm-button" onClick={() => navigate('/AlterarSenha')}>Alterar Senha</button>
       </div>
     </div>
   );

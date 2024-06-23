@@ -90,7 +90,7 @@ const ProfileAdm = () => {
       <h2>Administrador</h2>
       <button className="profile-adm-button" onClick={() => handleNavigate('/EditarEquipeAdm')}>Cadastrar Equipes</button>
       <button className="profile-adm-button" onClick={() => handleNavigate('/EditarStatusEquipes')}>Editar Status das Equipes</button>
-      <button className="profile-adm-button" onClick={() => handleNavigate('/ExcluirPage')}>Adicionar/remover membro da equipe</button>
+      <button className="profile-adm-button" onClick={() => handleNavigate('/ExcluirPage')}>Excluir Aluno/Orientador</button>
       <button className="profile-adm-button" onClick={() => handleNavigate('/TodasEquipes')}>Ver Equipes</button>
 
       <div className="global-settings">
@@ -126,6 +126,8 @@ const ProfileAdm = () => {
         />
         <button onClick={handleFileUpload}>Enviar Arquivo</button>
       </div>
+
+      <button className="profile-adm-button" onClick={() => handleNavigate('/AlterarSenha')}>Alterar Senha</button>
     </div>
   );
 };
