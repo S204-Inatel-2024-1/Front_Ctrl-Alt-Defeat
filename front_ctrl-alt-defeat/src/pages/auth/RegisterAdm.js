@@ -42,7 +42,7 @@ const RegisterAdm = () => {
 
     return (
         <div id="register">
-            <h2>Registro do Administrador</h2>
+            <h2>Registro Admin</h2>
             <p className='subtitle'> Cadastre-se</p>
             <form onSubmit={handleSubmit}>
                 <input type="text" placeholder="Nome Completo" onChange={(e) => setName(e.target.value)} value={name || ""} />
@@ -54,7 +54,7 @@ const RegisterAdm = () => {
                 {msg && <Message msg={msg} type="error" />}
             </form>
             <p>
-                Ja esta cadastrado? <Link to="/LoginAdm">Entre na plataforma</Link>
+                Já está cadastrado? <Link to="/LoginAdm">Entre na plataforma</Link>
             </p>
         </div>
     )

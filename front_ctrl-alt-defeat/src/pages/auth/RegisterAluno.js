@@ -56,7 +56,7 @@ const RegisterAluno = () => {
 
   return (
     <div id="register">
-      <h2>Ctrl+Alt+Defeat</h2>
+      <h2>Registro Aluno</h2>
       <p className="subtitle"> Cadastre-se para participar da maior feira de tecnologia de Minas Gerais</p>
       <form onSubmit={handleSubmit}>
         <input type="text" placeholder="Nome Completo" onChange={(e) => setName(e.target.value)} value={name || ""} />

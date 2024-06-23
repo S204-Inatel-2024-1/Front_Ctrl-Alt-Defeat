@@ -11,10 +11,9 @@ import { useSelector, useDispatch } from "react-redux"
 // Redux
 import { login, reset } from "../../slices/authSlice"
 
-
 const LoginOrientador = () => {
-    const [email, setEmail] = useState("chris@ges.inatel.br")
-    const [password, setPassword] = useState("teste")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -41,18 +40,15 @@ const LoginOrientador = () => {
         if (user === email) {
             //   console.log("User do Login Orientador: ", user)
             navigate(`/ProfileOrientador/${user}`); // Redireciona para o perfil do aluno com o email
-        }
-        else {
+        } else {
             navigate("/LoginOrientador")
         }
     }, [user, navigate]);
 
     return (
         <div id="login">
-            <h2>
-                Entre como Orientador
-            </h2>
-            <p className="subtitle">Faca login para cadastrar um projeto</p>
+            <h2>Entre como Orientador</h2>
+            <p className="subtitle">Faça login para cadastrar um projeto</p>
             <form onSubmit={handleSubmit}>
                 <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} value={email || ""} />
                 <input type="password" placeholder="Senha" onChange={(e) => setPassword(e.target.value)} value={password || ""} />
@@ -60,9 +56,7 @@ const LoginOrientador = () => {
                 {loading && <input type="submit" value="Aguarde..." disabled />}
                 {msg && <Message msg={msg} type="error" />}
             </form>
-            <p>
-                Nao se cadastrou ainda? <Link to="/RegisterOrientador">Clique aqui</Link>
-            </p>
+            <p>Não se cadastrou ainda? <Link to="/RegisterOrientador">Clique aqui</Link></p>
         </div>
     )
 }

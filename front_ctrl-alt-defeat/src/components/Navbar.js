@@ -1,5 +1,5 @@
 import './Navbar.css';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { BsHouseDoorFill, BsBackpack2, BsAward, BsFillCameraFill, BsAwardFill, BsArrowLeft } from 'react-icons/bs';
 import { useAuth } from '../hooks/useAuth';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,8 +17,8 @@ const Navbar = () => {
 
   const handleLogout = () => {
     navigate("");
-    dispatch(logout()); // Limpa o usuario do sistema
-    dispatch(reset()); // Garantia a mais de que o usuario foi removido
+    dispatch(logout());
+    dispatch(reset());
   };
 
   return (
@@ -26,9 +26,7 @@ const Navbar = () => {
       <button onClick={goBack} className="back-button">
         <BsArrowLeft />
       </button>
-      {/* <Link to="/">
-        FETIN
-      </Link> */}
+      <img src="/Fetin.png" alt="FETIN Logo" className="nav-logo nav-logo-position" />
       <ul id='nav-links'>
         {!auth ? (
           <>
@@ -37,7 +35,7 @@ const Navbar = () => {
                 <BsHouseDoorFill />
               </NavLink>
             </li>
-            {user && (
+            {/* {user && (
               <li>
                 <NavLink to={`/users/${user._id}`}>
                   <BsFillCameraFill />
@@ -58,7 +56,7 @@ const Navbar = () => {
               <NavLink to="/LoginAdm">
                 <BsAwardFill />
               </NavLink>
-            </li>
+            </li> */}
           </>
         ) : (
           <>
