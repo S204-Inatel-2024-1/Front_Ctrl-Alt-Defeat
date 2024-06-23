@@ -1,19 +1,29 @@
+/* Estilização para Login e Register páginas */
 #login,
 #register {
-  border: 5px solid #363636;
-  background-color: #1e1e1e;
-  padding: 1.5em 2em;
-  max-width: 33%;
-  margin: 2em auto;
-  border-radius: 10px;
+  background-color: #222;
+  border-radius: 15px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.3);
+  padding: 40px;
+  max-width: 600px;
+  margin: 80px auto;
+  color: #fff;
+  /* transition: transform 0.3s ease; */
+}
+
+#login:hover,
+#register:hover {
+  /* transform: scale(1.05); */
 }
 
 #login h2,
 #register h2 {
+  color: #fff;
+  font-size: 3em;
+  font-weight: bold;
+  letter-spacing: 2px;
   text-align: center;
-  font-size: 2.1em;
-  margin-top: 0;
-  color: #0094f6;
+  margin-bottom: 30px;
 }
 
 .subtitle {
@@ -25,9 +35,9 @@
 
 #login form,
 #register form {
-  padding-bottom: 1.5em;
-  margin-bottom: 1.5em;
-  border-bottom: 1px solid #363636;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 #login p,
@@ -40,3 +50,18 @@
   font-weight: bold;
   color: #0094f6;
 }
+
+/* Responsividade
+@media (max-width: 768px) {
+  #login,
+  #register {
+    padding: 20px;
+    margin: 40px auto;
+    max-width: 90%;
+  }
+
+  #login h2,
+  #register h2 {
+    font-size: 2em;
+  }
+} */
