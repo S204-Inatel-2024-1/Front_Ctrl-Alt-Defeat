@@ -12,8 +12,8 @@ import { useSelector, useDispatch } from "react-redux"
 import { login, reset } from "../../slices/authSlice"
 
 const LoginAluno = () => {
-  const [email, setEmail] = useState("eduardo.costa@ges.inatel.br")
-  const [password, setPassword] = useState("teste")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -36,9 +36,8 @@ const LoginAluno = () => {
     if (user === email) {
       console.log("User do LoginAluno: ", user)
       navigate(`/ProfileAluno/${user}`); // Redireciona para o perfil do aluno com o email
-    }
-    else{
-      navigate(`/loginAluno`)
+    } else {
+      navigate(`/LoginAluno`)
     }
   }, [user, navigate]);
 
@@ -58,9 +57,7 @@ const LoginAluno = () => {
         {loading && <input type="submit" value="Aguarde..." disabled />}
         {msg && <Message msg={msg} type="error" />}
       </form>
-      <p>
-        Não se cadastrou ainda? <Link to="/RegisterAluno">Clique aqui</Link>
-      </p>
+      <p>Não se cadastrou ainda? <Link to="/RegisterAluno">Clique aqui</Link></p>
     </div>
   );
 };

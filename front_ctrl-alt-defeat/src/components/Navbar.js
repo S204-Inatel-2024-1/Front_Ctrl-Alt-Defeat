@@ -35,7 +35,7 @@ const Navbar = () => {
                 <BsHouseDoorFill />
               </NavLink>
             </li>
-            {user && (
+            {/* {user && (
               <li>
                 <NavLink to={`/users/${user._id}`}>
                   <BsFillCameraFill />
@@ -56,7 +56,7 @@ const Navbar = () => {
               <NavLink to="/LoginAdm">
                 <BsAwardFill />
               </NavLink>
-            </li>
+            </li> */}
           </>
         ) : (
           <>
