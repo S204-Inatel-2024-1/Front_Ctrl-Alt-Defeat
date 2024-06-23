@@ -134,11 +134,11 @@ const EditarEquipeAdm = () => {
                 value={member.matricula}
                 onChange={(e) => handleMemberChange(index, e)}
               />
-              <button type="button" onClick={() => removeMember(index)}>Remover</button>
+              <button type="button" className="button.remover" onClick={() => removeMember(index)}>Remover</button>
             </div>
           ))}
           {formData.members.length < 4 && (
-            <button type="button" onClick={addMember}>Adicionar Membro</button>
+            <button type="button" className="button.adicionar" onClick={addMember}>Adicionar Membro</button>
           )}
         </div>
         <button type="submit">Enviar</button>

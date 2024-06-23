@@ -31,7 +31,7 @@
 
 .form-group input,
 .form-group textarea {
-  width: 100%;
+  width: 110%;
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #ccc;
@@ -43,8 +43,8 @@
 
 .member-group {
   display: flex;
-  gap: 10px;
-  margin-bottom: 10px;
+  gap: 0.0001px;
+  margin-bottom: 5px;
 }
 
 .member-group input {
@@ -52,18 +52,37 @@
 }
 
 button[type="button"] {
-  background-color: #ff4d4d;
+  background-color: #1a73e8; 
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  padding: 10px 15px;
+  padding: 5px 15px;
   transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-left: 10px;
 }
 
 button[type="button"]:hover {
-  background-color: #cc0000;
+  background-color: #1669c1; 
   transform: scale(1.05);
+}
+
+button.remover[type="button"] {
+  background-color: #ff4d4d; 
+  margin-left: 10px; 
+}
+
+button.remover:hover {
+  background-color: #cc0000; 
+}
+
+button.adicionar {
+  background-color: #1a73e8; 
+  margin-top: 10px;
+}
+
+button.adicionar:hover {
+  background-color: #1669c1; 
 }
 
 button[type="submit"] {
@@ -114,16 +133,4 @@ button[type="submit"]:hover {
 .error-popup button:hover, .success-popup button:hover {
   background-color: #1669c1;
   transform: scale(1.05);
-}
-
-button[type="button"] {
-  margin-top: 10px;
-}
-
-button[type="button"]:last-child {
-  background-color: #00c853;
-}
-
-button[type="button"]:last-child:hover {
-  background-color: #00a73e;
 }
