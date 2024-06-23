@@ -44,7 +44,7 @@ const LoginAdm = () => {
         else { 
             navigate('/LoginAdm')
         }
-    }, [user, navigate]);
+    }, [user, email, navigate]);
 
     return (
         <div id="login">

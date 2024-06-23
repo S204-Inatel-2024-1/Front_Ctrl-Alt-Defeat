@@ -38,7 +38,7 @@ const LoginAluno = () => {
     } else {
       navigate(`/LoginAluno`)
     }
-  }, [user, navigate]);
+  }, [user, email, navigate]);
 
   // Limpando todos os estados auth
   useEffect(() => {

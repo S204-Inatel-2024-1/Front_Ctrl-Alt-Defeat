@@ -42,7 +42,7 @@ const LoginOrientador = () => {
         } else {
             navigate("/LoginOrientador")
         }
-    }, [user, navigate]);
+    }, [user, email, navigate]);
 
     return (
         <div id="login">
