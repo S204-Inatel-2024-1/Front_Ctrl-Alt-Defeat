@@ -59,3 +59,30 @@
   cursor: pointer;
   color: inherit;
 }
+
+.nav-logo {
+  height: 50px; /* Altura da imagem */
+  width: auto; /* Mantém a proporção da imagem */
+  margin: auto; /* Centraliza a imagem dentro do flex container */
+}
+
+/* Variáveis para facilitar a edição */
+:root {
+  --nav-logo-height: 50px; /* Altura padrão da imagem */
+  --nav-logo-max-width: 100%; /* Largura máxima da imagem */
+  --nav-logo-margin: 0 auto; /* Margem padrão para centralização */
+}
+
+/* Uso das variáveis */
+.nav-logo {
+  height: var(--nav-logo-height);
+  max-width: var(--nav-logo-max-width);
+  margin: var(--nav-logo-margin);
+}
+
+/* Adicional: Personalizações avançadas */
+.nav-logo-position {
+  position: right; /* Necessário se for usar top, right, bottom, left */
+  top: 10px; /* Exemplo: move a imagem 10px para baixo */
+  left: 20px; /* Exemplo: move a imagem 20px para a direita */
+}
