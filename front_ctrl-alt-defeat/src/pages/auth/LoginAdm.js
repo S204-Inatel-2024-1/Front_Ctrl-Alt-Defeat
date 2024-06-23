@@ -49,7 +49,7 @@ const LoginAdm = () => {
 
     return (
         <div id="login">
-            <h2>Entre como Administrador</h2>
+            <h2>Entre como Adminr</h2>
             <p className="subtitle">Faça login para administrar a feira</p>
             <form onSubmit={handleSubmit}>
                 <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} value={email || ""} />
