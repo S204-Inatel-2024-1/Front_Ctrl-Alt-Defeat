@@ -52,7 +52,7 @@ const RegisterOrientador = () => {
 
     return (
         <div id="register">
-            <h2>Registro do Orientador</h2>
+            <h2>Registro Orientador</h2>
             <p className='subtitle'> Cadastre-se para ver os projetos orientados</p>
             <form onSubmit={handleSubmit}>
                 <input type="text" placeholder="Nome Completo" onChange={(e) => setName(e.target.value)} value={name || ""} />
