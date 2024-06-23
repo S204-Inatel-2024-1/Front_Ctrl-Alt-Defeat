@@ -25,7 +25,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cypress:run": "cypress run",
+    "cypress:report": "cypress run --reporter mochawesome && mochawesome-merge cypress/reports/*.json > mochawesome.json && marge mochawesome.json --reportDir cypress/reports/html"
   },
   "eslintConfig": {
     "extends": [
