@@ -29,15 +29,16 @@ jobs:
       id: cypress
       run: |
         npm run cypress:run -- --reporter mochawesome
-        npx mochawesome-merge cypress/reports/*.json > mochawesome.json
-        npx marge mochawesome.json --reportDir cypress/reports/html
+        npx mochawesome-merge cypress/reports/*.json > TestReports/mochawesome.json
+        npx marge TestReports/mochawesome.json --reportDir TestReports/html
       working-directory: front_ctrl-alt-defeat
+
     - name: Upload Cypress report
       if: ${{ steps.cypress.outcome == 'success' }}
       uses: actions/upload-artifact@v3
       with:
         name: cypress-report
-        path: front_ctrl-alt-defeat/cypress/reports/html
+        path: front_ctrl-alt-defeat/TestReports/html
 
   build:
     runs-on: ubuntu-latest
