@@ -10,8 +10,6 @@ const AlterarSenha = () => {
   const [newPassword, setNewPassword] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
   const [token, setToken] = useState('');
-  const [message, setMessage] = useState('');
-  const [error, setError] = useState('');
   const [showPopup, setShowPopup] = useState(false);
   const [popupMessage, setPopupMessage] = useState('');
 
@@ -61,8 +59,6 @@ const AlterarSenha = () => {
   return (
     <div className="alterar-senha-container">
       <h2>Alterar Senha</h2>
-      {error && <div className="error-message">{error}</div>}
-      {message && <div className="success-message">{message}</div>}
       <form onSubmit={handleForgotPassword} className="alterar-senha-form">
         <div className="form-group">
           <label htmlFor="email">Email:</label>
