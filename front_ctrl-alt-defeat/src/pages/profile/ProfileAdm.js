@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { parseISO, format } from 'date-fns';
 import authService from '../../services/authService';
 import "./ProfileAdm.css";
 
@@ -10,22 +11,25 @@ const ProfileAdm = () => {
   const [file, setFile] = useState(null);
 
   useEffect(() => {
-    const storedPhase = localStorage.getItem('globalPhase');
-    const storedDate = localStorage.getItem('globalDate');
-    if (storedPhase) setGlobalPhase(storedPhase);
-    if (storedDate) setGlobalDate(storedDate);
+    const fetchGlobalSettings = async () => {
+      try {
+        const data = await authService.getGlobalSettings();
+        setGlobalPhase(data.faseAtual);
+        setGlobalDate(formatDateForInput(data.prazoEntrega));
+      } catch (error) {
+        console.error('Failed to fetch global settings:', error);
+      }
+    };
+    
+    fetchGlobalSettings();
   }, []);
 
   const handlePhaseChange = (e) => {
-    const phase = e.target.value;
-    setGlobalPhase(phase);
-    localStorage.setItem('globalPhase', phase);
+    setGlobalPhase(e.target.value);
   };
 
   const handleDateChange = (e) => {
-    const date = e.target.value;
-    setGlobalDate(date);
-    localStorage.setItem('globalDate', date);
+    setGlobalDate(e.target.value);
   };
 
   const handleFileChange = (e) => {
@@ -44,6 +48,36 @@ const ProfileAdm = () => {
     } catch (error) {
       console.error('Erro ao enviar o arquivo:', error);
       alert('Falha ao enviar o arquivo. Tente novamente.');
+    }
+  };
+
+  const formatDate = (dateString) => {
+    const parsedDate = parseISO(dateString);
+    return format(parsedDate, 'dd/MM/yyyy HH:mm');
+  };
+
+  const formatDateForInput = (dateString) => {
+    const parsedDate = parseISO(dateString);
+    return parsedDate.toISOString().slice(0, 16);
+  };
+
+  const handlePhaseUpdate = async () => {
+    try {
+      await authService.updateGlobalSettings({ newFase: globalPhase, newPrazo: formatDate(globalDate) });
+      alert('Fase atualizada com sucesso!');
+    } catch (error) {
+      console.error('Erro ao atualizar a fase:', error);
+      alert('Falha ao atualizar a fase. Tente novamente.');
+    }
+  };
+
+  const handleDateUpdate = async () => {
+    try {
+      await authService.updateGlobalSettings({ newFase: globalPhase, newPrazo: formatDate(globalDate) });
+      alert('Data de entrega atualizada com sucesso!');
+    } catch (error) {
+      console.error('Erro ao atualizar a data de entrega:', error);
+      alert('Falha ao atualizar a data de entrega. Tente novamente.');
     }
   };
 
@@ -68,26 +102,29 @@ const ProfileAdm = () => {
             value={globalPhase}
             onChange={handlePhaseChange}
           />
+          <button onClick={handlePhaseUpdate}>Atualizar Fase</button>
         </div>
         <div className="form-group">
-          <label htmlFor="globalDate">Data de Entrega:</label>
+          <label htmlFor="globalDate">Data e Hora de Entrega:</label>
           <input
-            type="date"
+            type="datetime-local"
             id="globalDate"
             value={globalDate}
             onChange={handleDateChange}
           />
+          <button className="small-button" onClick={handleDateUpdate}>Atualizar Data e Hora</button>
         </div>
-        <div className="form-group">
-          <label htmlFor="fileUpload">Enviar Arquivo com os dados das Equipes:</label>
-          <input
-            type="file"
-            id="fileUpload"
-            accept=".xlsx"
-            onChange={handleFileChange}
-          />
-          <button onClick={handleFileUpload}>Enviar Arquivo</button>
-        </div>
+      </div>
+
+      <div className="file-upload-container">
+        <label htmlFor="fileUpload">Enviar Arquivo com os dados das Equipes:</label>
+        <input
+          type="file"
+          id="fileUpload"
+          accept=".xlsx"
+          onChange={handleFileChange}
+        />
+        <button onClick={handleFileUpload}>Enviar Arquivo</button>
       </div>
     </div>
   );

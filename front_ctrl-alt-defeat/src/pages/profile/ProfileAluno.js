@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import authService from '../../services/authService';
-import { NavLink } from 'react-router-dom';
 import "./Profile.css";
 import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
+import { parseISO, format } from 'date-fns';
 
 const ProfileAluno = () => {
   const { user, loading } = useSelector((state) => state.auth);
@@ -11,7 +12,7 @@ const ProfileAluno = () => {
   const [error, setError] = useState(null);
   const [showTeams, setShowTeams] = useState(false);
   const [globalPhase, setGlobalPhase] = useState('');
-  const [globalDate, setGlobalDate] = useState('teste');
+  const [globalDate, setGlobalDate] = useState('');
 
   const toggleTeamsVisibility = () => {
     setShowTeams(!showTeams);
@@ -29,17 +30,28 @@ const ProfileAluno = () => {
       }
     };
 
-    const storedPhase = localStorage.getItem('globalPhase');
-    const storedDate = localStorage.getItem('globalDate');
-    if (storedPhase) setGlobalPhase(storedPhase);
-    if (storedDate) setGlobalDate(storedDate);
+    const fetchGlobalSettings = async () => {
+      try {
+        const data = await authService.getGlobalSettings();
+        setGlobalPhase(data.faseAtual);
+        setGlobalDate(formatDate(data.prazoEntrega));
+      } catch (error) {
+        console.error('Failed to fetch global settings:', error);
+      }
+    };
 
+    fetchGlobalSettings();
     fetchData();
 
     return () => {
       setProfileData(null);
     };
   }, [user]);
+
+  const formatDate = (dateString) => {
+    const parsedDate = parseISO(dateString);
+    return format(parsedDate, 'dd/MM/yyyy HH:mm');
+  };
 
   if (error) {
     return <div className="error-message">Error: {error}</div>;
@@ -56,7 +68,7 @@ const ProfileAluno = () => {
   return (
     <div id="profile">
       <div className="profile-header">
-        <h2>Profile</h2>
+        <h2>Perfil Aluno</h2>
         <ul className="profile-info">
           <li className="name">
             <span className="label">Nome:</span>

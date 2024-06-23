@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import authService from '../../services/authService';
 import "./Profile.css";
 import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
+import { parseISO, format } from 'date-fns';
 
 const ProfileOrientador = () => {
   const { user, loading } = useSelector((state) => state.auth);
@@ -21,26 +22,36 @@ const ProfileOrientador = () => {
     const fetchData = async () => {
       try {
         if (user) {
-            console.log("Orientador: ", user)
-            const data = await authService.getEquipeOrientadorData(user);
-            setProfileData(data);
+          const data = await authService.getEquipeOrientadorData(user);
+          setProfileData(data);
         }
       } catch (err) {
         setError('Failed to fetch profile data.');
       }
     };
 
-    const storedPhase = localStorage.getItem('globalPhase');
-    const storedDate = localStorage.getItem('globalDate');
-    if (storedPhase) setGlobalPhase(storedPhase);
-    if (storedDate) setGlobalDate(storedDate);
+    const fetchGlobalSettings = async () => {
+      try {
+        const data = await authService.getGlobalSettings();
+        setGlobalPhase(data.faseAtual);
+        setGlobalDate(formatDate(data.prazoEntrega));
+      } catch (error) {
+        console.error('Failed to fetch global settings:', error);
+      }
+    };
 
+    fetchGlobalSettings();
     fetchData();
 
     return () => {
       setProfileData(null);
     };
   }, [user]);
+
+  const formatDate = (dateString) => {
+    const parsedDate = parseISO(dateString);
+    return format(parsedDate, 'dd/MM/yyyy HH:mm');
+  };
 
   if (error) {
     return <div className="error-message">Error: {error}</div>;
