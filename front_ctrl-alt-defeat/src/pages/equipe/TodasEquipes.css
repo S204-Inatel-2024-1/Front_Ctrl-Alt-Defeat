@@ -1,0 +1,145 @@
+#todas-equipes {
+  background-color: #222;
+  border-radius: 15px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.3);
+  padding: 40px;
+  max-width: 1000px;
+  margin: 80px auto;
+  color: #fff;
+  text-align: center;
+}
+
+#todas-equipes h2 {
+  color: #fff;
+  font-size: 2.5em;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin-bottom: 30px;
+}
+
+.equipes-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.equipe-card {
+  background-color: #333;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  width: 300px;
+  text-align: left;
+  transition: background-color 0.3s ease;
+}
+
+.equipe-card:hover {
+  background-color: #444;
+}
+
+.equipe-card h3 {
+  color: #1a73e8;
+  margin-bottom: 10px;
+}
+
+.equipe-card p {
+  color: #ddd;
+  margin: 5px 0;
+}
+
+.equipe-card .members {
+  margin-top: 10px;
+}
+
+.equipe-card button {
+  background-color: #1a73e8;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.equipe-card button:hover {
+  background-color: #155aab;
+}
+
+.equipe-card .delete-button {
+  background-color: #e81a1a;
+}
+
+.equipe-card .delete-button:hover {
+  background-color: #aa1515;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-content {
+  background: #333;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.popup-content p {
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.confirm-button {
+  background-color: #e81a1a;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.confirm-button:hover {
+  background-color: #aa1515;
+}
+
+.cancel-button {
+  background-color: #1a73e8;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.cancel-button:hover {
+  background-color: #155aab;
+}
+
+.delete-message {
+  background: #333;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 20px;
+  text-align: center;
+}

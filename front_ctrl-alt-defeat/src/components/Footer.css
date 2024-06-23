@@ -1,0 +1,10 @@
+#footer {
+    background-color: #1e1e1e;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid #363636;
+    color: #fafafa;
+  }
+  
