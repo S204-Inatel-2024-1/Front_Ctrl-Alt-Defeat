@@ -44,7 +44,7 @@ const RegisterOrientador = () => {
         else {
           navigate(`/RegisterOrientador`)
         }
-      }, [user, navigate]);
+      }, [user, email, navigate]);
 
     useEffect(() => {
         dispatch(reset())

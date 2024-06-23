@@ -2,7 +2,7 @@ import React from 'react'
 import "./Auth.css"
 
 // Components
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import Message from "../../components/Message"
 
 // Hooks
@@ -19,9 +19,10 @@ const RegisterAdm = () => {
     const [password, setpassword] = useState ("")
     const [confirmPass, setconfirmPassword] = useState("")
 
+    const navigate = useNavigate()
     const dispatch = useDispatch()
 
-    const { loading, msg } = useSelector((state) => state.auth)
+    const { loading, msg, user } = useSelector((state) => state.auth)
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -35,6 +36,15 @@ const RegisterAdm = () => {
 
           dispatch(register({ userData: userAdm, route: "admin" }))
     }
+
+    useEffect(() => {
+        if (user === email) {
+          navigate(`/ProfileAdm/${user}`); // Redireciona para o perfil do aluno com o email
+        }
+        else {
+          navigate(`/RegisterAdm`)
+        }
+      }, [user, email, navigate]);
 
     useEffect(() => {
         dispatch(reset())

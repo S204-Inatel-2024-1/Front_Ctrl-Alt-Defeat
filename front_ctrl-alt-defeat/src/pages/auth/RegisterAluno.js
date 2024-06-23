@@ -47,7 +47,7 @@ const RegisterAluno = () => {
     else {
       navigate(`/RegisterAluno`)
     }
-  }, [user, navigate]);
+  }, [user, email, navigate]);
 
   useEffect(() => {
     dispatch(reset())
