@@ -57,7 +57,7 @@ const LoginAdm = () => {
                 {loading && <input type="submit" value="Aguarde..." disabled />}
                 {msg && <Message msg={msg} type="error" />}
             </form>
-            <p>Não se cadastrou ainda? <Link to="/RegisterAdm">Clique aqui</Link></p>
+            {/* <p>Não se cadastrou ainda? <Link to="/RegisterAdm">Clique aqui</Link></p> */}
         </div>
     )
 }
