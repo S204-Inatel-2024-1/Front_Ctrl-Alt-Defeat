@@ -5,7 +5,6 @@ import authService from '../../services/authService';
 import "./Profile.css";
 import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
 import { parseISO, format } from 'date-fns';
-import { zonedTimeToUtc, format as formatTz } from 'date-fns-tz';
 
 const ProfileOrientador = () => {
   const { user, loading } = useSelector((state) => state.auth);
@@ -50,8 +49,8 @@ const ProfileOrientador = () => {
   }, [user]);
 
   const formatDate = (dateString) => {
-    const zonedDate = zonedTimeToUtc(parseISO(dateString), 'America/Sao_Paulo');
-    return formatTz(zonedDate, 'yyyy-MM-dd\'T\'HH:mm', { timeZone: 'America/Sao_Paulo' });
+    const parsedDate = parseISO(dateString);
+    return format(parsedDate, 'dd/MM/yyyy HH:mm');
   };
 
   if (error) {
