@@ -18,8 +18,6 @@ export const register = createAsyncThunk("auth/register", async ({ userData, rou
     const orientadorMsg = 'Orientador criado com sucesso!';
     const admMsg = "Administrador criado com sucesso!"
 
-    console.log(data)
-
     let response = null;
 
     if (data.msg === alunoMsg || data.msg === orientadorMsg || data.msg === admMsg) {
@@ -43,8 +41,6 @@ export const login = createAsyncThunk("auth/login", async ({ userData, route }, 
     const alunoMsg = 'Auntenticação Aluno realizada com sucesso!';
     const orientadorMsg = 'Auntenticação Orientador realizada com sucesso!';
     const admMsg = "Auntenticação Administrador realizada com sucesso!"
-
-    console.log(data.msg)
 
     let response = null;
 

@@ -42,13 +42,12 @@ const RegisterAluno = () => {
 
   useEffect(() => {
     if (user === email) {
-      console.log("User do LoginAluno: ", user)
       navigate(`/ProfileAluno/${user}`); // Redireciona para o perfil do aluno com o email
     }
     else {
       navigate(`/RegisterAluno`)
     }
-  }, [user, navigate]);
+  }, [user, email, navigate]);
 
   useEffect(() => {
     dispatch(reset())
@@ -69,7 +68,7 @@ const RegisterAluno = () => {
         {msg && <Message msg={msg} type="error" />}
       </form>
       <p>
-        Ja esta cadastrado? <Link to="/LoginAluno">Entre na plataforma</Link>
+      Já está cadastrado? <Link to="/LoginAluno">Entre na plataforma</Link>
       </p>
     </div>
   )

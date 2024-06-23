@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import authService from '../../services/authService';
 import './ExcluirPage.css';
 
@@ -7,7 +6,6 @@ const ExcluirPage = () => {
   const [email, setEmail] = useState('');
   const [userType, setUserType] = useState('aluno');
   const [userData, setUserData] = useState(null);
-  const [error, setError] = useState('');
   const [showPopup, setShowPopup] = useState(false);
   const [popupMessage, setPopupMessage] = useState('');
 
@@ -39,10 +37,8 @@ const ExcluirPage = () => {
           setShowPopup(true);
         }
 
-        console.log("Cai no if: ", res)
       } else {
         res = await authService.getEquipeData(email);
-        console.log("Cai no else: ", res)
         if (email) {
           setPopupMessage(res.msg);
           setShowPopup(true);
@@ -75,14 +71,6 @@ const ExcluirPage = () => {
     }
   };
 
-  const handleClearError = () => {
-    closePopup()
-    setEmail('');
-    setUserData(null);
-    window.location.reload(); // Atualiza a página
-  };
-
-
   return (
     <div id="excluir-page" className="excluir-page-container">
       <div className="excluir-page-header">
@@ -104,12 +92,6 @@ const ExcluirPage = () => {
         />
         <button onClick={handleSearch}>Buscar</button>
       </div>
-      {error && (
-        <div className="error-message">
-          <p>{error}</p>
-          <button onClick={handleClearError}>OK</button>
-        </div>
-      )}
       {userData && (
         <div className="user-data">
           <p>Nome: {userData.name}</p>
