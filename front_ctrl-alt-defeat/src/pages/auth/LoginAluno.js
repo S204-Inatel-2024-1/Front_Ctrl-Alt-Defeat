@@ -34,7 +34,6 @@ const LoginAluno = () => {
   // Redirecionar após login bem-sucedido
   useEffect(() => {
     if (user === email) {
-      console.log("User do LoginAluno: ", user)
       navigate(`/ProfileAluno/${user}`); // Redireciona para o perfil do aluno com o email
     } else {
       navigate(`/LoginAluno`)

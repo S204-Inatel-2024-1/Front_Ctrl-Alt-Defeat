@@ -39,10 +39,8 @@ const ExcluirPage = () => {
           setShowPopup(true);
         }
 
-        console.log("Cai no if: ", res)
       } else {
         res = await authService.getEquipeData(email);
-        console.log("Cai no else: ", res)
         if (email) {
           setPopupMessage(res.msg);
           setShowPopup(true);

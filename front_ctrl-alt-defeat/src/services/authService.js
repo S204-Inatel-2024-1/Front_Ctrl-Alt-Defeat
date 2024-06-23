@@ -29,8 +29,6 @@ const login = async (data, route) => {
       .then((res) => res.json())
       .catch((err) => err);
 
-    console.log("Adm: ", res)
-
     return res;
   } catch (err) {
     console.log(err);
@@ -40,7 +38,6 @@ const login = async (data, route) => {
 // Forgot Password
 const forgotPassword = async (data) => {
   const config = requestConfig("POST", data);
-  console.log(data)
   try {
     const res = await fetch(api + "forgot/password", config)
       .then((res) => res.json())
@@ -55,7 +52,6 @@ const forgotPassword = async (data) => {
 // Reset Password
 const resetPassword = async (data) => {
   const config = requestConfig("POST", data);
-  console.log(data)
   try {
     const res = await fetch(api + "password/reset", config)
       .then((res) => res.json())
@@ -93,8 +89,6 @@ const getEquipe = async (num) => {
       .then((res) => res.json())
       .catch((err) => err);
 
-    console.log(res);
-
     return res;
   } catch (err) {
     console.log('Error in getEquipeData: ', err);
@@ -108,8 +102,6 @@ const getEquipeOrientadorData = async (email) => {
     const res = await fetch(api + "get/orientador/data/" + email, config)
       .then((res) => res.json())
       .catch((err) => err);
-
-    console.log("Dados do orientador: ", res);
     return res;
 
   } catch (error) {
@@ -127,8 +119,6 @@ const updateEquipeData = async (data) => {
     const res = await fetch(api + "set/equipe/data", config)
       .then((res) => res.json())
       .catch((err) => err);
-
-    console.log("Update Equipe Data: ", res)
     return res;
   } catch (err) {
     console.log('Error in updateEquipeData: ', err);
@@ -157,7 +147,6 @@ const registerEquipe = async (data) => {
       .then((res) => res.json())
       .catch((err) => err);
 
-    console.log("Register Equipe: ", res)
 
     return res;
   } catch (err) {
@@ -247,7 +236,6 @@ const addAlunoToEquipe = async (data) => {
 
 const deleteEquipe = async (number) => {
   const config = requestConfig("DELETE", { number });
-  console.log({number})
 
   try {
     const res = await fetch(api + "delete/equipe", config)
@@ -262,7 +250,6 @@ const deleteEquipe = async (number) => {
 
 const updateGlobalSettings = async (data) => {
   const config = requestConfig("PUT", data);
-  console.log("GLOBAL DATA: ", data)
   try {
     const res = await fetch(api + "set/fase/atual", config)
       .then((res) => res.json())
