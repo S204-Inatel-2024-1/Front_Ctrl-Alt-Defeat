@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import authService from '../../services/authService';
+import { useNavigate } from 'react-router-dom';
 import './AlterarSenha.css'
+import { logout, reset } from '../../slices/authSlice';
+import { useDispatch } from 'react-redux';
 
 const AlterarSenha = () => {
   const [email, setEmail] = useState('');
@@ -9,14 +12,26 @@ const AlterarSenha = () => {
   const [token, setToken] = useState('');
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupMessage, setPopupMessage] = useState('');
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleForgotPassword = async (e) => {
     e.preventDefault();
     try {
       const res = await authService.forgotPassword({ email });
-      setMessage(res.message);
+      if(res.msg === "Email enviado com sucesso!"){
+        setPopupMessage(res.msg);
+        setShowPopup(true);
+      }else {
+        setPopupMessage(res.msg);
+        setShowPopup(true);
+      }
     } catch (err) {
-      setError('Erro ao solicitar redefinição de senha.');
+       setPopupMessage('Erro ao solicitar redefinição de senha.');
+       setShowPopup(true);
     }
   };
 
@@ -24,10 +39,23 @@ const AlterarSenha = () => {
     e.preventDefault();
     try {
       const res = await authService.resetPassword({ email, token, newPassword, confirmPass });
-      setMessage(res.message);
+      if(res.msg === "Senha resetada com sucesso!"){
+        dispatch(logout());
+        dispatch(reset());
+        navigate('/');
+      }else {
+        setPopupMessage(res.msg);
+        setShowPopup(true);
+      }
     } catch (err) {
-      setError('Erro ao redefinir senha.');
+        setPopupMessage('Erro ao redefinir senha.');
+        setShowPopup(true)
     }
+  };
+
+  const closePopup = () => {
+    setShowPopup(false);
+    setPopupMessage('');
   };
 
   return (
@@ -82,6 +110,14 @@ const AlterarSenha = () => {
         </div>
         <button type="submit">Redefinir Senha</button>
       </form>
+      {showPopup && (
+        <div className="popup">
+          <div className="popup-content">
+            <p>{popupMessage}</p>
+            <button className="close-button" onClick={closePopup}>OK</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
