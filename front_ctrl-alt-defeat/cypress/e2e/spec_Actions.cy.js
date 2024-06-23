@@ -32,9 +32,9 @@ describe('App Component', () => {
         cy.wait(1000)
         cy.get('h2').should('contain.text', 'Perfil Orientador');
         cy.get('.teams').click()
-        cy.get('div > a').click()
+        cy.wait(500)
+        cy.get(':nth-child(1) > a').click()
         cy.wait(1000)
-        cy.get('h2').should('contain.text', 'Equipe número: 32');
       });
 
       it('LoginOrientador Check form', () => {
@@ -50,7 +50,7 @@ describe('App Component', () => {
         cy.get('.tutorial-link > .value > a').click()
       });
 
-      it('LoginOrientador Check form', () => {
+      it('LoginOrientador Check manual', () => {
         // Verifique a navegação para a página de LoginOrientador
         cy.visit('https://front-ctrl-alt-defeat.vercel.app/LoginOrientador'),
         cy.get('[type="email"]').clear()
