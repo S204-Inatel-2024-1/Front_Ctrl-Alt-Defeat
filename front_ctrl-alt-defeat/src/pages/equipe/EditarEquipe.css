@@ -102,6 +102,7 @@ button[type="submit"]:hover {
   font-size: 1em;
   font-weight: bold;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .close-button:hover {
@@ -116,22 +117,74 @@ button[type="submit"]:hover {
 .member-list li {
   display: flex;
   justify-content: space-between;
-  margin: 10px 0;
-  padding: 5px 10px;
-  background: #222;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  align-items: center;
+  background: #333;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
 }
 
 .remove-button {
-  background: #e74c3c;
-  color: white;
-  border: none;
   padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #e91e63;
+  color: #fff;
+  font-size: 0.9em;
   cursor: pointer;
-  border-radius: 4px;
+  transition: background-color 0.3s ease;
 }
 
 .remove-button:hover {
-  background: #c0392b;
+  background-color: #d81b60;
+}
+
+.add-member-button {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #1a73e8;
+  color: #fff;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+.add-member-button:hover {
+  background-color: #1669c1;
+}
+
+.add-member-form {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.add-member-form input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #333;
+  color: #ddd;
+  font-size: 1em;
+  margin-right: 10px;
+}
+
+.add-member-form button {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #1a73e8;
+  color: #fff;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-member-form button:hover {
+  background-color: #1669c1;
 }

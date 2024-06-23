@@ -10,6 +10,8 @@ const EditarEquipe = () => {
   const [error, setError] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
   const [popupMessage, setPopupMessage] = useState('');
+  const [showAddMemberField, setShowAddMemberField] = useState(false);
+  const [newMemberEmail, setNewMemberEmail] = useState('');
   const [formData, setFormData] = useState({
     newName: '',
     newNameOrientador: '',
@@ -83,6 +85,33 @@ const EditarEquipe = () => {
     }
   };
 
+  const handleAddMember = async () => {
+    if (!newMemberEmail) {
+      setPopupMessage('Por favor, insira um email.');
+      setShowPopup(true);
+      return;
+    }
+
+    try {
+      const response = await authService.addAlunoToEquipe({
+        email: newMemberEmail,
+        number: equipeId
+      });
+      if (response.msg === 'Aluno Registrado com Sucesso.') {
+        const updatedEquipeData = await authService.getEquipe(equipeId);
+        setEquipeData(updatedEquipeData);
+        setNewMemberEmail('');
+        setShowAddMemberField(false);
+      } else {
+        setPopupMessage(response.msg);
+        setShowPopup(true);
+      }
+    } catch (err) {
+      setPopupMessage('Failed to add member.');
+      setShowPopup(true);
+    }
+  };
+
   if (error) {
     return <div className="error-message">Error: {error}</div>;
   }
@@ -146,11 +175,29 @@ const EditarEquipe = () => {
           </li>
         ))}
       </ul>
+      {showAddMemberField ? (
+        <div className="add-member-form">
+          <input
+            type="email"
+            value={newMemberEmail}
+            onChange={(e) => setNewMemberEmail(e.target.value)}
+            placeholder="Email do aluno"
+          />
+          <button onClick={handleAddMember}>Adicionar</button>
+        </div>
+      ) : (
+        <button
+          className="add-member-button"
+          onClick={() => setShowAddMemberField(true)}
+        >
+          Adicionar
+        </button>
+      )}
       {showPopup && (
         <div className="popup">
           <div className="popup-content">
             <p>{popupMessage}</p>
-            <button className="close-button" onClick={closePopup}>Voltar</button>
+            <button className="close-button" onClick={closePopup}>OK</button>
           </div>
         </div>
       )}
