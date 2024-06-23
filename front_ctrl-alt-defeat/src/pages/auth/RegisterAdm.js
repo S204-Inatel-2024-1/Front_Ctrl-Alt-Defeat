@@ -54,7 +54,7 @@ const RegisterAdm = () => {
                 {msg && <Message msg={msg} type="error" />}
             </form>
             <p>
-                Ja esta cadastrado? <Link to="/LoginAdm">Entre na plataforma</Link>
+                Já está cadastrado? <Link to="/LoginAdm">Entre na plataforma</Link>
             </p>
         </div>
     )

@@ -64,7 +64,7 @@ const RegisterOrientador = () => {
                 {msg && <Message msg={msg} type="error" />}
             </form>
             <p>
-                Ja esta cadastrado? <Link to="/LoginOrientador">Entre na plataforma</Link>
+            Já está cadastrado? <Link to="/LoginOrientador">Entre na plataforma</Link>
             </p>
         </div>
     )
