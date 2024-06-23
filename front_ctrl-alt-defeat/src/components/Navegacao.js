@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useRef } from 'react';
+import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { logout, reset } from '../slices/authSlice';
 import { useDispatch } from 'react-redux';
@@ -10,9 +10,11 @@ export const NavigationProvider = ({ children }) => {
     const location = useLocation();
     const historyRef = useRef([]);
     const dispatch = useDispatch();
+    const [currentPage, setCurrentPage] = useState(location.pathname);
 
     useEffect(() => {
         historyRef.current.push(location.pathname);
+        setCurrentPage(location.pathname);
     }, [location]);
 
     const handleLogout = () => {
@@ -29,11 +31,14 @@ export const NavigationProvider = ({ children }) => {
 
             // const navigationRegex = /\/Register(Aluno|Orientador|Adm)$/
             const profileRegex = /\/Profile(Aluno|Orientador|Adm)\/.*/;
-            const loginRegex = /\/(?:Login|login)(Aluno|Orientador|Adm)$/;
+            const loginRegex = /\/Login(Aluno|Orientador|Adm)$/;
 
             if (profileRegex.test(previousPath) && loginRegex.test(nextPath)) {
                 handleLogout();
-            } else {
+            } else if (loginRegex.test(currentPage)){
+                navigate('/')
+            }
+            else {
                 const previousPath = historyRef.current.pop();
                 navigate(previousPath);
             }
@@ -43,7 +48,7 @@ export const NavigationProvider = ({ children }) => {
     };
 
     return (
-        <NavigationContext.Provider value={{ goBack }}>
+        <NavigationContext.Provider value={{ goBack, currentPage }}>
             {children}
         </NavigationContext.Provider>
     );
