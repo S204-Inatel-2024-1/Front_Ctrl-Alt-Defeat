@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import authService from '../../services/authService';
-import "./EditarEquipeAdm.css";
+import "./EditarEquipe.css";
 
 const EditarEquipeAdm = () => {
   const navigate = useNavigate();
@@ -12,8 +12,8 @@ const EditarEquipeAdm = () => {
     emailOrientador: '',
     members: [{ name: '', email: '', matricula: '' }]
   });
-  const [error, setError] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupMessage, setPopupMessage] = useState('');
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -46,32 +46,25 @@ const EditarEquipeAdm = () => {
     try {
       const response = await authService.registerEquipe(formData);
       if (response.msg === `Equipe ${formData.number} criada com sucesso!`) {
-        setSuccessMessage(response.msg);
-        setTimeout(() => {
-          navigate('/TodasEquipes');
-        }, 2000);
+        navigate(`/TodasEquipes`);
       } else {
-        setError(response.msg || 'Erro ao cadastrar equipe');
+        setPopupMessage(response.msg);
+        setShowPopup(true);
       }
     } catch (err) {
-      setError('Failed to register equipe');
+      setPopupMessage('Failed to update equipe data.');
+      setShowPopup(true);
     }
   };
 
+  const closePopup = () => {
+    setShowPopup(false);
+    setPopupMessage('');
+  };
+
   return (
-    <div id="editar-equipe-adm" className="editar-equipe-adm-container">
+    <div id="editar-equipe" className="editar-equipe-adm-container">
       <h2>Cadastrar Equipe</h2>
-      {error && (
-        <div className="error-popup">
-          <p>{error}</p>
-          <button onClick={() => setError('')}>Voltar</button>
-        </div>
-      )}
-      {successMessage && (
-        <div className="success-popup">
-          <p>{successMessage}</p>
-        </div>
-      )}
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Número do Projeto:</label>
@@ -109,10 +102,10 @@ const EditarEquipeAdm = () => {
             onChange={handleInputChange}
           />
         </div>
-        <div className="form-group">
-          <label>Membros:</label>
+        <div className="member-list">
+          <h3>Membros: </h3>
           {formData.members.map((member, index) => (
-            <div key={index} className="member-group">
+            <div key={index} className="member-list">
               <input
                 type="text"
                 name="name"
@@ -134,15 +127,25 @@ const EditarEquipeAdm = () => {
                 value={member.matricula}
                 onChange={(e) => handleMemberChange(index, e)}
               />
-              <button type="button" className="button.remover" onClick={() => removeMember(index)}>Remover</button>
+              <div className="button">
+                <button type="button" className="remove-button" onClick={() => removeMember(index)}>Remover</button>
+              </div>
             </div>
           ))}
-          {formData.members.length < 4 && (
-            <button type="button" className="button.adicionar" onClick={addMember}>Adicionar Membro</button>
-          )}
         </div>
+        {formData.members.length < 4 && (
+          <button type="button" className="add-member-button" onClick={addMember}>Adicionar Membro</button>
+        )}
         <button type="submit">Enviar</button>
       </form>
+      {showPopup && (
+        <div className="popup">
+          <div className="popup-content">
+            <p>{popupMessage}</p>
+            <button className="close-button" onClick={closePopup}>OK</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
